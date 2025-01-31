@@ -7,6 +7,7 @@ const poolPostgres = require('./dbconfig/dbconection.js');
 
 const clienteRoutes = require('./route/clienteR.js');
 const emprendimientoRoutes = require('./route/emprendimientoR.js');
+const productoRoutes = require('./route/productoR.js')
 
 // Carpeta pública para el frontend
 app.use(express.static('client'));
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 // Usar las rutas definidas
 app.use(clienteRoutes)
 app.use(emprendimientoRoutes)
+app.use(productoRoutes)
 
 // Iniciar servidor
 app.listen(PORT, () => {
