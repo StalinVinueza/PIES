@@ -17,7 +17,7 @@ class ClienteModel {
           d.ES_CLI_CIUDAD,
           d.ES_CLI_CODIGO_POSTAL,
           d.ES_CLI_TELEFONO_1,
-          d.ES_CLI_TELEFONO2,
+          d.ES_CLI_TELEFONO_2,
           c.ES_CLI_FECHA_CREACION,
           c.ES_CLI_FECHA_MODIFICACION,
           c.ES_CLI_ESTADO
@@ -47,7 +47,7 @@ class ClienteModel {
           d.ES_CLI_CIUDAD,
           d.ES_CLI_CODIGO_POSTAL,
           d.ES_CLI_TELEFONO_1,
-          d.ES_CLI_TELEFONO2,
+          d.ES_CLI_TELEFONO_2,
           c.ES_CLI_FECHA_CREACION,
           c.ES_CLI_FECHA_MODIFICACION,
           c.ES_CLI_ESTADO

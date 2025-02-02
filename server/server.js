@@ -3,8 +3,6 @@ const express = require('express');
 const app = express();
 const PORT = 3001;
 
-const poolPostgres = require('./dbconfig/dbconection.js');
-
 const clienteRoutes = require('./route/clienteR.js');
 const emprendimientoRoutes = require('./route/emprendimientoR.js');
 
@@ -18,8 +16,8 @@ app.get('/', (req, res) => {
 
 
 // Usar las rutas definidas
-app.use(clienteRoutes)
-app.use(emprendimientoRoutes)
+app.use('/api', clienteRoutes);
+app.use('/api', emprendimientoRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => {
