@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 // Usar las rutas definidas
 app.use(clienteRoutes)
 app.use(emprendimientoRoutes)
-app.use(productoRoutes)
+app.use('/api/productos', productoRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => {
