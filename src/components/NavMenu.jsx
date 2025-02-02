@@ -7,12 +7,9 @@ function NavMenu() {
   return (
     <nav>
       <ul>
-        <li>
-          <Link to="/">Home</Link> {/* Enlace a la página de inicio */}
-        </li>
-        <li>
-          <Link to="/contacto">Contacto</Link> {/* Enlace a la página de contacto */}
-        </li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/clientes">Clientes</Link> </li>
+        <li><Link to="/contacto">Contacto</Link> </li>
       </ul>
     </nav>
   );
