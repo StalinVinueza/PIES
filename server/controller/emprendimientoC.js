@@ -1,4 +1,4 @@
-const emprendimientoModel = require('../model/emprendimientoM.js'); // Asegúrate de que el nombre sea correcto
+const emprendimientoModel = require('../model/emprendimientoM.js'); // Asegúrate de que el nombre del archivo sea correcto
 
 // Obtener todos los emprendimientos
 const getAllEmprendimientos = async (req, res) => {
@@ -6,7 +6,7 @@ const getAllEmprendimientos = async (req, res) => {
     const emprendimientos = await emprendimientoModel.getAllEmprendimientos();
     res.status(200).json(emprendimientos);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Error al obtener los emprendimientos: ' + err.message });
   }
 };
 
@@ -14,26 +14,32 @@ const getAllEmprendimientos = async (req, res) => {
 const getEmprendimientoById = async (req, res) => {
   const { id } = req.params;
   try {
-    const emprendimiento = await emprendimientoModel.getEmprendimientoById(id);
+    const emprendimiento = await emprendimientoModel.getEmprendimientobyId(id); // Corregido nombre de función
     if (!emprendimiento) {
       return res.status(404).json({ message: 'Emprendimiento no encontrado' });
     }
     res.status(200).json(emprendimiento);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Error al obtener el emprendimiento: ' + err.message });
   }
 };
 
 // Crear un nuevo emprendimiento
 const createEmprendimiento = async (req, res) => {
-  const { nombre, descripcion, logo } = req.body; // Ajustado a los campos de la tabla
+  const { nombre, descripcion, logo } = req.body;
+
+  // Validación de campos requeridos
+  if (!nombre || !descripcion || !logo) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+  }
+
   try {
     const newEmprendimiento = await emprendimientoModel.createEmprendimiento({
       nombre, descripcion, logo
     });
     res.status(201).json(newEmprendimiento);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Error al crear el emprendimiento: ' + err.message });
   }
 };
 
@@ -41,16 +47,22 @@ const createEmprendimiento = async (req, res) => {
 const updateEmprendimiento = async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion, logo } = req.body;
+
+  if (!nombre || !descripcion || !logo) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios para actualizar' });
+  }
+
   try {
     const updatedEmprendimiento = await emprendimientoModel.updateEmprendimiento(id, {
       nombre, descripcion, logo
     });
+
     if (!updatedEmprendimiento) {
       return res.status(404).json({ message: 'Emprendimiento no encontrado para actualizar' });
     }
     res.status(200).json(updatedEmprendimiento);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Error al actualizar el emprendimiento: ' + err.message });
   }
 };
 
@@ -58,13 +70,13 @@ const updateEmprendimiento = async (req, res) => {
 const deleteEmprendimiento = async (req, res) => {
   const { id } = req.params;
   try {
-    const deletedEmprendimiento = await emprendimientoModel.deleteEmprendimiento(id);
-    if (!deletedEmprendimiento) {
+    const deleted = await emprendimientoModel.deleteEmprendimiento(id);
+    if (!deleted) {
       return res.status(404).json({ message: 'Emprendimiento no encontrado para eliminar' });
     }
-    res.status(200).json({ message: 'Emprendimiento eliminado' });
+    res.status(200).json({ message: 'Emprendimiento eliminado exitosamente' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Error al eliminar el emprendimiento: ' + err.message });
   }
 };
 
