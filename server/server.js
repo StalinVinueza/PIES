@@ -15,14 +15,20 @@ app.get('/', (req, res) => {
   res.send('¡Bienvenido al servidor Eco-Shop!');
 });
 
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
-app.use(cors());
+app.use(express.json());
+
+// Opciones de CORS
+
+
+
 
 // Usar las rutas definidas
 app.use('/api', clienteRoutes);
-
 app.use('/api', emprendimientoRoutes);
-
 
 // Iniciar servidor
 app.listen(PORT, () => {
