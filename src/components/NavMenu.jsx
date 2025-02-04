@@ -10,6 +10,7 @@ function NavMenu() {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/clientes">Clientes</Link> </li>
         <li><Link to="/contacto">Contacto</Link> </li>
+        <li><Link to="/contacto">Nosotros</Link> </li>
       </ul>
     </nav>
   );
