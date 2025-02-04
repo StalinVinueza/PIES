@@ -68,8 +68,13 @@ const createCliente = async (req, res) => {
 
 // Actualizar un cliente existente
 const updateCliente = async (req, res) => {
+  const { ES_CLI_ID } = req.body; // Aseguramos que el ID venga en el cuerpo de la solicitud
+
+  if (!ES_CLI_ID) {
+    return res.status(400).json({ message: 'El ID del cliente es necesario' });
+  }
+
   const {
-    ES_CLI_ID,
     ES_CLI_NOMBRE,
     ES_CLI_APELLIDO,
     ES_CLI_PERFIL_ID,
@@ -92,9 +97,8 @@ const updateCliente = async (req, res) => {
       return res.status(404).json({ message: 'Cliente no encontrado' });
     }
 
-    // Llamar a la función de actualización del cliente
-    const updatedCliente = await ClienteModel.updateCliente({
-      ES_CLI_ID,
+    // Preparar los datos actualizados (no incluir el ID ya que se pasa en la URL)
+    const updatedData = {
       ES_CLI_NOMBRE,
       ES_CLI_APELLIDO,
       ES_CLI_PERFIL_ID,
@@ -108,15 +112,22 @@ const updateCliente = async (req, res) => {
       ES_CLI_CODIGO_POSTAL,
       ES_CLI_TELEFONO_1,
       ES_CLI_TELEFONO_2
-    });
+    };
+
+    // Llamar a la función de actualización del cliente
+    const updatedCliente = await ClienteModel.updateCliente(ES_CLI_ID, updatedData);
 
     // Responder con el cliente actualizado
-    res.status(200).json({ message: 'Cliente actualizado con éxito', updatedCliente });
+    res.status(200).json({
+      message: 'Cliente actualizado con éxito',
+      updatedCliente
+    });
   } catch (err) {
     // En caso de error, responder con un mensaje de error
     res.status(500).json({ message: err.message });
   }
 };
+
 
 
 // Eliminar un cliente

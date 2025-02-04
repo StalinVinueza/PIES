@@ -141,8 +141,7 @@ class ClienteModel {
         ES_CLI_CIUDAD,
         ES_CLI_CODIGO_POSTAL,
         ES_CLI_TELEFONO_1,
-        ES_CLI_TELEFONO_2,
-        ES_CLI_ESTADO
+        ES_CLI_TELEFONO_2
       } = clienteData;
 
       const result = await poolPostgres.query(`
@@ -161,9 +160,8 @@ class ClienteModel {
           ES_CLI_CODIGO_POSTAL = $11,
           ES_CLI_TELEFONO_1 = $12,
           ES_CLI_TELEFONO_2 = $13,
-          ES_CLI_ESTADO = $14,
           ES_CLI_FECHA_MODIFICACION = CURRENT_TIMESTAMP
-        WHERE ES_CLI_ID = $15
+        WHERE ES_CLI_ID = $14
         RETURNING ES_CLI_ID
       `, [
         ES_CLI_NOMBRE,
@@ -179,7 +177,6 @@ class ClienteModel {
         ES_CLI_CODIGO_POSTAL,
         ES_CLI_TELEFONO_1,
         ES_CLI_TELEFONO_2,
-        ES_CLI_ESTADO,
         id
       ]);
 
