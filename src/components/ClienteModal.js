@@ -22,8 +22,12 @@ function ClienteModal({ show, handleClose, editData, handleChange, handleUpdate 
             <p><strong>Genero:</strong> {editData.es_cli_genero}</p>
             <p><strong>Fecha de Nacimiento:</strong> {editData.es_cli_fecha_nacimiento}</p>
             <p><strong>Dirección:</strong> {editData.es_cli_direccion}</p>
-            <p><strong>Teléfono:</strong> {editData.es_cli_telefono_1}</p>
             <p><strong>País:</strong> {editData.es_cli_pais}</p>
+            <p><strong>Provincia:</strong> {editData.es_cli_provincia}</p>
+            <p><strong>Ciudad:</strong> {editData.es_cli_ciudad}</p>
+            <p><strong>Codigo Postal:</strong> {editData.es_cli_codigo_postal}</p>
+            <p><strong>Teléfono:</strong> {editData.es_cli_telefono_1}</p>
+            <p><strong>Teléfono:</strong> {editData.es_cli_telefono_2}</p>
             <p><strong>Estado:</strong> {editData.es_cli_estado}</p>
 
           </div>

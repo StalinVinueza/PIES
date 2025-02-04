@@ -34,3 +34,12 @@ app.use('/api', emprendimientoRoutes);
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+app.put('/api/clientes/:id', (req, res) => {
+  const clienteId = req.params.id;
+  const clienteData = req.body;
+
+  if (!clienteId) {
+    return res.status(400).json({ message: 'El ID del cliente es necesario' });
+  }
+});
