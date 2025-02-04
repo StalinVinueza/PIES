@@ -1,5 +1,5 @@
 import React from 'react';
-import ApiClientes from '../components/ApiClientes';
+import ApiClientes from '../components/ClienteApi';
 
 function ClientePage() {
   return (
