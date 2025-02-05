@@ -1,4 +1,4 @@
-const emprendimientoModel = require('../model/emprendimientoM.js'); // Asegúrate de que el nombre del archivo sea correcto
+const emprendimientoModel = require('../model/emprendimientoM.js');
 
 // Obtener todos los emprendimientos
 const getAllEmprendimientos = async (req, res) => {
@@ -14,7 +14,7 @@ const getAllEmprendimientos = async (req, res) => {
 const getEmprendimientoById = async (req, res) => {
   const { id } = req.params;
   try {
-    const emprendimiento = await emprendimientoModel.getEmprendimientobyId(id); // Corregido nombre de función
+    const emprendimiento = await emprendimientoModel.getEmprendimientobyId(id);
     if (!emprendimiento) {
       return res.status(404).json({ message: 'Emprendimiento no encontrado' });
     }
@@ -27,16 +27,11 @@ const getEmprendimientoById = async (req, res) => {
 // Crear un nuevo emprendimiento
 const createEmprendimiento = async (req, res) => {
   const { nombre, descripcion, logo } = req.body;
-
-  // Validación de campos requeridos
   if (!nombre || !descripcion || !logo) {
     return res.status(400).json({ message: 'Todos los campos son obligatorios' });
   }
-
   try {
-    const newEmprendimiento = await emprendimientoModel.createEmprendimiento({
-      nombre, descripcion, logo
-    });
+    const newEmprendimiento = await emprendimientoModel.createEmprendimiento({ nombre, descripcion, logo });
     res.status(201).json(newEmprendimiento);
   } catch (err) {
     res.status(500).json({ message: 'Error al crear el emprendimiento: ' + err.message });
@@ -47,16 +42,11 @@ const createEmprendimiento = async (req, res) => {
 const updateEmprendimiento = async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion, logo } = req.body;
-
   if (!nombre || !descripcion || !logo) {
     return res.status(400).json({ message: 'Todos los campos son obligatorios para actualizar' });
   }
-
   try {
-    const updatedEmprendimiento = await emprendimientoModel.updateEmprendimiento(id, {
-      nombre, descripcion, logo
-    });
-
+    const updatedEmprendimiento = await emprendimientoModel.updateEmprendimiento(id, { nombre, descripcion, logo });
     if (!updatedEmprendimiento) {
       return res.status(404).json({ message: 'Emprendimiento no encontrado para actualizar' });
     }

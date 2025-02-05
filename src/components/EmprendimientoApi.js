@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import EmprendimientoList from './EmprendimientoList';
 import EmprendimientoModal from './EmprendimientoModal';
 
-function ApiEmprendimientos() {
+function EmprendimientosApi() {
   const [emprendimientos, setEmprendimientos] = useState([]);
   const [selectedEmprendimiento, setSelectedEmprendimiento] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -40,6 +40,25 @@ function ApiEmprendimientos() {
     setEditData({ ...editData, [e.target.name]: e.target.value });
   };
 
+  const handleCreate = () => {
+    if (!editData.es_emp_nombre || !editData.es_emp_descripcion || !editData.es_emp_logo) {
+      alert('Todos los campos son obligatorios');
+      return;
+    }
+
+    fetch('http://localhost:3001/api/emprendimientos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editData),
+    })
+      .then(response => response.json())
+      .then(newEmprendimiento => {
+        setEmprendimientos([...emprendimientos, newEmprendimiento]);
+        setShowModal(false);
+      })
+      .catch(error => console.error('Error al crear el emprendimiento:', error));
+  };
+
   const handleUpdate = () => {
     if (!selectedEmprendimiento || !selectedEmprendimiento.es_emp_id) {
       alert('El ID del emprendimiento es necesario');
@@ -58,34 +77,40 @@ function ApiEmprendimientos() {
     })
       .then(response => response.json())
       .then(emprendimiento => {
-        setEmprendimientos(emprendimientos => emprendimientos.map(e => e.es_emp_id === emprendimiento.es_emp_id ? emprendimiento : e));
+        setEmprendimientos(emprendimientos.map(e => e.es_emp_id === emprendimiento.es_emp_id ? emprendimiento : e));
         setShowModal(false);
       })
       .catch(error => console.error('Error al actualizar el emprendimiento:', error));
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3001/api/emprendimientos/${id}`, { method: 'DELETE' })
-      .then(() => setEmprendimientos(emprendimientos.filter(emprendimiento => emprendimiento.es_emp_id !== id)))
-      .catch(error => console.error(error));
+    if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
+      fetch(`http://localhost:3001/api/emprendimientos/${id}`, { method: 'DELETE' })
+        .then(() => setEmprendimientos(emprendimientos.filter(emprendimiento => emprendimiento.es_emp_id !== id)))
+        .catch(error => console.error(error));
+    }
   };
 
   return (
     <div className="container">
       <h1 className="text-center my-4">Lista de Emprendimientos</h1>
       <button className="btn btn-success mb-3" onClick={() => handleShowModal()}>Nuevo Emprendimiento</button>
-      <EmprendimientoList emprendimientos={emprendimientos} onShowModal={handleShowModal} onDelete={handleDelete} />
+      <EmprendimientoList 
+      emprendimientos={emprendimientos} 
+      onShowModal={handleShowModal} // Aquí pasamos la función correctamente
+      onDelete={handleDelete} 
+        />
       {showModal && (
         <EmprendimientoModal
           show={showModal}
           handleClose={handleCloseModal}
           editData={editData}
           handleChange={handleChange}
-          handleUpdate={handleUpdate}
+          handleSave={selectedEmprendimiento ? handleUpdate : handleCreate}
         />
       )}
     </div>
   );
 }
 
-export default ApiEmprendimientos;
+export default EmprendimientosApi;

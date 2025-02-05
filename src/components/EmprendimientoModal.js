@@ -1,36 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
+import EmprendimientoForm from './EmprendimientoForm';
+
 
 function EmprendimientoModal({ show, handleClose, editData, handleChange, handleUpdate }) {
-  if (!show) return null;
+  const [isEditing, setIsEditing] = useState(false);
+
+  const toggleEdit = () => setIsEditing(!isEditing);
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>{editData.es_emp_id ? 'Editar Emprendimiento' : 'Nuevo Emprendimiento'}</h2>
-        <input
-          type="text"
-          name="es_emp_nombre"
-          placeholder="Nombre"
-          value={editData.es_emp_nombre}
-          onChange={handleChange}
-        />
-        <textarea
-          name="es_emp_descripcion"
-          placeholder="Descripción"
-          value={editData.es_emp_descripcion}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="es_emp_logo"
-          placeholder="Logo"
-          value={editData.es_emp_logo}
-          onChange={handleChange}
-        />
-        <button onClick={handleUpdate}>Guardar</button>
-        <button onClick={handleClose}>Cerrar</button>
-      </div>
-    </div>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>{editData.nombre_emprendimiento ? 'Información Emprendimiento' : 'Nuevo Emprendimiento'}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {!isEditing ? (
+          // Mostrar solo la información
+          <div>
+            <p><strong>Nombre Emprendimiento:</strong> {editData.nombre_emprendimiento}</p>
+            <p><strong>Nombre Emprendimiento:</strong> {editData.es_emp_nombre}</p>
+            <p><strong>Logo:</strong> <img src={editData.es_emp_logo} alt="Logo" style={{ width: '100px' }} /></p>
+
+          </div>
+        ) : (
+          // Mostrar el formulario de edición
+          <EmprendimientoForm editData={editData} handleChange={handleChange} />
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
+        {!isEditing ? (
+          <Button variant="primary" onClick={toggleEdit}>Editar</Button>
+        ) : (
+          <Button variant="success" onClick={handleUpdate}>Guardar</Button>
+        )}
+      </Modal.Footer>
+    </Modal>
   );
 }
 
