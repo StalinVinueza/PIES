@@ -1,33 +1,33 @@
-nav {
-    text-align: center; /* Centra el texto dentro del contenedor */
-    background-color: #007bff; /* Fondo azul */
-    padding: 10px 0; /* Espaciado superior e inferior */
-  }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  nav ul li {
-    display: inline-block; /* Los elementos estarán en línea, pero cada uno será un bloque */
-    margin-right: 30px; /* Espacio entre los elementos del menú */
-  }
-  
-  nav ul li a {
-    text-decoration: none; /* Quitamos el subrayado */
-    font-size: 18px;
-    color: white; /* Texto blanco */
-    font-weight: bold; /* Texto en negrita */
-    padding: 10px 20px; /* Relleno alrededor del texto */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Efecto suave de transición */
-  }
-  
-  /* Efecto cuando el usuario pasa el mouse sobre el enlace */
-  nav ul li a:hover {
-    background-color: #0056b3; /* Fondo azul más oscuro al pasar el mouse */
-    transform: scale(1.1); /* Efecto de agrandamiento al pasar el mouse */
-  }
-  
+/* Contenedor de la barra de navegación */
+.navbar {
+  padding: 15px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+/* Estilo para los enlaces del navbar */
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+/* Efecto Hover en los botones */
+.navbar-nav .nav-link:hover {
+  color: #e63946;
+}
+
+/* Estilo del icono de usuario */
+.user-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Efecto hover en el icono */
+.user-icon:hover {
+  transform: scale(1.2);
+  color: #e63946;
+}
