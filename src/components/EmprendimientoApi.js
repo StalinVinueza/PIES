@@ -1,115 +1,115 @@
-import React, { useEffect, useState } from 'react';
-import EmprendimientoList from './EmprendimientoList';
-import EmprendimientoModal from './EmprendimientoModal';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import EmprendimientoList from "./EmprendimientoList";
+import EmprendimientoModal from "./EmprendimientoModal";
+import EmprendimientoForm from "./EmprendimientoForm";
 
 function EmprendimientosApi() {
   const [emprendimientos, setEmprendimientos] = useState([]);
-  const [selectedEmprendimiento, setSelectedEmprendimiento] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
-    es_emp_id: '',
-    ES_EMP_NOMBRE: '',
-    ES_EMP_DESCRIPCION: '',
-    ES_EMP_LOGO: ''
+    es_emp_id: "",
+    es_emp_nombre: "",
+    es_emp_descripcion: "",
+    es_emp_logo: null
   });
 
+  // Cargar emprendimientos al montar el componente
   useEffect(() => {
-    fetch('http://localhost:3001/api/emprendimientos')
-      .then(response => response.json())
-      .then(data => setEmprendimientos(data))
-      .catch(error => console.error(error));
+    const fetchEmprendimientos = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/emprendimientos");
+        setEmprendimientos(response.data);
+      } catch (error) {
+        console.error("Error al obtener los emprendimientos:", error);
+        setEmprendimientos([]); // Evitar error al mapear en caso de fallo
+      }
+    };
+
+    fetchEmprendimientos();
   }, []);
 
-  const handleShowModal = (emprendimiento = null) => {
-    if (emprendimiento) {
-      setSelectedEmprendimiento(emprendimiento);
-      setEditData(emprendimiento);
-    } else {
-      setSelectedEmprendimiento(null);
-      setEditData({
-        es_emp_id: '',
-        ES_EMP_NOMBRE: '',
-        ES_EMP_DESCRIPCION: '',
-        ES_EMP_LOGO: ''
-      });
-    }
+  // Mostrar modal para nuevo o editar emprendimiento
+  const handleShowModal = (emprendimiento = {}) => {
+    setEditData({
+      es_emp_id: emprendimiento.es_emp_id || "",
+      es_emp_nombre: emprendimiento.es_emp_nombre || "",
+      es_emp_descripcion: emprendimiento.es_emp_descripcion || "",
+      es_emp_logo: emprendimiento.es_emp_logo || null
+    });
+
     setShowModal(true);
   };
 
+  // Cerrar modal
   const handleCloseModal = () => setShowModal(false);
 
+  // Manejar cambios en el formulario
   const handleChange = (e) => {
-    setEditData({ ...editData, [e.target.name]: e.target.value });
+    if (e.target.name === "es_emp_logo") {
+      if (e.target.files && e.target.files[0]) {
+        setEditData((prev) => ({
+          ...prev,
+          es_emp_logo: e.target.files[0]
+        }));
+      }
+    } else {
+      setEditData((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value
+      }));
+    }
   };
 
-  const handleCreate = () => {
-    if (!editData.ES_EMP_NOMBRE || !editData.ES_EMP_DESCRIPCION || !editData.ES_EMP_LOGO) {
-      alert('Todos los campos son obligatorios');
-      return;
+  // Guardar o actualizar emprendimiento
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("es_emp_nombre", editData.es_emp_nombre);
+    formData.append("es_emp_descripcion", editData.es_emp_descripcion);
+    if (editData.es_emp_logo instanceof File) {
+      formData.append("es_emp_logo", editData.es_emp_logo);
     }
 
-    fetch('http://localhost:3001/api/emprendimientos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(editData),
-    })
-      .then(response => response.json())
-      .then(newEmprendimiento => {
-        setEmprendimientos([...emprendimientos, newEmprendimiento]);
-        setShowModal(false);
-      })
-      .catch(error => console.error('Error al crear el emprendimiento:', error));
-  };
+    try {
+      let response;
+      if (editData.es_emp_id) {
+        response = await axios.put(
+          `http://localhost:3001/api/emprendimientos/${editData.es_emp_id}`,
+          formData
+        );
+      } else {
+        response = await axios.post("http://localhost:3001/api/emprendimientos", formData);
+      }
 
-  const handleUpdate = () => {
-    if (!selectedEmprendimiento || !selectedEmprendimiento.es_emp_id) {
-      alert('El ID del emprendimiento es necesario');
-      return;
-    }
-
-    if (!editData.ES_EMP_NOMBRE || !editData.ES_EMP_DESCRIPCION || !editData.ES_EMP_LOGO) {
-      alert('Por favor, complete todos los campos obligatorios.');
-      return;
-    }
-
-    fetch(`http://localhost:3001/api/emprendimientos/${selectedEmprendimiento.es_emp_id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(editData),
-    })
-      .then(response => response.json())
-      .then(emprendimiento => {
-        setEmprendimientos(emprendimientos.map(e => e.es_emp_id === emprendimiento.es_emp_id ? emprendimiento : e));
-        setShowModal(false);
-      })
-      .catch(error => console.error('Error al actualizar el emprendimiento:', error));
-  };
-
-  const handleDeleteEmprendimiento = (id) => {
-    if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
-      fetch(`http://localhost:3001/api/emprendimientos/${id}`, { method: 'DELETE' })
-        .then(() => setEmprendimientos(emprendimientos.filter(emprendimiento => emprendimiento.es_emp_id !== id)))
-        .catch(error => console.error(error));
+      console.log("Respuesta del servidor:", response.data);
+      setShowModal(false);
+      window.location.reload(); // ✅ Recargar la página después de guardar
+    } catch (error) {
+      console.error("Error al guardar:", error);
     }
   };
 
   return (
     <div className="container">
       <h1 className="text-center my-4">Lista de Emprendimientos</h1>
-      <button className="btn btn-success mb-3" onClick={() => handleShowModal()}>Nuevo Emprendimiento</button>
-      <EmprendimientoList 
-      emprendimientos={emprendimientos} 
-      onShowModal={handleShowModal} // Aquí pasamos la función correctamente
-      onDelete={handleDeleteEmprendimiento} 
-        />
+      <button className="btn btn-success mb-3" onClick={() => handleShowModal()}>
+        Nuevo Emprendimiento
+      </button>
+
+      <EmprendimientoList emprendimientos={emprendimientos} onShowModal={handleShowModal} />
+
       {showModal && (
         <EmprendimientoModal
           show={showModal}
           handleClose={handleCloseModal}
           editData={editData}
           handleChange={handleChange}
-          handleSave={selectedEmprendimiento ? handleUpdate : handleCreate}
-        />
+          handleSubmit={handleSubmit}
+        >
+          <EmprendimientoForm editData={editData} handleChange={handleChange} handleSubmit={handleSubmit} />
+        </EmprendimientoModal>
       )}
     </div>
   );

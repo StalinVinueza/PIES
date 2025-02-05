@@ -15,22 +15,16 @@ class EmprendimientoModel {
       throw new Error('Error al obtener los emprendimientos: ' + err.message);
     }
   }
-  
 
   // Obtener un emprendimiento por ID
   static async getEmprendimientobyId(id) {
     try {
       const result = await poolPostgres.query(`
         SELECT 
-          e.ES_EMP_ID,
-          e.ES_EMP_NOMBRE,
-          e.ES_EMP_DESCRIPCION,
-          e.ES_EMP_LOGO,
-          e.ES_EMP_FECHA_CREACION,
-          e.ES_EMP_FECHA_MODIFICACION,
-          e.ES_EMP_ESTADO
-        FROM ES_EMPRENDIMIENTO e
-        WHERE e.ES_EMP_ID = $1
+          ES_EMP_ID, ES_EMP_NOMBRE, ES_EMP_DESCRIPCION, 
+          ES_EMP_LOGO, ES_EMP_FECHA_CREACION, ES_EMP_FECHA_MODIFICACION, ES_EMP_ESTADO
+        FROM ES_EMPRENDIMIENTO
+        WHERE ES_EMP_ID = $1
       `, [id]);
 
       return result.rows.length > 0 ? result.rows[0] : null;
@@ -44,7 +38,7 @@ class EmprendimientoModel {
     try {
       const result = await poolPostgres.query(
         `INSERT INTO ES_EMPRENDIMIENTO (ES_EMP_NOMBRE, ES_EMP_DESCRIPCION, ES_EMP_LOGO, ES_EMP_FECHA_CREACION, ES_EMP_ESTADO)
-         VALUES ($1, $2, $3, NOW(), 'activo') RETURNING *`,
+         VALUES ($1, $2, $3, NOW(), 1) RETURNING *`,
         [nombre, descripcion, logo]
       );
       return result.rows[0];
@@ -56,6 +50,15 @@ class EmprendimientoModel {
   // Actualizar un emprendimiento
   static async updateEmprendimiento(id, { nombre, descripcion, logo }) {
     try {
+      // Obtener el logo anterior si no se sube uno nuevo
+      const existing = await poolPostgres.query(`SELECT ES_EMP_LOGO FROM ES_EMPRENDIMIENTO WHERE ES_EMP_ID = $1`, [id]);
+  
+      if (existing.rows.length === 0) {
+        throw new Error('Emprendimiento no encontrado');
+      }
+  
+      const es_emp_logo = logo || existing.rows[0].es_emp_logo; // ✅ Mantener imagen anterior si no se envía nueva
+  
       const result = await poolPostgres.query(
         `UPDATE ES_EMPRENDIMIENTO SET
          ES_EMP_NOMBRE = $1,
@@ -63,7 +66,7 @@ class EmprendimientoModel {
          ES_EMP_LOGO = $3,
          ES_EMP_FECHA_MODIFICACION = NOW()
          WHERE ES_EMP_ID = $4 RETURNING *`,
-        [nombre, descripcion, logo, id]
+        [nombre, descripcion, es_emp_logo, id]
       );
       return result.rows.length > 0 ? result.rows[0] : null;
     } catch (err) {
@@ -77,15 +80,11 @@ class EmprendimientoModel {
         "DELETE FROM ES_EMPRENDIMIENTO WHERE ES_EMP_ID = $1 RETURNING *",
         [id]
       );
-  
-      return result.rowCount > 0; // ✅ Retorna `true` si se eliminó correctamente
+      return result.rowCount > 0;
     } catch (err) {
-      console.error("Error en deleteEmprendimiento:", err);
       throw new Error("Error al eliminar el emprendimiento: " + err.message);
     }
   }
-  
-  
 }
 
 module.exports = EmprendimientoModel;
