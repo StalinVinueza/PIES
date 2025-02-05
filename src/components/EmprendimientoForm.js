@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 
+
 function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
   return (
     <Form onSubmit={handleSubmit}>

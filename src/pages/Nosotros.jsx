@@ -1,17 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Card from '../components/CardNosotros';
 import './Nosotros.css';
+import Card from '../components/CardNosotros';
 
 function Nosotros() {
   return (
     <div className="container mt-5">
-      <h1 className="text-animated text-center">
-        Somos una empresa comprometida con la innovación y la sostenibilidad.
+      <h1 className="text-muted text-center">
+        Comprometidos con el planeta y la sostenibilidad.
       </h1>
 
-      <div className="row row-cols-1 row-cols-md-3 g-4 mt-4">
-        <div className="col">
+      <div className="row mt-4">
+        <div className="col-md-4">
           <Card 
             title="Misión" 
             description="Ofrecer productos sostenibles para reducir la huella de carbono." 
@@ -37,4 +37,4 @@ function Nosotros() {
   );
 }
 
-export default Nosotros;
+export default Nosotros; // ✅ Asegúrate de que esta línea esté FUERA de la función

@@ -5,6 +5,7 @@ import BotonWhatsApp from '../components/BotonWhatsApp';
 import FormularioContacto from '../components/FormularioContacto'; 
 import '../components/Contactos.css'; // Asegúrate de que este archivo exista en styles, no en components
 
+
 function Contacto() {
   return (
     <div className="container mt-5">

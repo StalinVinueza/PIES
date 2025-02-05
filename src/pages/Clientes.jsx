@@ -1,11 +1,13 @@
 import React from 'react';
 import ApiClientes from '../components/ClienteApi';
+import './ClientePages.css'; // Importa el archivo CSS
 
 function ClientePage() {
   return (
-    <div>
-      
-      <ApiClientes />
+    <div className="cliente-page">
+      <div className="cliente-content">
+        <ApiClientes />
+      </div>
     </div>
   );
 }

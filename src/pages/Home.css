@@ -1,11 +1,35 @@
 /* Estilos generales del contenedor Home */
 .home {
-  background: linear-gradient(135deg, #f4f4f9, #e0e0ec); /* Fondo con degradado suave */
-  padding: 60px 20px;
+  background: linear-gradient(135deg, rgba(244, 244, 249, 0.8), rgba(224, 224, 236, 0.8)), 
+              url('/public/fondo.jpg'); /* Imagen de fondo con degradado */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ocupar toda la pantalla */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 80px); /* Altura ajustada */
+  padding: 60px 20px;
+  flex-direction: column;
+}
+
+/* Asegurar que el footer se acople con el fondo */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegurar que ocupa toda la pantalla */
+}
+
+.App {
+  flex-grow: 1; /* Permite que el contenido se expanda hasta el footer */
 }
 
 /* Caja central con el contenido */
@@ -67,6 +91,16 @@
       opacity: 1;
       transform: translateY(0);
   }
+}
+
+/* Estilos del footer para que se acople correctamente */
+.footer {
+  background-color: #264653;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  margin-top: auto; /* Empuja el footer hacia abajo */
 }
 
 /* Modo responsive para pantallas pequeñas */

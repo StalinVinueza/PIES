@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 
 function FormularioContacto() {
-  // Estados para capturar datos del formulario
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     mensaje: ''
   });
 
-  // Manejar cambios en los inputs
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Enviar los datos al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/api/contacto', { // Ruta del backend
+      const response = await fetch('http://localhost:3001/api/contacto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -28,7 +25,7 @@ function FormularioContacto() {
 
       if (response.ok) {
         alert('Mensaje enviado correctamente');
-        setFormData({ nombre: '', email: '', mensaje: '' }); // Limpiar formulario
+        setFormData({ nombre: '', email: '', mensaje: '' });
       } else {
         alert('Hubo un error al enviar el mensaje');
       }
@@ -54,7 +51,17 @@ function FormularioContacto() {
           <label className="form-label">Mensaje</label>
           <textarea className="form-control" rows="4" name="mensaje" value={formData.mensaje} onChange={handleChange} required></textarea>
         </div>
-        <button type="submit" className="btn btn-primary w-100">Enviar</button>
+        <button 
+          type="submit" 
+          className="btn w-100" 
+          style={{
+            backgroundColor: "#636b2f", 
+            borderColor: "#636b2f", 
+            color: "white"
+          }}>
+          Enviar
+        </button>
+
       </form>
     </div>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import EmprendimientoForm from "./EmprendimientoForm";
 
+
 function EmprendimientoModal({ show, handleClose, editData, handleChange, handleSubmit }) {
   return (
     <Modal show={show} onHide={handleClose}>
