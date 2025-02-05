@@ -1,0 +1,85 @@
+/* Estilos generales del contenedor Home */
+.home {
+  background: linear-gradient(135deg, #f4f4f9, #e0e0ec); /* Fondo con degradado suave */
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 80px); /* Altura ajustada */
+}
+
+/* Caja central con el contenido */
+.home-content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Título principal */
+.home h1 {
+  font-size: 2.5rem;
+  color: #264653; /* Azul oscuro elegante */
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+/* Párrafo */
+.home p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Botón de acción */
+.home-button {
+  background: linear-gradient(135deg, #e63946, #ff7b54);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+}
+
+.home-button:hover {
+  background: linear-gradient(135deg, #ff7b54, #f77f00);
+  box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Animación suave para la caja central */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Modo responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .home h1 {
+      font-size: 2rem;
+  }
+
+  .home p {
+      font-size: 1rem;
+  }
+
+  .home-content {
+      padding: 20px;
+  }
+}

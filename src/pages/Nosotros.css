@@ -1,0 +1,103 @@
+/* Estilos generales */
+.nosotros-container {
+    background-color: #f1f8e9; /* Verde claro, ecológico */
+    color: #2e7d32; /* Verde oscuro para texto */
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 20px;
+}
+
+/* Sección principal */
+.nosotros-header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nosotros-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.nosotros-header p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Misión y Visión */
+.mision-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.mision, .vision {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mision h2, .vision h2 {
+    color: #388E3C;
+    font-size: 1.8rem;
+}
+
+/* Equipo */
+.equipo-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.equipo-container h2 {
+    font-size: 2rem;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.equipo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.equipo-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 280px;
+}
+
+.equipo-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.equipo-card h3 {
+    color: #2e7d32;
+    font-size: 1.3rem;
+}
+
+/* Footer */
+.nosotros-footer {
+    background-color: #388E3C;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    border-radius: 10px 10px 0 0;
+}
