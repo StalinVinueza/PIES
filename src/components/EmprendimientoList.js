@@ -38,8 +38,6 @@ function Emprendimientos({ onShowModal }) {
 
   return (
     <div className="container py-4">
-  
-
       {emprendimientos.length === 0 ? (
         <p className="text-center">No hay emprendimientos disponibles.</p>
       ) : (
@@ -57,10 +55,29 @@ function Emprendimientos({ onShowModal }) {
                   <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
                   <p className="card-text flex-grow-1">{emprendimiento.es_emp_descripcion}</p>
                   <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary btn-sm" onClick={() => onShowModal(emprendimiento)}>
+                    {/* Botón de editar con color personalizado */}
+                    <button
+                      className="btn btn-sm"
+                      style={{
+                        backgroundColor: "#636b2f",
+                        borderColor: "#636b2f",
+                        color: "white",
+                      }}
+                      onClick={() => onShowModal(emprendimiento)}
+                    >
                       <PencilSquare size={18} />
                     </button>
-                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(emprendimiento.es_emp_id)}>
+
+                    {/* Botón de eliminar con color personalizado */}
+                    <button
+                      className="btn btn-sm"
+                      style={{
+                        backgroundColor: "#636b2f",
+                        borderColor: "#636b2f",
+                        color: "white",
+                      }}
+                      onClick={() => handleDelete(emprendimiento.es_emp_id)}
+                    >
                       <TrashFill size={18} />
                     </button>
                   </div>

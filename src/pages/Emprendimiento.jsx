@@ -3,9 +3,10 @@ import EmprendimientosApi from '../components/EmprendimientoApi';
 
 function ClientePage() {
   return (
-    <div>
-      
-      <EmprendimientosApi />
+    <div className="cliente-page">
+      <div className="cliente-page-content">
+        <EmprendimientosApi />
+      </div>
     </div>
   );
 }
