@@ -8,9 +8,10 @@ function NavMenu() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
       <div className="container">
-        {/* Logo (redirige al inicio) */}
-        <Link className="navbar-brand fw-bold text-primary" to="/">
-          Eco-Shop
+       
+       
+        <Link className="navbar-brand fw-bold" to="/">
+          <img src="/logo.png"/>
         </Link>
 
         {/* Botón Hamburguesa para móviles */}
@@ -38,9 +39,10 @@ function NavMenu() {
 
             {/* Icono de Usuario (Redirige a Login) */}
             <li className="nav-item">
-              <Link className="nav-link user-icon" to="/login">
-                <FaUser size={22} className="text-dark" />
-              </Link>
+            <Link className="nav-link" to="/login">
+              <FaUser size={22} className="user-icon" />
+            </Link>
+
             </li>
           </ul>
         </div>
@@ -49,4 +51,4 @@ function NavMenu() {
   );
 }
 
-export default NavMenu;
+export default NavMenu;

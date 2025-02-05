@@ -6,9 +6,11 @@ import Home from './pages/Home';
 import Clientes from './pages/Clientes';
 import Emprendimientos from './pages/Emprendimiento';
 import Contacto from './pages/Contacto';
-import Nosotros from './pages/Nosotros'; // ✅ Importamos Nosotros
+import Nosotros from './pages/Nosotros';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 
 function App() {

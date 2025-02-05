@@ -1,48 +1,43 @@
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Nosotros.css';
+import Card from '../components/Card';
 
-export default function Nosotros() {
-    return (
-        <div className="nosotros-container">
-            {/* Sección principal */}
-            <section className="nosotros-header">
-                <h1>Sobre Nosotros</h1>
-                <p>Eco-Shop nació con la misión de ofrecer productos sostenibles que ayudan a reducir la huella de carbono y fomentan un estilo de vida ecoamigable.</p>
-            </section>
+function Nosotros() {
+  return (
+    <div className="container mt-5">
+      <h1 className="text-muted text-center">
+        Comprometidos con el planeta y la sostenibilidad.
+      </h1>
 
-            {/* Misión y Visión */}
-            <section className="mision-vision">
-                <div className="mision">
-                    <h2>Nuestra Misión</h2>
-                    <p>Fomentar un consumo responsable mediante productos ecológicos y sostenibles.</p>
-                </div>
-                <div className="vision">
-                    <h2>Nuestra Visión</h2>
-                    <p>Convertirnos en la plataforma líder en Ecuador para productos sustentables.</p>
-                </div>
-            </section>
-
-            {/* Equipo */}
-            <section className="equipo-container">
-                <h2>Nuestro Equipo</h2>
-                <div className="equipo-grid">
-                    <div className="equipo-card">
-                        <img src="/avatar1.jpg" alt="Ana Pérez" />
-                        <h3>Ana Pérez</h3>
-                        <p>Fundadora & CEO</p>
-                    </div>
-                    <div className="equipo-card">
-                        <img src="/avatar2.jpg" alt="Juan López" />
-                        <h3>Juan López</h3>
-                        <p>Gerente de Operaciones</p>
-                    </div>
-                    <div className="equipo-card">
-                        <img src="/avatar3.jpg" alt="Carla Torres" />
-                        <h3>Carla Torres</h3>
-                        <p>Marketing & Ventas</p>
-                    </div>
-                </div>
-            </section>
-
+      <div className="row mt-4">
+        <div className="col-md-4">
+          <Card 
+            title="Misión" 
+            description="Ofrecer productos sostenibles para reducir la huella de carbono." 
+            image="https://via.placeholder.com/150"
+          />
         </div>
-    );
+        <div className="col-md-4">
+          <Card 
+            title="Visión" 
+            description="Ser líderes en el mercado ecológico y sostenible." 
+            image="https://via.placeholder.com/150"
+          />
+        </div>
+        <div className="col-md-4">
+          <Card 
+            title="Valores" 
+            description="Innovación, sostenibilidad y responsabilidad social." 
+            image="https://via.placeholder.com/150"
+          />
+        </div>
+      </div>
+    </div>
+  );
+
+function Nosotros() {
+  
 }
+
+export default Nosotros;
