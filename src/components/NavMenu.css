@@ -1,5 +1,6 @@
 /* Contenedor de la barra de navegación */
 .navbar {
+  background-color: #333;
   padding: 15px 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
