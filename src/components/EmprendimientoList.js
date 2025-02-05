@@ -20,9 +20,9 @@ function Emprendimientos({ onShowModal }) {
         console.error("Error al cargar emprendimientos:", error);
         setEmprendimientos([]);
       });
-  }, []); // ✅ No necesitas dependencia aquí
+  }, []);
 
-  // ✅ Función para eliminar un emprendimiento
+  // Función para eliminar un emprendimiento
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
       fetch(`http://localhost:3001/api/emprendimientos/${id}`, { method: "DELETE" })
@@ -38,9 +38,8 @@ function Emprendimientos({ onShowModal }) {
 
   return (
     <div className="container py-4">
-      <h1 className="text-center mb-4">Emprendimientos</h1>
+  
 
-      {/* ✅ Si no hay emprendimientos, mostrar mensaje */}
       {emprendimientos.length === 0 ? (
         <p className="text-center">No hay emprendimientos disponibles.</p>
       ) : (
