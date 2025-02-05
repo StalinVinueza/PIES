@@ -1,43 +1,40 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from '../components/CardNosotros';
 import './Nosotros.css';
-import Card from '../components/Card';
 
 function Nosotros() {
   return (
     <div className="container mt-5">
-      <h1 className="text-muted text-center">
-        Comprometidos con el planeta y la sostenibilidad.
+      <h1 className="text-animated text-center">
+        Somos una empresa comprometida con la innovación y la sostenibilidad.
       </h1>
 
-      <div className="row mt-4">
-        <div className="col-md-4">
+      <div className="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        <div className="col">
           <Card 
             title="Misión" 
             description="Ofrecer productos sostenibles para reducir la huella de carbono." 
-            image="https://via.placeholder.com/150"
+            image="/mision.jpg"
           />
         </div>
-        <div className="col-md-4">
+        <div className="col">
           <Card 
             title="Visión" 
             description="Ser líderes en el mercado ecológico y sostenible." 
-            image="https://via.placeholder.com/150"
+            image="/vision.jpg"
           />
         </div>
-        <div className="col-md-4">
+        <div className="col">
           <Card 
             title="Valores" 
             description="Innovación, sostenibilidad y responsabilidad social." 
-            image="https://via.placeholder.com/150"
+            image="/valores.jpg"
           />
         </div>
       </div>
     </div>
   );
-
-function Nosotros() {
-  
 }
 
 export default Nosotros;
