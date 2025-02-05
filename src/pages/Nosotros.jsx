@@ -1,14 +1,38 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Home.css';
+import './Nosotros.css';
+import Card from '../components/Card';
 
 function Nosotros() {
   return (
     <div className="container mt-5">
-      <h2 className="text-center">Nosotros</h2>
-      <p className="text-muted text-center">
-        Somos una empresa comprometida con la innovación y la sostenibilidad.
-      </p>
+      <h1 className="text-muted text-center">
+        Comprometidos con el planeta y la sostenibilidad.
+      </h1>
+
+      <div className="row mt-4">
+        <div className="col-md-4">
+          <Card 
+            title="Misión" 
+            description="Ofrecer productos sostenibles para reducir la huella de carbono." 
+            image="https://via.placeholder.com/150"
+          />
+        </div>
+        <div className="col-md-4">
+          <Card 
+            title="Visión" 
+            description="Ser líderes en el mercado ecológico y sostenible." 
+            image="https://via.placeholder.com/150"
+          />
+        </div>
+        <div className="col-md-4">
+          <Card 
+            title="Valores" 
+            description="Innovación, sostenibilidad y responsabilidad social." 
+            image="https://via.placeholder.com/150"
+          />
+        </div>
+      </div>
     </div>
   );
 
