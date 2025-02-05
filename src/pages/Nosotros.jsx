@@ -11,6 +11,9 @@ function Nosotros() {
       </p>
     </div>
   );
+
+function Nosotros() {
+  
 }
 
 export default Nosotros;
