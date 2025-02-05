@@ -1,9 +1,9 @@
-const emprendimientoModel = require('../model/emprendimientoM.js');
+const EmprendimientoModel = require('../model/emprendimientoM');
 
 // Obtener todos los emprendimientos
 const getAllEmprendimientos = async (req, res) => {
   try {
-    const emprendimientos = await emprendimientoModel.getAllEmprendimientos();
+    const emprendimientos = await EmprendimientoModel.getAllEmprendimientos();
     res.status(200).json(emprendimientos);
   } catch (err) {
     res.status(500).json({ message: 'Error al obtener los emprendimientos: ' + err.message });
@@ -14,7 +14,7 @@ const getAllEmprendimientos = async (req, res) => {
 const getEmprendimientoById = async (req, res) => {
   const { id } = req.params;
   try {
-    const emprendimiento = await emprendimientoModel.getEmprendimientobyId(id);
+    const emprendimiento = await EmprendimientoModel.getEmprendimientobyId(id);
     if (!emprendimiento) {
       return res.status(404).json({ message: 'Emprendimiento no encontrado' });
     }
@@ -24,31 +24,35 @@ const getEmprendimientoById = async (req, res) => {
   }
 };
 
-// Crear un nuevo emprendimiento
+// Crear un nuevo emprendimiento con imagen
 const createEmprendimiento = async (req, res) => {
-  const { nombre, descripcion, logo } = req.body;
-  if (!nombre || !descripcion || !logo) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
-  }
+  const { ES_EMP_NOMBRE, ES_EMP_DESCRIPCION } = req.body;
+  const ES_EMP_LOGO = req.file ? `/uploads/${req.file.filename}` : null;
   try {
-    const newEmprendimiento = await emprendimientoModel.createEmprendimiento({ nombre, descripcion, logo });
+    const newEmprendimiento = await EmprendimientoModel.createEmprendimiento({
+      nombre: ES_EMP_NOMBRE,
+      descripcion: ES_EMP_DESCRIPCION,
+      logo: ES_EMP_LOGO
+    });
     res.status(201).json(newEmprendimiento);
   } catch (err) {
     res.status(500).json({ message: 'Error al crear el emprendimiento: ' + err.message });
   }
 };
 
-// Actualizar un emprendimiento
+// Actualizar un emprendimiento con imagen
 const updateEmprendimiento = async (req, res) => {
   const { id } = req.params;
-  const { nombre, descripcion, logo } = req.body;
-  if (!nombre || !descripcion || !logo) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios para actualizar' });
-  }
+  const { ES_EMP_NOMBRE, ES_EMP_DESCRIPCION } = req.body;
+  const ES_EMP_LOGO = req.file ? `/uploads/${req.file.filename}` : null;
   try {
-    const updatedEmprendimiento = await emprendimientoModel.updateEmprendimiento(id, { nombre, descripcion, logo });
+    const updatedEmprendimiento = await EmprendimientoModel.updateEmprendimiento(id, {
+      nombre: ES_EMP_NOMBRE,
+      descripcion: ES_EMP_DESCRIPCION,
+      logo: ES_EMP_LOGO
+    });
     if (!updatedEmprendimiento) {
-      return res.status(404).json({ message: 'Emprendimiento no encontrado para actualizar' });
+      return res.status(404).json({ message: 'Emprendimiento no encontrado' });
     }
     res.status(200).json(updatedEmprendimiento);
   } catch (err) {
@@ -58,17 +62,27 @@ const updateEmprendimiento = async (req, res) => {
 
 // Eliminar un emprendimiento
 const deleteEmprendimiento = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // Obtener el ID de la URL
   try {
-    const deleted = await emprendimientoModel.deleteEmprendimiento(id);
-    if (!deleted) {
-      return res.status(404).json({ message: 'Emprendimiento no encontrado para eliminar' });
+    console.log("Eliminando emprendimiento con ID:", id); // 🛠️ Debugging
+
+    // Validar que el ID es un número
+    if (isNaN(id)) {
+      return res.status(400).json({ message: "El ID proporcionado no es válido." });
     }
-    res.status(200).json({ message: 'Emprendimiento eliminado exitosamente' });
+
+    const result = await EmprendimientoModel.deleteEmprendimiento(id);
+    if (!result) {
+      return res.status(404).json({ message: "Emprendimiento no encontrado" });
+    }
+
+    res.status(200).json({ message: "Emprendimiento eliminado con éxito" });
   } catch (err) {
-    res.status(500).json({ message: 'Error al eliminar el emprendimiento: ' + err.message });
+    console.error("Error en deleteEmprendimiento:", err);
+    res.status(500).json({ message: "Error al eliminar el emprendimiento: " + err.message });
   }
 };
+
 
 module.exports = {
   getAllEmprendimientos,

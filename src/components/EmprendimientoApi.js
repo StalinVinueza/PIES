@@ -7,9 +7,10 @@ function EmprendimientosApi() {
   const [selectedEmprendimiento, setSelectedEmprendimiento] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
-    es_emp_nombre: '',
-    es_emp_descripcion: '',
-    es_emp_logo: ''
+    es_emp_id: '',
+    ES_EMP_NOMBRE: '',
+    ES_EMP_DESCRIPCION: '',
+    ES_EMP_LOGO: ''
   });
 
   useEffect(() => {
@@ -26,9 +27,10 @@ function EmprendimientosApi() {
     } else {
       setSelectedEmprendimiento(null);
       setEditData({
-        es_emp_nombre: '',
-        es_emp_descripcion: '',
-        es_emp_logo: ''
+        es_emp_id: '',
+        ES_EMP_NOMBRE: '',
+        ES_EMP_DESCRIPCION: '',
+        ES_EMP_LOGO: ''
       });
     }
     setShowModal(true);
@@ -41,7 +43,7 @@ function EmprendimientosApi() {
   };
 
   const handleCreate = () => {
-    if (!editData.es_emp_nombre || !editData.es_emp_descripcion || !editData.es_emp_logo) {
+    if (!editData.ES_EMP_NOMBRE || !editData.ES_EMP_DESCRIPCION || !editData.ES_EMP_LOGO) {
       alert('Todos los campos son obligatorios');
       return;
     }
@@ -65,7 +67,7 @@ function EmprendimientosApi() {
       return;
     }
 
-    if (!editData.es_emp_nombre || !editData.es_emp_descripcion || !editData.es_emp_logo) {
+    if (!editData.ES_EMP_NOMBRE || !editData.ES_EMP_DESCRIPCION || !editData.ES_EMP_LOGO) {
       alert('Por favor, complete todos los campos obligatorios.');
       return;
     }
@@ -83,7 +85,7 @@ function EmprendimientosApi() {
       .catch(error => console.error('Error al actualizar el emprendimiento:', error));
   };
 
-  const handleDelete = (id) => {
+  const handleDeleteEmprendimiento = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
       fetch(`http://localhost:3001/api/emprendimientos/${id}`, { method: 'DELETE' })
         .then(() => setEmprendimientos(emprendimientos.filter(emprendimiento => emprendimiento.es_emp_id !== id)))
@@ -98,7 +100,7 @@ function EmprendimientosApi() {
       <EmprendimientoList 
       emprendimientos={emprendimientos} 
       onShowModal={handleShowModal} // Aquí pasamos la función correctamente
-      onDelete={handleDelete} 
+      onDelete={handleDeleteEmprendimiento} 
         />
       {showModal && (
         <EmprendimientoModal

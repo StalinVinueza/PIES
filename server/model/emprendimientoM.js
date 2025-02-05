@@ -6,20 +6,16 @@ class EmprendimientoModel {
     try {
       const result = await poolPostgres.query(`
         SELECT 
-          e.ES_EMP_ID,
-          e.ES_EMP_NOMBRE,
-          e.ES_EMP_DESCRIPCION,
-          e.ES_EMP_LOGO,
-          e.ES_EMP_FECHA_CREACION,
-          e.ES_EMP_FECHA_MODIFICACION,
-          e.ES_EMP_ESTADO
-        FROM ES_EMPRENDIMIENTO e
+          ES_EMP_ID, ES_EMP_NOMBRE, ES_EMP_DESCRIPCION, 
+          ES_EMP_LOGO, ES_EMP_FECHA_CREACION, ES_EMP_FECHA_MODIFICACION, ES_EMP_ESTADO
+        FROM ES_EMPRENDIMIENTO
       `);
       return result.rows;
     } catch (err) {
       throw new Error('Error al obtener los emprendimientos: ' + err.message);
     }
   }
+  
 
   // Obtener un emprendimiento por ID
   static async getEmprendimientobyId(id) {
@@ -75,18 +71,21 @@ class EmprendimientoModel {
     }
   }
 
-  // Eliminar un emprendimiento
   static async deleteEmprendimiento(id) {
     try {
       const result = await poolPostgres.query(
-        `DELETE FROM ES_EMPRENDIMIENTO WHERE ES_EMP_ID = $1 RETURNING *`,
+        "DELETE FROM ES_EMPRENDIMIENTO WHERE ES_EMP_ID = $1 RETURNING *",
         [id]
       );
-      return result.rows.length > 0;
+  
+      return result.rowCount > 0; // ✅ Retorna `true` si se eliminó correctamente
     } catch (err) {
-      throw new Error('Error al eliminar el emprendimiento: ' + err.message);
+      console.error("Error en deleteEmprendimiento:", err);
+      throw new Error("Error al eliminar el emprendimiento: " + err.message);
     }
   }
+  
+  
 }
 
 module.exports = EmprendimientoModel;
