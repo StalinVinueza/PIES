@@ -10,6 +10,9 @@ const emprendimientoRoutes = require('./route/emprendimientoR.js');
 // Carpeta pública para el frontend
 app.use(express.static('client'));
 
+// Permitir servir archivos estáticos desde "server/uploads"
+app.use('/uploads', express.static('server/uploads'));
+
 // Ruta básica
 app.get('/', (req, res) => {
   res.send('¡Bienvenido al servidor Eco-Shop!');
@@ -28,18 +31,13 @@ app.use(express.json());
 
 // Usar las rutas definidas
 app.use('/api', clienteRoutes);
+
 app.use('/api', emprendimientoRoutes);
+
+
 
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 
-app.put('/api/clientes/:id', (req, res) => {
-  const clienteId = req.params.id;
-  const clienteData = req.body;
-
-  if (!clienteId) {
-    return res.status(400).json({ message: 'El ID del cliente es necesario' });
-  }
-});

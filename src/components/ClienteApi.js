@@ -5,7 +5,6 @@ import ClienteModal from './ClienteModal';
 function ApiClientes() {
   const [clientes, setClientes] = useState([]);
   const [selectedCliente, setSelectedCliente] = useState(null);
-
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
     es_cli_nombre: '',
@@ -16,7 +15,6 @@ function ApiClientes() {
   });
 
   useEffect(() => {
-    // Fetch inicial para obtener los clientes
     fetch('http://localhost:3001/api/clientes')
       .then(response => response.json())
       .then(data => setClientes(data))
@@ -25,11 +23,9 @@ function ApiClientes() {
 
   const handleShowModal = (cliente = null) => {
     if (cliente) {
-      // Si se pasa un cliente (para editar), cargamos sus datos
       setSelectedCliente(cliente);
-      setEditData(cliente);  // Cargamos los datos del cliente
+      setEditData(cliente);
     } else {
-      // Si no se pasa un cliente (nuevo cliente), iniciamos el formulario vacío
       setSelectedCliente(null);
       setEditData({
         es_cli_nombre: '',
@@ -48,13 +44,31 @@ function ApiClientes() {
     setEditData({ ...editData, [e.target.name]: e.target.value });
   };
 
+  const handleCreate = () => {
+    if (!editData.es_cli_nombre || !editData.es_cli_apellido || !editData.es_cli_correo) {
+      alert('Todos los campos obligatorios deben ser completados');
+      return;
+    }
+
+    fetch('http://localhost:3001/api/clientes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(editData),
+    })
+      .then(response => response.json())
+      .then(newCliente => {
+        setClientes([...clientes, newCliente]);
+        setShowModal(false);
+      })
+      .catch(error => console.error('Error al crear el cliente:', error));
+  };
+
   const handleUpdate = () => {
     if (!selectedCliente || !selectedCliente.es_cli_id) {
       alert('El ID del cliente es necesario');
       return;
     }
 
-    // Comprobamos si el cliente tiene los datos obligatorios antes de continuar
     if (!editData.es_cli_nombre || !editData.es_cli_apellido || !editData.es_cli_correo) {
       alert('Por favor, complete todos los campos obligatorios.');
       return;
@@ -63,20 +77,22 @@ function ApiClientes() {
     fetch(`http://localhost:3001/api/clientes/${selectedCliente.es_cli_id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(editData),  // Enviamos todos los datos
+      body: JSON.stringify(editData),
     })
       .then(response => response.json())
       .then(cliente => {
-        setClientes(clientes => clientes.map(c => (c.es_cli_id === cliente.es_cli_id ? cliente : c))); // Actualiza el cliente editado
-        setShowModal(false);  // Cierra el modal
+        setClientes(clientes.map(c => (c.es_cli_id === cliente.es_cli_id ? cliente : c)));
+        setShowModal(false);
       })
       .catch(error => console.error('Error al actualizar el cliente:', error));
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3001/api/clientes/${id}`, { method: 'DELETE' })
-      .then(() => setClientes(clientes.filter(cliente => cliente.es_cli_id !== id)))
-      .catch(error => console.error(error));
+    if (window.confirm("¿Estás seguro de eliminar este cliente?")) {
+      fetch(`http://localhost:3001/api/clientes/${id}`, { method: 'DELETE' })
+        .then(() => setClientes(clientes.filter(cliente => cliente.es_cli_id !== id)))
+        .catch(error => console.error(error));
+    }
   };
 
   return (
@@ -90,7 +106,7 @@ function ApiClientes() {
           handleClose={handleCloseModal}
           editData={editData}
           handleChange={handleChange}
-          handleUpdate={handleUpdate}  // Asegúrate de que handleUpdate esté correctamente pasado
+          handleSave={selectedCliente ? handleUpdate : handleCreate}
         />
       )}
     </div>

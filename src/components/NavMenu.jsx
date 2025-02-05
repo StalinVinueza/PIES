@@ -13,7 +13,7 @@ function NavMenu() {
           Eco-Shop
         </Link>
 
-        {/* Botón Hamburguesa */}
+        {/* Botón Hamburguesa para móviles */}
         <button 
           className="navbar-toggler" 
           type="button" 
@@ -26,17 +26,17 @@ function NavMenu() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Menú */}
+        {/* Menú de navegación */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/clientes">Clientes</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li> 
             <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li> 
-            <li className="nav-item"><Link className="nav-link" to="#">Emprendimientos</Link></li> 
-            <li className="nav-item"><Link className="nav-link" to="#">Productos</Link></li> 
-            
-            {/* Icono de Usuario en lugar de "Iniciar Sesión" */}
+
+            {/* Icono de Usuario (Redirige a Login) */}
             <li className="nav-item">
               <Link className="nav-link user-icon" to="/login">
                 <FaUser size={22} className="text-dark" />
