@@ -4,9 +4,11 @@ import NavMenu from './components/NavMenu';
 import FooterEco from './components/FooterEco';
 import Home from './pages/Home';
 import Clientes from './pages/Clientes';
+import Emprendimientos from './pages/Emprendimiento';
 import Contacto from './pages/Contacto';
 import Nosotros from './pages/Nosotros'; // ✅ Importamos Nosotros
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -21,7 +23,8 @@ function App() {
           <Route path="/" element={<Home />} /> 
           <Route path="/clientes" element={<Clientes />} /> 
           <Route path="/contacto" element={<Contacto />} /> 
-          <Route path="/nosotros" element={<Nosotros />} /> {/* ✅ Agregamos Nosotros */}
+          <Route path="/emprendimientos" element={<Emprendimientos />} />
+          <Route path="/nosotros" element={<Nosotros />} /> 
         </Routes>
       </main>
 

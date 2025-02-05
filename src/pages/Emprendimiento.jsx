@@ -1,11 +1,11 @@
 import React from 'react';
-import ApiClientes from '../components/ClienteApi';
+import EmprendimientosApi from '../components/EmprendimientoApi';
 
 function ClientePage() {
   return (
     <div>
       
-      <ApiClientes />
+      <EmprendimientosApi />
     </div>
   );
 }

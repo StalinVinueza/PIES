@@ -6,6 +6,13 @@ import './NavMenu.css'; // Asegúrate de enlazar el CSS si tienes estilos person
 
 function NavMenu() {
   return (
+    <nav>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/clientes">Clientes</Link> </li>
+        <li><Link to="/emprendimientos">Emprendimientos</Link> </li>
+        <li><Link to="/contacto">Contacto</Link> </li>
+      </ul>
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
       <div className="container">
         {/* Logo (redirige al inicio) */}
