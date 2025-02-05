@@ -22,7 +22,7 @@ function EmprendimientosApi() {
         setEmprendimientos(response.data);
       } catch (error) {
         console.error("Error al obtener los emprendimientos:", error);
-        setEmprendimientos([]); // Evitar error al mapear en caso de fallo
+        setEmprendimientos([]);
       }
     };
 
@@ -85,7 +85,7 @@ function EmprendimientosApi() {
 
       console.log("Respuesta del servidor:", response.data);
       setShowModal(false);
-      window.location.reload(); // ✅ Recargar la página después de guardar
+      window.location.reload();
     } catch (error) {
       console.error("Error al guardar:", error);
     }

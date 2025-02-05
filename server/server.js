@@ -25,10 +25,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 
-// Opciones de CORS
-
-
-
 
 // Usar las rutas definidas
 app.use('/api', clienteRoutes);

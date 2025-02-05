@@ -57,7 +57,7 @@ class EmprendimientoModel {
         throw new Error('Emprendimiento no encontrado');
       }
   
-      const es_emp_logo = logo || existing.rows[0].es_emp_logo; // ✅ Mantener imagen anterior si no se envía nueva
+      const es_emp_logo = logo || existing.rows[0].es_emp_logo;
   
       const result = await poolPostgres.query(
         `UPDATE ES_EMPRENDIMIENTO SET
