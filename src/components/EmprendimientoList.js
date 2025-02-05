@@ -38,7 +38,7 @@ function Emprendimientos({ onShowModal }) {
 
   return (
     <div className="container py-4">
-      <h1 className="text-center mb-4">Emprendimientos</h1>
+  
 
       {emprendimientos.length === 0 ? (
         <p className="text-center">No hay emprendimientos disponibles.</p>
