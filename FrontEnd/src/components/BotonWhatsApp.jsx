@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaWhatsapp } from 'react-icons/fa'; // Importa el icono de WhatsApp
+// import { FaWhatsapp } from 'react-icons/fa'; 
 import '../components/Contactos.css'; // Asegúrate de que este archivo exista
 
 function BotonWhatsApp() {
@@ -11,7 +11,7 @@ function BotonWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <FaWhatsapp size={24} /> {/* Icono de WhatsApp con Bootstrap */}
+      {/* <FaWhatsapp size={24} />  */}
       Enviar mensaje
     </a>
   );
