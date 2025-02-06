@@ -28,7 +28,7 @@ function Contacto() {
       {/* Sección del Botón de WhatsApp */}
       <div className="row mt-4">
         <div className="col text-center">
-          <p className="fw-bold fs-5">Envíanos un mensaje a nuestro WhatsApp para más información</p>
+          <p className="fs-3">Escríbenos, ¡Te contactaremos de inmediato! ✉️🚀</p>
           <BotonWhatsApp />
         </div>
       </div>
