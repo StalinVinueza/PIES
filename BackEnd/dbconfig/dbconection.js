@@ -23,6 +23,8 @@ poolPostgres.connect((err, client, release) => {
 // Exportar el pool para usarlo en otros archivos
 module.exports = poolPostgres;
 
+
+
 // (async () => {
 //     try {
 //       const queryText = 'SELECT * FROM ES_CATEGORIA'; // Consulta SQL

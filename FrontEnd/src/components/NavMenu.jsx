@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa'; // Importamos el icono de usuario
+// import { FaUser } from 'react-icons/fa'; // Importamos el icono de usuario
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavMenu.css'; // Asegúrate de enlazar el CSS si tienes estilos personalizados
 
@@ -39,9 +39,9 @@ function NavMenu() {
 
             {/* Icono de Usuario (Redirige a Login) */}
             <li className="nav-item">
-            <Link className="nav-link" to="/login">
+            {/* <Link className="nav-link" to="/login">
               <FaUser size={22} className="user-icon" />
-            </Link>
+            </Link> */}
 
             </li>
           </ul>
