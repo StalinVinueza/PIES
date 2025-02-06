@@ -27,5 +27,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Ignorar las imagenes que se suben al servidor
+Backend/uploads/*
 
-Backend/uploads/
