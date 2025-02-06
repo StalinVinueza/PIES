@@ -1,4 +1,5 @@
 .whatsapp-button {
+  max-width: 180px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -8,6 +9,7 @@
   border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
+  width: 50px;
 }
 
 .whatsapp-button:hover {
