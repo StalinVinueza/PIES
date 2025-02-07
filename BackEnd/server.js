@@ -8,12 +8,10 @@ const path = require('path');
 const clienteRoutes = require('./route/clienteR.js');
 const emprendimientoRoutes = require('./route/emprendimientoR.js');
 const productoRoutes = require('./route/productoR.js');
+const compraRoutes = require("./route/carritoR");
 
 // Carpeta pública para el frontend
 app.use(express.static('client'));
-
-// Permitir servir archivos estáticos desde "server/uploads"
-app.use('/uploads', express.static('server/uploads'));
 
 // Ruta básica
 app.get('/', (req, res) => {
@@ -34,6 +32,8 @@ app.use('/api', clienteRoutes);
 app.use('/api', emprendimientoRoutes);
 
 app.use('/api', productoRoutes);
+
+app.use('/api', compraRoutes);
 
 //Imagenes
 app.use('/uploads', express.static(path.join(__dirname, 'middleware/uploads')));
