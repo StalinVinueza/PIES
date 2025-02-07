@@ -3,8 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Ubicacion from '../components/Ubicacion'; 
 import BotonWhatsApp from '../components/BotonWhatsApp'; 
 import FormularioContacto from '../components/FormularioContacto'; 
-import '../components/Contactos.css'; // Asegúrate de que este archivo exista en styles, no en components
-
+import '../components/Contactos.css'; 
 
 function Contacto() {
   return (
