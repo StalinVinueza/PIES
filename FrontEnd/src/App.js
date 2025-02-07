@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Clientes from './pages/ClientePage';
 import Emprendimientos from './pages/EmprendimientoPage';
 import Productos from './pages/ProductoPage';
+import Cart from './components/Carrito';
 import Contacto from './pages/Contacto';
 import Nosotros from './pages/Nosotros';
 import './App.css';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/clientes" element={<Clientes />} /> 
           <Route path="/productos" element={<Productos />} />
           <Route path="/emprendimientos" element={<Emprendimientos />} />
+          <Route path="/carrito" element={<Cart />} />
           <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 
         </Routes>

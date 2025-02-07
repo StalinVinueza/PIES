@@ -33,7 +33,8 @@ function NavMenu() {
             <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/clientes">Clientes</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li> 
+            <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li>
+            <li className='nav-item'><Link className='nav-link' to='/carrito'>Carrito</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li> 
 
