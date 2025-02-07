@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // import { FaUser } from 'react-icons/fa'; // Importamos el icono de usuario
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './NavMenu.css'; // Asegúrate de enlazar el CSS si tienes estilos personalizados
+import './NavMenu.css';
 
 function NavMenu() {
   return (

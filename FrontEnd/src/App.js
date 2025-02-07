@@ -3,8 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
 import FooterEco from './components/FooterEco';
 import Home from './pages/Home';
-import Clientes from './pages/Clientes';
-import Emprendimientos from './pages/Emprendimiento';
+import Clientes from './pages/ClientePage';
+import Emprendimientos from './pages/EmprendimientoPage';
+import Productos from './pages/ProductoPage';
 import Contacto from './pages/Contacto';
 import Nosotros from './pages/Nosotros';
 import './App.css';
@@ -24,8 +25,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} /> 
           <Route path="/clientes" element={<Clientes />} /> 
-          <Route path="/contacto" element={<Contacto />} /> 
+          <Route path="/productos" element={<Productos />} />
           <Route path="/emprendimientos" element={<Emprendimientos />} />
+          <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 
         </Routes>
       </main>
