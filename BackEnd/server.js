@@ -6,8 +6,8 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { registro, login } = require('./controller/mongoC');  // Asegúrate de que estas funciones estén definidas en mongoC.js
-
+// const { registro, login } = require('./controller/mongoC'); 
+const { registro, login } = require('./controller/authC');
 require('dotenv').config(); 
 
 // Conectar a MongoDB Local
@@ -30,9 +30,14 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 
-// Rutas API de usuarios
-app.post('/api/usuarios/registro', registro);  // Registro
-app.post('/api/usuarios/login', login);  // Login
+// // Rutas API de usuarios
+// app.post('/api/usuarios/registro', registro);  // Registro
+// app.post('/api/usuarios/login', login);  // Login
+
+
+app.post('/api/auth/registro', registro);
+app.post('/api/auth/login', login);
+
 
 // Otras rutas
 const clienteRoutes = require('./route/clienteR.js');
