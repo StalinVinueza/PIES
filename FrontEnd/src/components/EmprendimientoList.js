@@ -25,12 +25,16 @@ function Emprendimientos({ onShowModal }) {
   // Función para eliminar un emprendimiento
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
-      fetch(`http://localhost:3001/api/emprendimientos/${id}`, { method: "DELETE" })
+      fetch(`http://localhost:3001/api/emprendimientos/${id}`, {
+        method: "DELETE",
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Error al eliminar el emprendimiento");
           }
-          setEmprendimientos((prev) => prev.filter((emp) => emp.es_emp_id !== id));
+          setEmprendimientos((prev) =>
+            prev.filter((emp) => emp.es_emp_id !== id)
+          );
         })
         .catch((error) => console.error("Error al eliminar:", error));
     }
@@ -43,17 +47,30 @@ function Emprendimientos({ onShowModal }) {
       ) : (
         <div className="row">
           {emprendimientos.map((emprendimiento) => (
-            <div key={emprendimiento.es_emp_id} className="col-md-4 col-lg-3 mb-4">
+            <div
+              key={emprendimiento.es_emp_id}
+              className="col-md-4 col-lg-3 mb-4"
+            >
               <div className="card shadow-sm h-100">
                 <img
-                  src={`http://localhost:3001${emprendimiento.es_emp_logo}`}
+                  src={
+                    emprendimiento.es_emp_logo.startsWith("/uploads/")
+                      ? `http://localhost:3001${emprendimiento.es_emp_logo}`
+                      : `http://localhost:3001/uploads/${emprendimiento.es_emp_logo}`
+                  }
                   alt={emprendimiento.es_emp_nombre}
                   className="card-img-top"
                   style={{ height: "180px", objectFit: "cover" }}
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
                 />
+
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
-                  <p className="card-text flex-grow-1">{emprendimiento.es_emp_descripcion}</p>
+                  <p className="card-text flex-grow-1">
+                    {emprendimiento.es_emp_descripcion}
+                  </p>
                   <div className="d-flex justify-content-between">
                     {/* Botón de editar con color personalizado */}
                     <button

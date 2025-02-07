@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = 3001;
 const cors = require('cors');
+const path = require('path');
 
 const clienteRoutes = require('./route/clienteR.js');
 const emprendimientoRoutes = require('./route/emprendimientoR.js');
@@ -31,7 +32,8 @@ app.use('/api', clienteRoutes);
 
 app.use('/api', emprendimientoRoutes);
 
-
+//Imagenes
+app.use('/uploads', express.static(path.join(__dirname, 'middleware/uploads')));
 
 // Iniciar servidor
 app.listen(PORT, () => {
