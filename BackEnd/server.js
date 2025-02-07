@@ -7,6 +7,7 @@ const path = require('path');
 
 const clienteRoutes = require('./route/clienteR.js');
 const emprendimientoRoutes = require('./route/emprendimientoR.js');
+const productoRoutes = require('./route/productoR.js');
 
 // Carpeta pública para el frontend
 app.use(express.static('client'));
@@ -31,6 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', clienteRoutes);
 
 app.use('/api', emprendimientoRoutes);
+
+app.use('/api', productoRoutes);
 
 //Imagenes
 app.use('/uploads', express.static(path.join(__dirname, 'middleware/uploads')));
