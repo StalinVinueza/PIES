@@ -35,6 +35,8 @@ app.use('/api', emprendimientoRoutes);
 
 app.use('/api', productoRoutes);
 
+
+
 //Imagenes
 app.use('/uploads', express.static(path.join(__dirname, 'middleware/uploads')));
 
