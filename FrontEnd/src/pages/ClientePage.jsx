@@ -1,6 +1,6 @@
 import React from 'react';
 import ApiClientes from '../components/ClienteApi';
-import './ClientePages.css'; // Importa el archivo CSS
+import '../styles/ClientePages.css';
 
 function ClientePage() {
   return (

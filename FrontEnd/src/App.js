@@ -9,13 +9,15 @@ import Productos from './pages/ProductoPage';
 import Cart from './components/Carrito';
 import Contacto from './pages/Contacto';
 import Nosotros from './pages/Nosotros';
+import Registro from './components/Register';
 import Login from "./components/Login";
 import ProtectedRoute from './components/ProtectedRoute';
+import PoliticasPrivacidad from './pages/PoliticasPrivacidad';
+import PoliticasReembolsos from './pages/PoliticasReembolsos';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-
 
 function App() {
   return (
@@ -33,7 +35,12 @@ function App() {
           <Route path="/carrito" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
           <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 
+          <Route path='/registro' element={<Registro />} />
           <Route path='/login' element={<Login />} />
+          
+          {/* Rutas para las políticas */}
+          <Route path="/politicas-privacidad" element={<PoliticasPrivacidad />} /> {/* Corrected path */}
+          <Route path="/politicas-reembolsos" element={<PoliticasReembolsos />} /> {/* Corrected path */}
         </Routes>
       </main>
 

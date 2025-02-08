@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Nosotros.css';
+import '../styles/Nosotros.css';
 import Card from '../components/CardNosotros';
 
 function Nosotros() {

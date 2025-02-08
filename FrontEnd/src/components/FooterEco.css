@@ -1,65 +1,19 @@
-/* Footer general */
-.footer {
-  background-color: #006d68; /* Color de fondo */
-  color: white; /* Color del texto */
-  padding-top: 2rem;
+.footer-icon {
+  color: #007bff; /* Azul original */
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Estilo de enlaces */
+.footer-icon:hover {
+  color: #0056b3; /* Azul más oscuro al pasar el cursor */
+  transform: scale(1.2); /* Aumenta ligeramente el tamaño */
+}
+
 .footer-link {
-  color: white;
   text-decoration: none;
+  color: white;
   transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-  color: #9eac42; /* Color al pasar el mouse */
-}
-
-/* Iconos de redes sociales */
-.social-icons a {
-  color: white;
-  transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #9eac42; /* Color al pasar el mouse */
-}
-
-/* Asegurar espaciado entre los enlaces */
-.footer ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-.footer ul li {
-  margin-bottom: 0.5rem;
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-  .footer {
-    text-align: center;
-  }
-
-  .footer .col-md-4 {
-    margin-bottom: 1.5rem;
-  }
-
-  .social-icons {
-    justify-content: center; /* Centrar los iconos en pantallas pequeñas */
-  }
-}
-
-/* Barra inferior */
-.border-white {
-  border-color: rgba(255, 255, 255, 0.5) !important;
-}
-
-.footer p {
-  margin-bottom: 0.5rem;
-}
-
-.footer span {
-  color: white;
+  color: #ddd;
 }

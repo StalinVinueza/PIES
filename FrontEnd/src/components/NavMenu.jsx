@@ -59,6 +59,9 @@ function NavMenu() {
             <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
+            {!isAuthenticated && (
+              <li className='nav-item'><Link className='nav-link' to='/registro'>Registro</Link></li>
+            )}
 
             {/* Mostrar botón de logout si el usuario está autenticado */}
             {isAuthenticated ? (

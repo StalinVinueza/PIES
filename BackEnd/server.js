@@ -24,6 +24,7 @@ const connectMongo = async () => {
 // Conectar a MongoDB
 connectMongo();
 
+
 // Middleware
 app.use(express.static('client')); 
 app.use(cors({ origin: 'http://localhost:3000' }));
@@ -49,6 +50,10 @@ app.use('/api', clienteRoutes);
 app.use('/api', emprendimientoRoutes);
 app.use('/api', productoRoutes);
 app.use('/api', compraRoutes);
+
+
+//Imagenes
+app.use('/uploads', express.static(path.join(__dirname, 'middleware/uploads')));
 
 // Ruta básica
 app.get('/', (req, res) => {
