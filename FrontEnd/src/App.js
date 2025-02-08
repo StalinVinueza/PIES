@@ -9,6 +9,7 @@ import Productos from './pages/ProductoPage';
 import Cart from './components/Carrito';
 import Contacto from './pages/Contacto';
 import Nosotros from './pages/Nosotros';
+import Registro from './components/Register';
 import Login from "./components/Login";
 import ProtectedRoute from './components/ProtectedRoute';
 import PoliticasPrivacidad from './pages/PoliticasPrivacidad';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/carrito" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
           <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 
+          <Route path='/registro' element={<Registro />} />
           <Route path='/login' element={<Login />} />
           
           {/* Rutas para las políticas */}
