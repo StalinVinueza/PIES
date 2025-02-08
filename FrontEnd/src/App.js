@@ -12,6 +12,7 @@ import Nosotros from './pages/Nosotros';
 import Login from "./components/Login";
 import ProtectedRoute from './components/ProtectedRoute';
 import PoliticasPrivacidad from './pages/PoliticasPrivacidad';
+import PoliticasReembolsos from './pages/PoliticasReembolsos';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -36,7 +37,8 @@ function App() {
           <Route path='/login' element={<Login />} />
           
           {/* Rutas para las políticas */}
-          <Route path="/politicas-privacidad" element={<PoliticasPrivacidad />} />
+          <Route path="/politicas-privacidad" element={<PoliticasPrivacidad />} /> {/* Corrected path */}
+          <Route path="/politicas-reembolsos" element={<PoliticasReembolsos />} /> {/* Corrected path */}
         </Routes>
       </main>
 
