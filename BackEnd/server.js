@@ -51,10 +51,15 @@ app.use('/api', emprendimientoRoutes);
 app.use('/api', productoRoutes);
 app.use('/api', compraRoutes);
 
+
+//Imagenes
+app.use('/uploads', express.static(path.join(__dirname, 'middleware/uploads')));
+
 // Ruta básica
 app.get('/', (req, res) => {
   res.send('¡Bienvenido al servidor Eco-Shop!');
 });
+
 
 // Iniciar servidor
 app.listen(PORT, () => {
