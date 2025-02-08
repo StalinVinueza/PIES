@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavMenu.css';
+import { FaUser  } from 'react-icons/fa';  // Importamos el ícono de inicio de sesión
+
 
 function NavMenu() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);  // Estado para verificar si el usuario está autenticado
@@ -70,8 +72,10 @@ function NavMenu() {
               </li>
             ) : (
               <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
-              </li>
+              <Link className="nav-link" to="/login">
+                <FaUser />  {/* Aquí colocamos el ícono de la silueta de una persona */}
+              </Link>
+            </li>
             )}
           </ul>
         </div>

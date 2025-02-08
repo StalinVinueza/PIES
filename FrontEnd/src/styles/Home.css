@@ -1,117 +1,80 @@
-/* Estilos generales del contenedor Home */
 .home {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh; /* Ocupar toda la pantalla */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  flex-direction: column;
+  padding-left: 30%; /* Padding en el lateral izquierdo */
+  padding-right: 30%; /* Padding en el lateral derecho */
 }
 
-/* Asegurar que el footer se acople con el fondo */
-body, html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+.home h1, .home p {
+  font-size: 2rem; /* Aumentado el tamaño de los títulos (h1) */
+  color: #3f3f3f; /* Color para texto en el contenido */
+  line-height: 1.5; /* Mejora la legibilidad del texto */
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Asegurar que ocupa toda la pantalla */
-}
-
-.App {
-  flex-grow: 1; /* Permite que el contenido se expanda hasta el footer */
-}
-
-/* Caja central con el contenido */
-.home-content {
-  background-color: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 600px;
-  animation: fadeIn 1s ease-in-out;
-}
-
-/* Título principal */
+/* Estilo específico para h1 dentro de contenido */
 .home h1 {
-  font-size: 2.5rem;
-  color: #264653; /* Azul oscuro elegante */
-  margin-bottom: 20px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
+  font-size: 3rem; /* Tamaño mayor para los títulos */
+  color: #3f3f3f; /* Color del texto en el contenido */
+  font-weight: bold; /* Puedes añadir negrita si lo deseas */
 }
 
-/* Párrafo */
+/* Estilo específico para los párrafos dentro de contenido */
 .home p {
+  font-size: 1.5rem; /* Tamaño mayor para los párrafos */
+  color: #3f3f3f; /* Color del texto en el contenido */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.row {
+  margin-bottom: 50px;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn-primary {
+  background-color: #2b8a3e;
+  border-color: #2b8a3e;
+  padding: 12px 24px;
   font-size: 1.2rem;
-  color: #555;
-  line-height: 1.8;
-  margin-bottom: 30px;
-  font-family: 'Inter', sans-serif;
-}
-
-/* Botón de acción */
-.home-button {
-  background: linear-gradient(135deg, #e63946, #ff7b54);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-weight: 600;
   border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
 }
 
-.home-button:hover {
-  background: linear-gradient(135deg, #ff7b54, #f77f00);
-  box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
-  transform: translateY(-2px);
+.btn-primary:hover {
+  background-color: #1d6f2b;
+  border-color: #1d6f2b;
 }
 
-/* Animación suave para la caja central */
-@keyframes fadeIn {
-  from {
-      opacity: 0;
-      transform: translateY(-20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
+.product-image.arandanos {
+  max-width: 100%; /* Ajusta este valor según el tamaño deseado */
+  display: block;
+  margin: 0 auto;
+  padding-left: 0;
 }
 
-/* Estilos del footer para que se acople correctamente */
+
+/* Estilos del footer (sin cambios, solo asegúrate de que no se vean afectados) */
 .footer {
   background-color: #264653;
   color: white;
   text-align: center;
   padding: 20px;
   width: 100%;
-  margin-top: auto; /* Empuja el footer hacia abajo */
+  margin-top: 0; /* Eliminado margin-top: auto para evitar empujarlo hacia abajo */
 }
 
-/* Modo responsive para pantallas pequeñas */
-@media (max-width: 768px) {
-  .home h1 {
-      font-size: 2rem;
+/* Responsividad para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .home {
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
-  .home p {
-      font-size: 1rem;
-  }
-
-  .home-content {
-      padding: 20px;
+  /* Ajustes para pantallas pequeñas */
+  .home h1, .home p {
+    font-size: 1.5rem; /* Ajuste del tamaño en pantallas pequeñas */
   }
 }
