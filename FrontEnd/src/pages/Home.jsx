@@ -73,7 +73,6 @@ function Home() {
 
       {/* Footer (sin afectarse por la clase text-start) */}
       <footer className="text-center py-3">
-        <p>&copy; 2025 Eco Shop. Todos los derechos reservados.</p>
       </footer>
     </>
   );
