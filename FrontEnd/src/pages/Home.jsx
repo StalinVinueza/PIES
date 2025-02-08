@@ -1,81 +1,81 @@
-// Home.js
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Carousel } from 'react-bootstrap';
-import '../styles/Home.css'; // Asegúrate de tener los estilos adecuados en este archivo
+import '../styles/Home.css'; 
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div className="container-fluid home">
-      {/* Imagen principal */}
-      <div className="main-image mb-5">
+    <>
+      {/* Imagen principal fuera de la clase home */}
+      <div className="main-image">
         <img 
           src="/home.jpeg" 
-          className="img-fluid w-100" 
-          alt="Productos Agroecologicos"
+          className="img-fluid w-100 main-image-size" 
+          alt="Productos Agroecológicos"
         />
       </div>
 
-      {/* Título y descripción */}
-      <div className="text-center mb-5">
-        <h1 className="display-4">Bienvenidos a Eco Shop</h1>
-        <p className="lead">Tu tienda ecológica en línea para un mundo más verde y sostenible.</p>
-      </div>
+      <div className="container-fluid home">
+        {/* Título y descripción */}
+        <div className="text-center mb-5">
+          <h1>Bienvenidos a Eco Shop</h1>
+          <p>Tu tienda ecológica en línea para un mundo más verde y sostenible.</p>
+        </div>
 
-      {/* Carrusel de productos */}
-      <div className="carousel-container text-center mb-5">
-        <h2>Nuestros Productos</h2>
-        <Carousel>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://via.placeholder.com/800x400/FFCC00/333333?text=Producto+1"
-              alt="Producto 1"
-            />
-            <Carousel.Caption>
-              <h3>Producto 1</h3>
-              <p>Beneficio 1: Este producto es ecológico y sostenible, perfecto para tu hogar.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+        {/* Secciones de productos */}
+        <div className="row mb-5 align-items-center">
+          <div className="col-md-6">
+            <img className="img-fluid product-image" src="/arandanos.jpeg" alt="Arándanos" />
+          </div>
+          <div className="col-md-6">
+            <h1>Arándanos</h1>
+            <p>Los arándanos son ricos en antioxidantes, mejoran la memoria, promueven la salud ocular y cardiovascular, ayudan a regular el azúcar en sangre y fortalecen el sistema inmunológico.</p>
+          </div>
+        </div>
 
-          <Carousel.Item>
+        {/* Fila 2: Descripción a la izquierda y imagen a la derecha */}
+        <div className="row mb-5 align-items-center">
+          <div className="col-md-6">
+            <h1 className="text-start">Berenjena</h1> {/* Solo este título se alinea a la izquierda */}
+            <p>La berenjena es rica en fibra, antioxidantes y vitaminas. Ayuda a mejorar la digestión, reducir el colesterol, controlar el azúcar en sangre y proteger la salud cardiovascular.</p>
+          </div>
+          <div className="col-md-6">
             <img
-              className="d-block w-100"
-              src="https://via.placeholder.com/800x400/2D8A3E/FFFFFF?text=Producto+2"
+              className="img-fluid product-image"
+              src="/berenjena.jpg"
               alt="Producto 2"
             />
-            <Carousel.Caption>
-              <h3>Producto 2</h3>
-              <p>Beneficio 2: Ayuda a reducir el impacto ambiental, libre de químicos dañinos.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+          </div>
+        </div>
 
-          <Carousel.Item>
+        {/* Fila 3: Imagen a la izquierda y descripción a la derecha */}
+        <div className="row mb-5 align-items-center">
+          <div className="col-md-6">
             <img
-              className="d-block w-100"
-              src="https://via.placeholder.com/800x400/FFAA33/333333?text=Producto+3"
-              alt="Producto 3"
+              className="img-fluid product-image"
+              src="/camu.jpg"
+              alt="Camu"
             />
-            <Carousel.Caption>
-              <h3>Producto 3</h3>
-              <p>Beneficio 3: Ahorra energía y es totalmente biodegradable.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
+          </div>
+          <div className="col-md-6">
+            <h1>Camu Camu</h1>
+            <p>Una fruta rica en vitamina C, incluso más que la naranja, y con propiedades antioxidantes. Ayuda a fortalecer el sistema inmunológico y a combatir el estrés.</p>
+          </div>
+        </div>
+
+        {/* Botón para explorar productos */}
+        <div className="text-center">
+          <Link to="/productos">
+            <button className="btn btn-primary btn-lg">Explorar Más Productos</button>
+          </Link>
+        </div>
       </div>
 
-      {/* Botón para explorar productos */}
-      <div className="text-center">
-        <button className="btn btn-primary btn-lg">Explorar Más Productos</button>
-      </div>
-
-      {/* Sección de contacto o información adicional */}
-      <div className="info-section text-center mt-5">
-        <h2>Contáctanos</h2>
-        <p>Si tienes alguna pregunta o necesitas más información sobre nuestros productos, ¡estamos aquí para ayudarte!</p>
-        <button className="btn btn-success btn-lg">Contáctanos</button>
-      </div>
-    </div>
+      {/* Footer (sin afectarse por la clase text-start) */}
+      <footer className="text-center py-3">
+        <p>&copy; 2025 Eco Shop. Todos los derechos reservados.</p>
+      </footer>
+    </>
   );
 }
 
