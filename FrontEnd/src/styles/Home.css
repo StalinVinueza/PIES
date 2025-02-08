@@ -1,25 +1,18 @@
 .home {
-  padding-left: 30%; /* Padding en el lateral izquierdo */
-  padding-right: 30%; /* Padding en el lateral derecho */
+  padding-left: 20%; /* Padding en el lateral izquierdo */
+  padding-right: 20%; /* Padding en el lateral derecho */
 }
 
-.home h1, .home p {
-  font-size: 2rem; /* Aumentado el tamaño de los títulos (h1) */
-  color: #3f3f3f; /* Color para texto en el contenido */
-  line-height: 1.5; /* Mejora la legibilidad del texto */
+.main-title {
+  padding-top: 4%;
+  color: #BDB76B; /* Verde que combina con el tema ecológico */
+  font-weight: bold; /* Opcional: para hacerlo más destacado */
 }
 
-/* Estilo específico para h1 dentro de contenido */
-.home h1 {
-  font-size: 3rem; /* Tamaño mayor para los títulos */
-  color: #3f3f3f; /* Color del texto en el contenido */
-  font-weight: bold; /* Puedes añadir negrita si lo deseas */
-}
 
 /* Estilo específico para los párrafos dentro de contenido */
 .home p {
-  font-size: 1.5rem; /* Tamaño mayor para los párrafos */
-  color: #3f3f3f; /* Color del texto en el contenido */
+  font-size: 2rem; /* Tamaño mayor para los párrafos */
 }
 
 .text-center {
@@ -36,35 +29,32 @@
 }
 
 .btn-primary {
-  background-color: #2b8a3e;
-  border-color: #2b8a3e;
-  padding: 12px 24px;
+  background-color: #BDB76B;
   font-size: 1.2rem;
-  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px
+  
+}
+
+.btn-primary:focus {
+    background-color: #264653 !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 .btn-primary:hover {
-  background-color: #1d6f2b;
-  border-color: #1d6f2b;
-}
-
-.product-image.arandanos {
-  max-width: 100%; /* Ajusta este valor según el tamaño deseado */
-  display: block;
-  margin: 0 auto;
-  padding-left: 0;
-}
-
-
-/* Estilos del footer (sin cambios, solo asegúrate de que no se vean afectados) */
-.footer {
   background-color: #264653;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  width: 100%;
-  margin-top: 0; /* Eliminado margin-top: auto para evitar empujarlo hacia abajo */
 }
+
+.product-image {
+  transition: transform 1s ease; /* Suaviza la transición */
+}
+
+.product-image:hover {
+  transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el mouse */
+}
+
+
 
 /* Responsividad para pantallas más pequeñas */
 @media screen and (max-width: 768px) {

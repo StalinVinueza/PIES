@@ -6,7 +6,7 @@
     background-color: #f3f8f7; /* Fondo suave */
     color: #264653;
     border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-shadow: 0px 4px 10px #BDB76B; /* Sombra suave */
     max-width: 800px; /* Máxima anchura del contenido */
     margin: 40px auto; /* Centrado horizontal y margen superior/inferior */
     padding-left: 20px; /* Espacio a la izquierda */
@@ -14,19 +14,19 @@
   }
   
   .privacy-page h1 {
-    color: #2b8a3e;
+    color: #BDB76B;
     font-size: 2.5rem;
     text-align: center;
     font-weight: bold;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px; /* Espaciado entre letras */
-    border-bottom: 3px solid #2b8a3e; /* Línea debajo */
+    border-bottom: 3px solid #BDB76B; /* Línea debajo */
     padding-bottom: 10px;
   }
   
   .privacy-page h2 {
-    color: #2b8a3e;
+    color: #BDB76B;
     font-size: 1.8rem;
     font-weight: bold;
     margin-top: 20px;
@@ -48,24 +48,24 @@
   
  
   .privacy-page p {
-    margin-bottom: 20px;
+    color: #264653; /* El color que prefieras */
     font-size: 1.1rem;
-    color: #264653;
   }
+  
   
   .privacy-page p:last-child {
     margin-bottom: 0;
   }
   
   .privacy-page a {
-    color: #2b8a3e;
+    color: #BDB76B;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
   }
   
   .privacy-page a:hover {
-    color: #1d6f2b; /* Cambio de color al pasar el mouse */
+    color: #BDB76B; /* Cambio de color al pasar el mouse */
   }
   
   /* Respuesta en pantallas pequeñas */
