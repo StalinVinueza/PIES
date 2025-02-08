@@ -11,11 +11,11 @@ import Contacto from './pages/Contacto';
 import Nosotros from './pages/Nosotros';
 import Login from "./components/Login";
 import ProtectedRoute from './components/ProtectedRoute';
+import PoliticasPrivacidad from './pages/PoliticasPrivacidad';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-
 
 function App() {
   return (
@@ -34,6 +34,9 @@ function App() {
           <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 
           <Route path='/login' element={<Login />} />
+          
+          {/* Rutas para las políticas */}
+          <Route path="/politicas-privacidad" element={<PoliticasPrivacidad />} />
         </Routes>
       </main>
 

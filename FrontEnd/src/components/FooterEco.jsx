@@ -1,4 +1,3 @@
-// src/components/FooterEco.jsx
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FooterEco.css'; // Asegúrate de que este CSS tenga los estilos adicionales necesarios
@@ -54,12 +53,11 @@ const FooterEco = () => {
             <div>
               <a href="/politicas-privacidad" className="footer-link">Políticas de privacidad y cookies</a>
               <span className="mx-2">|</span>
-              <a href="/politicas-devoluciones-reembolsos" className="footer-link">Políticas de devoluciones y reembolsos</a>
+              <a href="/politicas-reembolsos" className="footer-link">Políticas de devoluciones y reembolsos</a>
             </div>
           </div>
         </div>
       </div>
-    
     </footer>
   );
 };
