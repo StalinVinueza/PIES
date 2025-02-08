@@ -1,37 +1,19 @@
-/* src/components/FooterEco.css */
-.footer {
-  background: #636b2f;
+.footer-icon {
+  color: #007bff; /* Azul original */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-icon:hover {
+  color: #0056b3; /* Azul más oscuro al pasar el cursor */
+  transform: scale(1.2); /* Aumenta ligeramente el tamaño */
+}
+
+.footer-link {
+  text-decoration: none;
   color: white;
-  padding: 30px 0;
-  text-align: center;
-  margin-top: 50px;
+  transition: color 0.3s ease;
 }
 
-.footer-logo {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.footer-text {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.social-icons a {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0 10px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.social-icons a:hover {
-  transform: scale(1.2);
-  color: #9eac42;
-}
-
-.footer-copy {
-  font-size: 0.9rem;
-  margin-top: 15px;
-  opacity: 0.8;
+.footer-link:hover {
+  color: #ddd;
 }

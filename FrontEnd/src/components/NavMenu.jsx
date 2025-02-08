@@ -1,17 +1,34 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-// import { FaUser } from 'react-icons/fa'; // Importamos el icono de usuario
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavMenu.css';
+import { FaUser  } from 'react-icons/fa';  // Importamos el ícono de inicio de sesión
+
 
 function NavMenu() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);  // Estado para verificar si el usuario está autenticado
+  const navigate = useNavigate();  // Para redirigir al usuario
+
+  // Verificar si hay un token almacenado en localStorage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);  // Si hay token, el usuario está autenticado
+  }, []);
+
+  // Función para manejar el logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");  // Eliminar el token de localStorage
+    localStorage.removeItem("usuario");  // Eliminar información adicional si es necesario
+    setIsAuthenticated(false);  // Actualizar el estado
+    navigate("/login");  // Redirigir a la página de login
+  };
+  
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
       <div className="container">
-       
-       
         <Link className="navbar-brand fw-bold" to="/">
-          <img src="/logo.png"/>
+          <img src="/logo.png" alt="Logo" />
         </Link>
 
         {/* Botón Hamburguesa para móviles */}
@@ -31,19 +48,35 @@ function NavMenu() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/clientes">Clientes</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li> 
+            
+            {/* Solo mostrar los siguientes enlaces si el usuario está autenticado */}
+            {isAuthenticated && (
+              <>
+                <li className="nav-item"><Link className="nav-link" to="/clientes">Clientes</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/carrito">Carrito</Link></li>
+              </>
+            )}
+
+            <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li> 
+            <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
+            {!isAuthenticated && (
+              <li className='nav-item'><Link className='nav-link' to='/registro'>Registro</Link></li>
+            )}
 
-            {/* Icono de Usuario (Redirige a Login) */}
-            <li className="nav-item">
-            {/* <Link className="nav-link" to="/login">
-              <FaUser size={22} className="user-icon" />
-            </Link> */}
-
+            {/* Mostrar botón de logout si el usuario está autenticado */}
+            {isAuthenticated ? (
+              <li className="nav-item">
+                <button className="nav-link btn" onClick={handleLogout}>Logout</button>
+              </li>
+            ) : (
+              <li className="nav-item">
+              <Link className="nav-link" to="/login">
+                <FaUser />  {/* Aquí colocamos el ícono de la silueta de una persona */}
+              </Link>
             </li>
+            )}
           </ul>
         </div>
       </div>
@@ -51,4 +84,4 @@ function NavMenu() {
   );
 }
 
-export default NavMenu;
+export default NavMenu;
