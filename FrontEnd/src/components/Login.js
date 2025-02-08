@@ -31,7 +31,7 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
 
-      alert("Login exitoso!");
+      // alert("Login exitoso!");
       window.location.href = "/"; // Redirigir al usuario a la página principal
     } catch (error) {
       setError(error.message);
@@ -59,7 +59,7 @@ const Login = () => {
           required
         />
 
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit" className="btn btn-success w-100">Iniciar Sesión</button>
       </form>
     </div>
   );

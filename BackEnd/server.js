@@ -24,6 +24,7 @@ const connectMongo = async () => {
 // Conectar a MongoDB
 connectMongo();
 
+
 // Middleware
 app.use(express.static('client')); 
 app.use(cors({ origin: 'http://localhost:3000' }));
