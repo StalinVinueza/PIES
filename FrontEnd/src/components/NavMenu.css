@@ -1,23 +1,27 @@
-/* Contenedor de la barra de navegación */
-.navbar {
-  background-color: #333;
-  padding: 15px 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+/* Asegura que el contenido no se cubra por la barra de navegación */
+body {
+  padding-top: 100px; /* Ajusta según el alto de tu barra de navegación */
 }
 
+.navbar {
+  background-color: #264653;
+  padding: 1px 30px;
+}
+
+/* Línea inferior decorativa */
 .navbar::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 3px; /* Grosor de la línea */
-  background-color: #264653; /* Color verde */
+  height: 0.2em;
+  background-color: #BDB76B;
 }
 
 /* Estilo para los enlaces del navbar */
 .navbar-nav .nav-link {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   color: #264653;
   padding: 10px 15px;
@@ -28,6 +32,13 @@
 /* Efecto Hover en los botones */
 .navbar-nav .nav-link:hover {
   color: #BDB76B;
+}
+
+/* Contenedor del icono de usuario */
+.navbar-nav .nav-item.user-icon {
+  display: flex; /* Asegura que esté alineado con los otros elementos */
+  align-items: center; /* Centra verticalmente el ícono */
+  margin-left: 10px; /* Espacio entre los elementos */
 }
 
 /* Estilo del icono de usuario */
@@ -42,16 +53,88 @@
   color: #264653;
 }
 
-
 /* Contenedor del logo */
 .navbar-brand img {
-  height: 100px; /* Ajusta el tamaño del logo */
-  max-width: 150px; /* Evita que sea demasiado grande */
+  height: 100px; /* Tamaño predeterminado */
+  max-width: 150px;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 /* Efecto hover en el logo */
 .navbar-brand img:hover {
-  transform: scale(1.2); /* Hace un pequeño zoom */
-  opacity: 0.8; /* Le da un efecto de opacidad */
+  transform: scale(1.2);
+  opacity: 0.9;
+}
+
+/* Alinear los elementos de la barra de navegación de forma correcta */
+.navbar-nav {
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+.navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 991px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  /* Reducir tamaño del logo en móviles */
+  .navbar-brand img {
+    height: 60px;
+    max-width: 120px;
+  }
+
+  /* Ajustar la disposición del menú */
+  .navbar-nav {
+    text-align: center;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+
+  /* Reducir tamaño de fuente en móviles */
+  .navbar-nav .nav-link {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  /* Ajustar el icono en móviles */
+  .user-icon {
+    font-size: 1.2rem;
+  }
+
+  /* Añadir espacio extra para no cubrir el contenido en pantallas pequeñas */
+  body {
+    padding-top: 110px; /* Ajuste adicional si es necesario */
+  }
+}
+
+/* Ajustes para pantallas extra pequeñas (menos de 576px) */
+@media (max-width: 576px) {
+  .navbar-brand img {
+    height: 50px;
+    max-width: 100px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+
+  .user-icon {
+    font-size: 1rem;
+  }
+
+  /* Añadir espacio extra en pantallas más pequeñas */
+  body {
+    padding-top: 120px; /* Ajuste según sea necesario */
+  }
 }

@@ -66,12 +66,10 @@ function Home() {
           </div>
         </div>
 
-        {/* Botón para explorar productos */}
-        <div className="text-center">
-          <Link to="/productos">
-            <button className="btn btn-primary btn-lg">Explorar Más Productos</button>
-          </Link>
-        </div>
+        {/* Botón para redirigir a la página de registro */}
+              <div className="signup-link">
+                <p>¿No tienes tu cuenta? <Link to="/registro">Crear cuenta</Link></p>
+              </div>
       </div>
 
       {/* Footer (sin afectarse por la clase text-start) */}

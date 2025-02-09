@@ -27,8 +27,8 @@ const FooterEco = () => {
 
           {/* Tercera columna: Información de contacto */}
           <div className="col-md-3 text-center">
-            <p>Teléfonos: <br /> 098-0128-824 / <br /> 099-8235-229</p>
-            <p>Email: snusnus@ecoshop.com</p>
+            <p>Teléfonos: <br /> 098-0128-824  <br /> 099-8235-229</p>
+            <p>Email: <br /> pucetec@ecoshop.com</p>
           </div>
 
           {/* Cuarta columna: Redes sociales */}
@@ -52,7 +52,8 @@ const FooterEco = () => {
 
         {/* Derechos reservados y enlaces en una sola línea */}
         <div className="footer-bottom">
-          <p>&copy; 2025 Eco-Shop. Todos los derechos reservados.</p>
+          <p>&copy; 2025 Eco-Shop. Todos los derechos reservados</p>
+          <span>|</span>
           <a href="/politicas-privacidad">Políticas de privacidad y cookies</a>
           <span>|</span>
           <a href="/politicas-reembolsos">Políticas de devoluciones y reembolsos</a>

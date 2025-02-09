@@ -54,6 +54,26 @@
   transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el mouse */
 }
 
+.signup-link {
+  display: flex;
+  justify-content: center;  /* Centra el contenido horizontalmente */
+  align-items: center;      /* Centra el contenido verticalmente */
+  margin-top: 20px;         /* Espacio superior */
+}
+
+.signup-link p {
+  font-size: 16px;
+}
+
+.signup-link a {
+  color: #007bff;           /* Color del enlace */
+  text-decoration: none;    /* Sin subrayado */
+  font-weight: bold;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;  /* Subraya el enlace cuando se pasa el mouse */
+}
 
 
 /* Responsividad para pantallas más pequeñas */

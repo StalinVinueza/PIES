@@ -1,52 +1,108 @@
+/* Contenedor principal de la página de registro */
 .register-container {
-    max-width: 400px;
-    margin: 50px auto;
+  padding: 40px;
+  background-color: #f3f8f7; /* Fondo suave */
+  color: #264653; /* Color de texto */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 4px 15px #BDB76B; /* Sombra suave */
+  max-width: 650px; /* Máxima anchura del formulario */
+  margin: 80px auto; /* Centrado horizontal y margen superior */
+  text-align: center;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Título principal */
+.register-container h2 {
+  color: #264653; /* Color dorado para el título */
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Mensajes de error */
+.alert {
+  margin-top: 15px;
+  color: red;
+  font-size: 1rem;
+}
+
+/* Estilo para los inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #264653;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+/* Animación al hacer foco en los inputs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border: 2px solid #BDB76B; /* Bordes dorados cuando se hace foco */
+  outline: none;
+}
+
+/* Estilo para los botones */
+button[type="submit"],
+button[type="button"] {
+  width: 100%;
+  padding: 14px;
+  background-color: #264653; /* Color de fondo oscuro */
+  color: #264653;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efecto de hover y foco en los botones */
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background-color: #BDB76B; /* Cambio de color a dorado */
+  transform: scale(1.05); /* Efecto de aumento suave */
+}
+
+/* Estilo de los íconos del botón para la contraseña */
+.input-group-append .btn-light {
+  border: none;
+  background-color: transparent;
+}
+
+/* Estilo en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .register-container {
     padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
   }
-  
+
   .register-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 1.6rem;
   }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    font-weight: bold;
-  }
-  
-  .form-control {
-    border-radius: 5px;
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  select {
     padding: 10px;
-    font-size: 16px;
+    font-size: 0.9rem;
   }
-  
-  .btn-register {
-    width: 100%;
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    transition: 0.3s;
+
+  button[type="submit"],
+  button[type="button"] {
+    padding: 12px;
+    font-size: 1rem;
   }
-  
-  .btn-register:hover {
-    background-color: #218838;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
+}

@@ -87,9 +87,15 @@ exports.login = async (req, res) => {
     }
 
     // Generar Token JWT
-
-    
-    const token = jwt.sign({ id: usuario.es_cli_id, correo: usuario.es_cli_correo }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(
+      { 
+        id: usuario.es_cli_id, 
+        correo: usuario.es_cli_correo, 
+        perfilId: usuario.es_cli_perfil_id // Asegúrate de que esta columna exista en la consulta
+      }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: '1h' }
+    );
 
     res.status(200).json({
       message: 'Inicio de sesión exitoso',
@@ -107,7 +113,8 @@ exports.login = async (req, res) => {
         ciudad: usuario.es_cli_ciudad,
         codigoPostal: usuario.es_cli_codigo_postal,
         telefono1: usuario.es_cli_telefono_1,
-        telefono2: usuario.es_cli_telefono_2
+        telefono2: usuario.es_cli_telefono_2,
+        perfilId: usuario.es_cli_perfil_id // Asegúrate de que esta columna exista en la consulta
       }
     });
   } catch (error) {
@@ -115,3 +122,4 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: 'Error en el login', error });
   }
 };
+

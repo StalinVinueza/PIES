@@ -1,16 +1,18 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-// Componente ProtectedRoute que protege las rutas
-const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem("token");  // Verifica si existe el token
+const ProtectedRoute = ({ children, requiredProfile }) => {
+  const isAuthenticated = localStorage.getItem("token");
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   if (!isAuthenticated) {
-    // Si no está autenticado, redirige al login
     return <Navigate to="/login" replace />;
   }
 
-  // Si está autenticado, muestra el contenido de la ruta protegida
+  if (requiredProfile && usuario.es_cli_perfil_id !== requiredProfile) {
+    return <Navigate to="/" replace />;
+  }
+
   return children;
 };
 
