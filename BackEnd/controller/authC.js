@@ -107,7 +107,8 @@ exports.login = async (req, res) => {
         ciudad: usuario.es_cli_ciudad,
         codigoPostal: usuario.es_cli_codigo_postal,
         telefono1: usuario.es_cli_telefono_1,
-        telefono2: usuario.es_cli_telefono_2
+        telefono2: usuario.es_cli_telefono_2,
+        perfilId: usuario.es_cli_perfil_id 
       }
     });
   } catch (error) {
