@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Register.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importar íconos de Font Awesome
+import { Link } from "react-router-dom";  // Importar Link para redirección
+
 
 function RegistroUsuario() {
   const [formData, setFormData] = useState({
@@ -10,6 +13,7 @@ function RegistroUsuario() {
     ES_CLI_APELLIDO: '',
     ES_CLI_CORREO: '',
     contrasena: '',
+    confirmContrasena: '', // Nuevo campo para confirmar la contraseña
     ES_CLI_GENERO: '',
     ES_CLI_FECHA_NACIMIENTO: '',
     ES_CLI_DIRECCION: '',
@@ -21,6 +25,10 @@ function RegistroUsuario() {
     ES_CLI_TELEFONO_2: ''
   });
 
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado para mostrar/ocultar la confirmación de contraseña
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -29,6 +37,12 @@ function RegistroUsuario() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Verificar que las contraseñas coincidan
+    if (formData.contrasena !== formData.confirmContrasena) {
+      setError('Las contraseñas no coinciden.');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3001/api/auth/registro', formData);
       // alert('Usuario registrado con éxito');
@@ -48,12 +62,59 @@ function RegistroUsuario() {
             <input type="text" name="ES_CLI_NOMBRE" placeholder="Nombre" className="form-control" onChange={handleChange} required />
             <input type="text" name="ES_CLI_APELLIDO" placeholder="Apellido" className="form-control" onChange={handleChange} required />
             <input type="email" name="ES_CLI_CORREO" placeholder="Correo" className="form-control" onChange={handleChange} required />
-            <input type="password" name="contrasena" placeholder="Contraseña" className="form-control" onChange={handleChange} required />
+            
+            {/* Campo para la contraseña */}
+            <div className="input-group">
+              <input 
+                type={showPassword ? 'text' : 'password'} 
+                name="contrasena" 
+                placeholder="Contraseña" 
+                className="form-control" 
+                onChange={handleChange} 
+                required 
+              />
+              <div className="input-group-append">
+                <button 
+                  type="button" 
+                  className="btn btn-light" 
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Mostrar/ocultar icono de ojo */}
+                </button>
+              </div>
+            </div>
+
+            {/* Campo para confirmar la contraseña */}
+            <div className="input-group">
+              <input 
+                type={showConfirmPassword ? 'text' : 'password'} 
+                name="confirmContrasena" 
+                placeholder="Confirmar Contraseña" 
+                className="form-control" 
+                onChange={handleChange} 
+                required 
+              />
+              <div className="input-group-append">
+                <button 
+                  type="button" 
+                  className="btn btn-light" 
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />} {/* Mostrar/ocultar icono de ojo */}
+                </button>
+              </div>
+            </div>
+            
+            {error && <div className="alert alert-danger">{error}</div>} {/* Mostrar mensaje de error */}
+
             <select name="ES_CLI_GENERO" className="form-control" onChange={handleChange} required>
-              <option value="">Seleccione Género</option>
+              <option value="">Selecciona tú Género</option>
               <option value="masculino">Masculino</option>
               <option value="femenino">Femenino</option>
+              <option value="otro">Otro</option> {/* Corregido para "Otro" */}
             </select>
+            
+            {/* Campo de fecha de nacimiento */}
             <input type="date" name="ES_CLI_FECHA_NACIMIENTO" className="form-control" onChange={handleChange} required />
         
             <input type="text" name="ES_CLI_DIRECCION" placeholder="Dirección" className="form-control" onChange={handleChange} required />
@@ -66,8 +127,11 @@ function RegistroUsuario() {
           </div>
         </div>
         {/* Botón de envío con color verde */}
-        <button type="submit" className="btn btn-success w-100">Registrar</button>
+        <button type="submit" className="btn btn-success w-100">Registrarse</button>
       </form>
+      <div className="signup-link">
+        <p>Ya tienes una cuenta? <Link to="/login">Iniciar Sesión</Link></p>
+      </div>
     </div>
   );
 }

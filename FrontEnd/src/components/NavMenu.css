@@ -1,8 +1,11 @@
-/* Contenedor de la barra de navegación */
+/* Asegura que el contenido no se cubra por la barra de navegación */
+body {
+  padding-top: 100px; /* Ajusta según el alto de tu barra de navegación */
+}
+
 .navbar {
   background-color: #264653;
-  padding: 10px 30px;
-  
+  padding: 1px 30px;
 }
 
 /* Línea inferior decorativa */
@@ -13,7 +16,7 @@
   left: 0;
   width: 100%;
   height: 0.2em;
-  background-color: #264653;
+  background-color: #BDB76B;
 }
 
 /* Estilo para los enlaces del navbar */
@@ -107,6 +110,11 @@
   .user-icon {
     font-size: 1.2rem;
   }
+
+  /* Añadir espacio extra para no cubrir el contenido en pantallas pequeñas */
+  body {
+    padding-top: 110px; /* Ajuste adicional si es necesario */
+  }
 }
 
 /* Ajustes para pantallas extra pequeñas (menos de 576px) */
@@ -123,5 +131,10 @@
 
   .user-icon {
     font-size: 1rem;
+  }
+
+  /* Añadir espacio extra en pantallas más pequeñas */
+  body {
+    padding-top: 120px; /* Ajuste según sea necesario */
   }
 }

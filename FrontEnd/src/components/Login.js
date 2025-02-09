@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";  // Importar Link para redirección
 import "../styles/Login.css";
-
 
 const Login = () => {
   const [correo, setCorreo] = useState("");
@@ -62,6 +62,11 @@ const Login = () => {
 
         <button type="submit" className="btn btn-success w-100">Iniciar Sesión</button>
       </form>
+
+      {/* Botón para redirigir a la página de registro */}
+      <div className="signup-link">
+        <p>¿No tienes una cuenta? <Link to="/registro">Crear cuenta</Link></p>
+      </div>
     </div>
   );
 };

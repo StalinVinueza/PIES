@@ -13,7 +13,7 @@ function NavMenu() {
     const token = localStorage.getItem("token");
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     setIsAuthenticated(!!token);
-    setUserProfile(usuario ? usuario.perfilId : null); // Asegúrate de que perfilId esté correctamente asignado
+    setUserProfile(usuario ? usuario.perfilId : null);
   }, []);
 
   const handleLogout = () => {
@@ -24,10 +24,15 @@ function NavMenu() {
     navigate("/login");
   };
 
+  // Función para manejar el scroll hacia arriba
+  const handleNavClick = () => {
+    window.scrollTo(0, 0); // Mover al inicio de la página
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/">
+        <Link className="navbar-brand fw-bold" to="/" onClick={handleNavClick}>
           <img src="/logo.png" alt="Logo" />
         </Link>
 
@@ -45,35 +50,28 @@ function NavMenu() {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/" onClick={handleNavClick}>Inicio</Link>
+            </li>
 
-            {/* Mostrar pestañas según el perfil del usuario */}
             {isAuthenticated && userProfile === 1 && (
               <>
-                <li className="nav-item"><Link className="nav-link" to="/clientes">Clientes</Link></li>
-                <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
-                <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/clientes" onClick={handleNavClick}>Clientes</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/emprendimientos" onClick={handleNavClick}>Emprendimientos</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/productos" onClick={handleNavClick}>Productos</Link></li>
               </>
             )}
 
             {isAuthenticated && userProfile === 3 && (
               <>
-                <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
-                
-                <li className="nav-item"><Link className="nav-link" to="/carrito">Carrito</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/emprendimientos" onClick={handleNavClick}>Emprendimientos</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/carrito" onClick={handleNavClick}>Carrito</Link></li>
               </>
             )}
 
-            {/* Pestañas públicas */}
-            <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/contacto" onClick={handleNavClick}>Contacto</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/nosotros" onClick={handleNavClick}>Nosotros</Link></li>
 
-            {/* Mostrar registro solo si no está autenticado */}
-            {!isAuthenticated && (
-              <li className="nav-item"><Link className="nav-link" to="/registro">Registro</Link></li>
-            )}
-
-            {/* Mostrar ícono de login o logout según autenticación */}
             {isAuthenticated ? (
               <li className="nav-item">
                 <button className="nav-link btn" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0 }}>
@@ -82,7 +80,7 @@ function NavMenu() {
               </li>
             ) : (
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
+                <Link className="nav-link" to="/login" onClick={handleNavClick}>
                   <FaUser size={20} title="Iniciar sesión" />
                 </Link>
               </li>
