@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavMenu.css';
-import { FaUser, FaSignOutAlt } from 'react-icons/fa';  // Importamos los íconos
+import { FaUser, FaSignOutAlt } from 'react-icons/fa';
 
 function NavMenu() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
     setIsAuthenticated(!!token);
+    setUserProfile(usuario ? usuario.perfilId : null); // Asegúrate de que perfilId esté correctamente asignado
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
     setIsAuthenticated(false);
+    setUserProfile(null);
     navigate("/login");
   };
 
@@ -27,7 +31,6 @@ function NavMenu() {
           <img src="/logo.png" alt="Logo" />
         </Link>
 
-        {/* Botón Hamburguesa para móviles */}
         <button 
           className="navbar-toggler" 
           type="button" 
@@ -40,27 +43,37 @@ function NavMenu() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Menú de navegación */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
 
-            {isAuthenticated && (
+            {/* Mostrar pestañas según el perfil del usuario */}
+            {isAuthenticated && userProfile === 1 && (
               <>
                 <li className="nav-item"><Link className="nav-link" to="/clientes">Clientes</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li>
+              </>
+            )}
+
+            {isAuthenticated && userProfile === 3 && (
+              <>
+                <li className="nav-item"><Link className="nav-link" to="/emprendimientos">Emprendimientos</Link></li>
+                
                 <li className="nav-item"><Link className="nav-link" to="/carrito">Carrito</Link></li>
               </>
             )}
 
-            <li className="nav-item"><Link className="nav-link" to="/productos">Productos</Link></li>
+            {/* Pestañas públicas */}
             <li className="nav-item"><Link className="nav-link" to="/contacto">Contacto</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/nosotros">Nosotros</Link></li>
 
+            {/* Mostrar registro solo si no está autenticado */}
             {!isAuthenticated && (
               <li className="nav-item"><Link className="nav-link" to="/registro">Registro</Link></li>
             )}
 
+            {/* Mostrar ícono de login o logout según autenticación */}
             {isAuthenticated ? (
               <li className="nav-item">
                 <button className="nav-link btn" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0 }}>
