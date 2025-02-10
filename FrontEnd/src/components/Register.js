@@ -55,77 +55,98 @@ function RegistroUsuario() {
 
   return (
     <div className="container register-container">
-      <h2>Registro de Usuario</h2>
+      <h2 >Registro de Usuario</h2>
       <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-md-12 col-lg-12">
-            <input type="text" name="ES_CLI_NOMBRE" placeholder="Nombre" className="form-control" onChange={handleChange} required />
-            <input type="text" name="ES_CLI_APELLIDO" placeholder="Apellido" className="form-control" onChange={handleChange} required />
-            <input type="email" name="ES_CLI_CORREO" placeholder="Correo" className="form-control" onChange={handleChange} required />
-            
-            {/* Campo para la contraseña */}
-            <div className="input-group">
-              <input 
-                type={showPassword ? 'text' : 'password'} 
-                name="contrasena" 
-                placeholder="Contraseña" 
-                className="form-control" 
-                onChange={handleChange} 
-                required 
-              />
-              <div className="input-group-append">
-                <button 
-                  type="button" 
-                  className="btn btn-light" 
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Mostrar/ocultar icono de ojo */}
-                </button>
-              </div>
-            </div>
-
-            {/* Campo para confirmar la contraseña */}
-            <div className="input-group">
-              <input 
-                type={showConfirmPassword ? 'text' : 'password'} 
-                name="confirmContrasena" 
-                placeholder="Confirmar Contraseña" 
-                className="form-control" 
-                onChange={handleChange} 
-                required 
-              />
-              <div className="input-group-append">
-                <button 
-                  type="button" 
-                  className="btn btn-light" 
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />} {/* Mostrar/ocultar icono de ojo */}
-                </button>
-              </div>
-            </div>
-            
-            {error && <div className="alert alert-danger">{error}</div>} {/* Mostrar mensaje de error */}
-
-            <select name="ES_CLI_GENERO" className="form-control" onChange={handleChange} required>
-              <option value="">Selecciona tú Género</option>
-              <option value="masculino">Masculino</option>
-              <option value="femenino">Femenino</option>
-              <option value="otro">Otro</option> {/* Corregido para "Otro" */}
-            </select>
-            
-            {/* Campo de fecha de nacimiento */}
-            <input type="date" name="ES_CLI_FECHA_NACIMIENTO" className="form-control" onChange={handleChange} required />
         
-            <input type="text" name="ES_CLI_DIRECCION" placeholder="Dirección" className="form-control" onChange={handleChange} required />
-            <input type="text" name="ES_CLI_PAIS" placeholder="País" className="form-control" onChange={handleChange} required />
-            <input type="text" name="ES_CLI_PROVINCIA" placeholder="Provincia" className="form-control" onChange={handleChange} required />
-            <input type="text" name="ES_CLI_CIUDAD" placeholder="Ciudad" className="form-control" onChange={handleChange} required />
-            <input type="text" name="ES_CLI_CODIGO_POSTAL" placeholder="Código Postal" className="form-control" onChange={handleChange} required />
-            <input type="text" name="ES_CLI_TELEFONO_1" placeholder="Teléfono 1" className="form-control" onChange={handleChange} required />
-            <input type="text" name="ES_CLI_TELEFONO_2" placeholder="Teléfono 2 (Opcional)" className="form-control" onChange={handleChange} />
-          </div>
+      <div className="row">
+    <div className="col-md-12 col-lg-12">
+      
+      <label className="form-label text-start w-100">Nombre</label>
+      <input type="text" name="ES_CLI_NOMBRE" placeholder="Ingrese su Nombre" className="form-control form-control-sm no_caracteres" onChange={handleChange} required maxLength="30" />
+      
+      <label className="form-label text-start w-100">Apellido</label>
+      <input type="text" name="ES_CLI_APELLIDO" placeholder="Ingrese su Apellido" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">Correo</label>
+      <input type="email" name="ES_CLI_CORREO" placeholder="Ingrese un Correo" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-50">Contraseña</label>
+      <div className="input-group">
+        <input 
+          type={showPassword ? 'text' : 'password'} 
+          name="contrasena" 
+          placeholder="Ingrese unaContraseña" 
+          className="form-control" 
+          onChange={handleChange} 
+          required 
+        />
+        <div className="input-group-append">
+          <button 
+            type="button" 
+            className="btn btn-light" 
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
         </div>
+      </div>
+
+      <div className="input-group">
+        <input 
+          type={showConfirmPassword ? 'text' : 'password'} 
+          name="confirmContrasena" 
+          placeholder="Confirme su Contraseña" 
+          className="form-control" 
+          onChange={handleChange} 
+          required 
+        />
+        <div className="input-group-append">
+          <button 
+            type="button" 
+            className="btn btn-light" 
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
+      </div>
+
+      {error && <div className="alert alert-danger">{error}</div>}
+
+      <label className="form-label text-start w-100">Género</label>
+      <select name="ES_CLI_GENERO" className="form-control" onChange={handleChange} required>
+        <option value="">Seleccione su Género</option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+        
+      </select>
+
+      <label className="form-label text-start w-100">Fecha de Nacimiento</label>
+      <input type="date" name="ES_CLI_FECHA_NACIMIENTO" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">Dirección</label>
+      <input type="text" name="ES_CLI_DIRECCION" placeholder="Ingrese su Dirección" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">País</label>
+      <input type="text" name="ES_CLI_PAIS" placeholder="Ingrese su País" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">Provincia</label>
+      <input type="text" name="ES_CLI_PROVINCIA" placeholder="Ingrese su Provincia" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">Ciudad</label>
+      <input type="text" name="ES_CLI_CIUDAD" placeholder="Ingrese su Ciudad" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">Código Postal</label>
+      <input type="text" name="ES_CLI_CODIGO_POSTAL" placeholder="Ingrese su Código Postal" className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">Teléfono</label>
+      <input type="text" name="ES_CLI_TELEFONO_1" placeholder="Ingrese un Número Teléfonico " className="form-control" onChange={handleChange} required />
+
+      <label className="form-label text-start w-100">Teléfono 2 (Opcional)</label>
+      <input type="text" name="ES_CLI_TELEFONO_2" placeholder="Ingrese un Número Teléfonico(Opcional)" className="form-control" onChange={handleChange} />
+
+    </div>
+  </div>
         {/* Botón de envío con color verde */}
         <button type="submit" className="btn btn-success w-100">Registrarse</button>
       </form>
