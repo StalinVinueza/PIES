@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ClienteList from './ClienteList';
 import ClienteModal from './ClienteModal';
 
+
 function ApiClientes() {
   const [clientes, setClientes] = useState([]);
   const [selectedCliente, setSelectedCliente] = useState(null);
@@ -24,7 +25,7 @@ function ApiClientes() {
   const handleShowModal = (cliente = null) => {
     if (cliente) {
       setSelectedCliente(cliente);
-      setEditData(cliente);
+      setEditData(cliente);  // Cargar datos para edición
     } else {
       setSelectedCliente(null);
       setEditData({
@@ -32,11 +33,21 @@ function ApiClientes() {
         es_cli_apellido: '',
         es_cli_correo: '',
         es_cli_direccion: '',
-        es_cli_telefono_1: ''
-      });
+        es_cli_telefono_1: '',
+        es_cli_genero: '',
+        es_cli_fecha_nacimiento: '',
+        es_cli_pais: '',
+        es_cli_provincia: '',
+        es_cli_ciudad: '',
+        es_cli_codigo_postal: '',
+        es_cli_telefono_2: '',
+        es_cli_estado: ''
+      });  // Limpiar datos para creación
     }
     setShowModal(true);
   };
+  
+  
 
   const handleCloseModal = () => setShowModal(false);
 
@@ -49,7 +60,7 @@ function ApiClientes() {
       alert('Todos los campos obligatorios deben ser completados');
       return;
     }
-
+  
     fetch('http://localhost:3001/api/clientes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -68,12 +79,12 @@ function ApiClientes() {
       alert('El ID del cliente es necesario');
       return;
     }
-
+  
     if (!editData.es_cli_nombre || !editData.es_cli_apellido || !editData.es_cli_correo) {
       alert('Por favor, complete todos los campos obligatorios.');
       return;
     }
-
+  
     fetch(`http://localhost:3001/api/clientes/${selectedCliente.es_cli_id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

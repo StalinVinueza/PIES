@@ -1,0 +1,22 @@
+/* ButtonModal.css */
+.custom-btn {
+    padding: 12px 25px; /* Tamaño del botón */
+    font-size: 1.2rem; /* Tamaño del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 0 5px; /* Espaciado entre botones */
+  }
+  
+  .modal-footer-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+
+  .custom-btn {
+    padding: 12px 25px !important;
+    font-size: 1.2rem !important;
+    border-radius: 5px !important;
+  }
