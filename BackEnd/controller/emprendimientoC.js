@@ -1,4 +1,5 @@
 const EmprendimientoModel = require('../model/emprendimientoM');
+const upload = require('../middleware/upload'); // Middleware para cargar imágenes
 
 // Obtener todos los emprendimientos
 const getAllEmprendimientos = async (req, res) => {
@@ -14,7 +15,7 @@ const getAllEmprendimientos = async (req, res) => {
 const getEmprendimientoById = async (req, res) => {
   const { id } = req.params;
   try {
-    const emprendimiento = await EmprendimientoModel.getEmprendimientobyId(id);
+    const emprendimiento = await EmprendimientoModel.getEmprendimientoById(id);
     if (!emprendimiento) {
       return res.status(404).json({ message: 'Emprendimiento no encontrado' });
     }
@@ -28,12 +29,11 @@ const getEmprendimientoById = async (req, res) => {
 const createEmprendimiento = async (req, res) => {
   try {
     const { es_emp_nombre, es_emp_descripcion } = req.body;
-    const es_emp_logo = req.file ? `/uploads/${req.file.filename}` : null;
-
-    if (!es_emp_nombre || !es_emp_descripcion || !es_emp_logo) {
+    if (!es_emp_nombre || !es_emp_descripcion || !req.file) {
       return res.status(400).json({ message: "Todos los campos son obligatorios, incluyendo la imagen" });
     }
-
+    const es_emp_logo = `/uploads/${req.file.filename}`;
+    
     const newEmprendimiento = await EmprendimientoModel.createEmprendimiento({
       nombre: es_emp_nombre,
       descripcion: es_emp_descripcion,
