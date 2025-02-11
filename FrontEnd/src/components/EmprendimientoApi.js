@@ -3,6 +3,7 @@ import axios from "axios";
 import EmprendimientoList from "./EmprendimientoList";
 import EmprendimientoModal from "./EmprendimientoModal";
 import EmprendimientoForm from "./EmprendimientoForm";
+import "../styles/ButtonModal.css";
 
 function EmprendimientosApi() {
   const [emprendimientos, setEmprendimientos] = useState([]);
@@ -94,7 +95,7 @@ function EmprendimientosApi() {
   return (
     <div className="container">
       <h1 className="text-center my-4">Lista de Emprendimientos</h1>
-      <button className="btn btn-success mb-3" onClick={() => handleShowModal()}>
+      <button className="btn-emprendimiento" onClick={() => handleShowModal()}>
         Nuevo Emprendimiento
       </button>
 

@@ -20,3 +20,32 @@
     font-size: 1.2rem !important;
     border-radius: 5px !important;
   }
+
+ 
+
+/* Estilo del botón (igual que antes) */
+.btn-emprendimiento {
+  background-color: #264653;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-left: 15px; 
+}
+
+.btn-emprendimiento:hover {
+  background-color: #2A9D8F;
+  transform: scale(1.05);
+}
+
+.btn-emprendimiento:focus {
+  outline: none;
+}
+
+.btn-emprendimiento:active {
+  background-color: #1F6F55;
+}
