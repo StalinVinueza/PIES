@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { PencilSquare, TrashFill } from "react-bootstrap-icons";
+import { PencilSquare, TrashFill, Eye } from "react-bootstrap-icons";
+import Modal from "react-bootstrap/Modal";
 
 function Emprendimientos({ onShowModal }) {
   const [emprendimientos, setEmprendimientos] = useState([]);
+  const [selectedEmprendimiento, setSelectedEmprendimiento] = useState(null);
+  const [showViewModal, setShowViewModal] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3001/api/emprendimientos")
@@ -40,8 +43,16 @@ function Emprendimientos({ onShowModal }) {
     }
   };
 
+  // Función para visualizar los detalles de un emprendimiento
+  const handleView = (emprendimiento) => {
+    setSelectedEmprendimiento(emprendimiento);
+    setShowViewModal(true);
+  };
+
+  const handleCloseViewModal = () => setShowViewModal(false);
+
   return (
-    <div className="container py-4">
+    <div className="container py-">
       {emprendimientos.length === 0 ? (
         <p className="text-center">No hay emprendimientos disponibles.</p>
       ) : (
@@ -65,14 +76,21 @@ function Emprendimientos({ onShowModal }) {
                     e.target.style.display = "none";
                   }}
                 />
-
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
-                  <p className="card-text flex-grow-1">
-                    {emprendimiento.es_emp_descripcion}
-                  </p>
                   <div className="d-flex justify-content-between">
-                    {/* Botón de editar con color personalizado */}
+                    <button
+                      className="btn btn-sm"
+                      style={{
+                        backgroundColor: "#636b2f",
+                        borderColor: "#636b2f",
+                        color: "white",
+                      }}
+                      onClick={() => handleView(emprendimiento)}
+                    >
+                      <Eye size={18} />
+                    </button>
+
                     <button
                       className="btn btn-sm"
                       style={{
@@ -85,7 +103,6 @@ function Emprendimientos({ onShowModal }) {
                       <PencilSquare size={18} />
                     </button>
 
-                    {/* Botón de eliminar con color personalizado */}
                     <button
                       className="btn btn-sm"
                       style={{
@@ -104,6 +121,37 @@ function Emprendimientos({ onShowModal }) {
           ))}
         </div>
       )}
+
+      {/* Modal para ver los detalles del emprendimiento (solo lectura) */}
+      <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Detalles del Emprendimiento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedEmprendimiento && (
+            <>
+              <p><strong>Nombre:</strong> {selectedEmprendimiento.es_emp_nombre}</p>
+              
+              <p><strong>Descripción:</strong> {selectedEmprendimiento.es_emp_descripcion}</p>
+              <p><strong>Logo:</strong></p>
+              <img
+                src={`http://localhost:3001${selectedEmprendimiento.es_emp_logo}`}
+                alt={selectedEmprendimiento.es_emp_nombre}
+                className="img-fluid"
+              />
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-primary" onClick={() => onShowModal(selectedEmprendimiento)}>
+            Editar
+          </button>
+          <button className="btn btn-danger" onClick={() => handleDelete(selectedEmprendimiento.es_emp_id)}>
+            Eliminar
+          </button>
+         
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
