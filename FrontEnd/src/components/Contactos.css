@@ -59,7 +59,7 @@
 
 /* Agregar márgenes arriba y abajo para la sección de contacto */
 .contacto-container {
-  margin-top: 50px;   /* Espacio en la parte superior */
+  margin-top: 100px;   /* Espacio en la parte superior */
   margin-bottom: 20px; /* Espacio en la parte inferior */
   color: #264653;
 }

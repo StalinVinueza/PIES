@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { PencilSquare, TrashFill } from "react-bootstrap-icons";
+import { Pencil, Trash, Eye } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import "../styles/ProductosList.css"; // Importa el archivo CSS específico
 
 function ProductoList({ onShowModal }) {
   const [productos, setProductos] = useState([]);
@@ -39,14 +41,14 @@ function ProductoList({ onShowModal }) {
   };
 
   return (
-    <div className="container py-4">
+    <div className="container-pro py-4">
       {productos.length === 0 ? (
         <p className="text-center">No hay productos disponibles.</p>
       ) : (
         <div className="row">
           {productos.map((producto) => (
             <div key={producto.es_pro_id} className="col-md-4 col-lg-3 mb-4">
-              <div className="card shadow-sm h-100">
+              <div className="card-pro shadow-sm h-100">
                 <img
                   src={
                     producto.es_pro_imagen?.startsWith("/uploads/")
@@ -54,46 +56,45 @@ function ProductoList({ onShowModal }) {
                       : `http://localhost:3001/uploads/${producto.es_pro_imagen}`
                   }
                   alt={producto.es_pro_nombre}
-                  className="card-img-top"
-                  style={{ height: "180px", objectFit: "cover" }}
+                  className="card-img-top-pro"
                   onError={(e) => {
                     e.target.style.display = "none";
                   }}
                 />
 
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{producto.es_pro_nombre}</h5>
-                  <p className="card-text">Precio: ${producto.es_pro_precio}</p>
-                  <p className="card-text">Stock: {producto.es_pro_stock}</p>
-                  <p className="card-text flex-grow-1">{producto.es_pro_descripcion}</p>
-                  <div className="d-flex justify-content-between">
-                    {/* Botón de editar con color personalizado */}
+                <div className="card-body-pro d-flex flex-column">
+                  <h5 className="card-title-pro">{producto.es_pro_nombre}</h5>
+                  <p className="card-text-pro flex-grow-1">{producto.es_pro_descripcion}</p>
+                  <p className="card-text-pro">Precio: ${producto.es_pro_precio}</p>
+                  <p className="card-text-pro">Stock: {producto.es_pro_stock}</p>
+                  </div>
+                  <div className="card-footer-pro">
+                    {/* Botón de ver */}
+                    <Link
+                      to={`/productos/${producto.es_pro_id}`} // Ajusta la ruta según tu aplicación
+                      className="btn btn-sm btn-view-pro"
+                    >
+                      <Eye size={18} />
+                    </Link>
+
+                    {/* Botón de editar */}
                     <button
-                      className="btn btn-sm"
-                      style={{
-                        backgroundColor: "#636b2f",
-                        borderColor: "#636b2f",
-                        color: "white",
-                      }}
+                      className="btn btn-sm btn-edit-pro"
                       onClick={() => onShowModal(producto)}
                     >
-                      <PencilSquare size={18} />
+                      <Pencil size={18} />
                     </button>
 
-                    {/* Botón de eliminar con color personalizado */}
+                    {/* Botón de eliminar */}
                     <button
-                      className="btn btn-sm"
-                      style={{
-                        backgroundColor: "#636b2f",
-                        borderColor: "#636b2f",
-                        color: "white",
-                      }}
+                      className="btn btn-sm btn-delete-pro"
                       onClick={() => handleDelete(producto.es_pro_id)}
                     >
-                      <TrashFill size={18} />
+                      <Trash size={18} />
                     </button>
+                    
                   </div>
-                </div>
+                
               </div>
             </div>
           ))}
