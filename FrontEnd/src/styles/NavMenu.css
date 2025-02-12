@@ -1,7 +1,7 @@
 .navbar {
   background-color: #264653;
   padding: 0 30px;
-  height: 60px; /* Fija la altura de la barra de navegación */
+  height: 80px; /* Fija la altura de la barra de navegación */
   display: flex;
   align-items: center;
   position: fixed;
@@ -21,7 +21,7 @@
 /* Contenedor del logo */
 .navbar-brand img {
   height: auto; /* Mantiene proporción */
-  max-height: 55px; /* Aumenta el tamaño sin afectar la barra */
+  max-height: 80px; /* Aumenta el tamaño sin afectar la barra */
   max-width: 130px;
   padding-bottom: 15px;
   transition: transform 0.3s ease-in-out; /* Suaviza el efecto */
