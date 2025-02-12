@@ -1,7 +1,7 @@
 /* Fondo de la página principal */
 .cliente-page {
   background: linear-gradient(135deg, rgba(244, 244, 249, 0.8), rgba(224, 224, 236, 0.8)), 
-              url('/public/FondoE1.jpg'); /* Ruta de la imagen de fondo */
+              url("../../public/FondoE1.jpg"); /* Ruta de la imagen de fondo */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
