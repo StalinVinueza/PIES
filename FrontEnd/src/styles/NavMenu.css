@@ -1,11 +1,10 @@
-/* Asegura que el contenido no se cubra por la barra de navegación */
-body {
-  padding-top: 100px; /* Ajusta según el alto de tu barra de navegación */
-}
-
 .navbar {
   background-color: #264653;
-  padding: 1px 30px;
+  padding: 0 30px;
+  height: 80px; /* Fija la altura de la barra de navegación */
+  display: flex;
+  align-items: center;
+  position: fixed;
 }
 
 /* Línea inferior decorativa */
@@ -17,6 +16,33 @@ body {
   width: 100%;
   height: 0.2em;
   background-color: #BDB76B;
+}
+
+/* Contenedor del logo */
+.navbar-brand img {
+  height: auto; /* Mantiene proporción */
+  max-height: 80px; /* Aumenta el tamaño sin afectar la barra */
+  max-width: 130px;
+  padding-bottom: 15px;
+  transition: transform 0.3s ease-in-out; /* Suaviza el efecto */
+}
+
+/* Efecto al pasar el mouse */
+.navbar-brand img:hover {
+  transform: scale(1.1); /* Aumenta el tamaño un 10% */
+}
+
+
+/* Alinear los elementos del navbar */
+.navbar-nav {
+padding-bottom: 15px;
+}
+
+.navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-top: -5px; /* Eleva los enlaces ligeramente */
 }
 
 /* Estilo para los enlaces del navbar */
@@ -34,70 +60,29 @@ body {
   color: #BDB76B;
 }
 
-/* Contenedor del icono de usuario */
-.navbar-nav .nav-item.user-icon {
-  display: flex; /* Asegura que esté alineado con los otros elementos */
-  align-items: center; /* Centra verticalmente el ícono */
-  margin-left: 10px; /* Espacio entre los elementos */
-}
-
-/* Estilo del icono de usuario */
-.user-icon {
-  font-size: 1.5rem;
-  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-/* Efecto hover en el icono */
-.user-icon:hover {
-  transform: scale(1.2);
-  color: #264653;
-}
-
-/* Contenedor del logo */
-.navbar-brand img {
-  height: 100px; /* Tamaño predeterminado */
-  max-width: 150px;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-/* Efecto hover en el logo */
-.navbar-brand img:hover {
-  transform: scale(1.2);
-  opacity: 0.9;
-}
-
-/* Alinear los elementos de la barra de navegación de forma correcta */
-.navbar-nav {
-  display: flex;
-  align-items: center; /* Centra verticalmente los elementos */
-}
-
-.navbar-nav .nav-item {
-  display: flex;
-  align-items: center;
-  margin-right: 15px;
-}
-
 /* Ajustes para dispositivos móviles */
 @media (max-width: 991px) {
   .navbar {
     padding: 10px;
+    height: auto;
   }
 
   /* Reducir tamaño del logo en móviles */
   .navbar-brand img {
-    height: 60px;
-    max-width: 120px;
+    height: 50px;
+    max-width: 110px;
   }
 
   /* Ajustar la disposición del menú */
   .navbar-nav {
     text-align: center;
     width: 100%;
+    align-items: center;
   }
 
   .navbar-nav .nav-item {
     margin-bottom: 10px;
+    margin-top: 0; /* Resetear ajuste para móviles */
   }
 
   /* Reducir tamaño de fuente en móviles */
@@ -113,14 +98,14 @@ body {
 
   /* Añadir espacio extra para no cubrir el contenido en pantallas pequeñas */
   body {
-    padding-top: 110px; /* Ajuste adicional si es necesario */
+    padding-top: 90px; /* Ajuste adicional si es necesario */
   }
 }
 
 /* Ajustes para pantallas extra pequeñas (menos de 576px) */
 @media (max-width: 576px) {
   .navbar-brand img {
-    height: 50px;
+    height: 45px;
     max-width: 100px;
   }
 
@@ -133,8 +118,8 @@ body {
     font-size: 1rem;
   }
 
-  /* Añadir espacio extra en pantallas más pequeñas */
+  /* Ajuste extra para evitar superposición */
   body {
-    padding-top: 120px; /* Ajuste según sea necesario */
+    padding-top: 100px;
   }
 }

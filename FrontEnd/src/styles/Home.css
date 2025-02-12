@@ -1,64 +1,35 @@
+/* Ajustes generales */
 .home {
-  padding-left: 20%; /* Padding en el lateral izquierdo */
-  padding-right: 20%; /* Padding en el lateral derecho */
+  padding: 5%;
 }
 
 .main-title {
   padding-top: 4%;
-  color: #BDB76B; /* Verde que combina con el tema ecológico */
-  font-weight: bold; /* Opcional: para hacerlo más destacado */
+  color: #a6da21;
+  font-weight: bold;
 }
 
-
-/* Estilo específico para los párrafos dentro de contenido */
 .home p {
-  font-size: 2rem; /* Tamaño mayor para los párrafos */
+  font-size: 1.5rem;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.row {
-  margin-bottom: 50px;
-}
-
+/* Imágenes de productos */
 .product-image {
   max-width: 100%;
   height: auto;
-}
-
-.btn-primary {
-  background-color: #BDB76B;
-  font-size: 1.2rem;
-  border: none;
-  margin-bottom: 10px
-  
-}
-
-.btn-primary:focus {
-    background-color: #264653 !important;
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-.btn-primary:hover {
-  background-color: #264653;
-}
-
-.product-image {
-  transition: transform 1s ease; /* Suaviza la transición */
+  transition: transform 0.5s ease;
 }
 
 .product-image:hover {
-  transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el mouse */
+  transform: scale(1.05);
 }
 
+/* Botón */
 .signup-link {
   display: flex;
-  justify-content: center;  /* Centra el contenido horizontalmente */
-  align-items: center;      /* Centra el contenido verticalmente */
-  margin-top: 20px;         /* Espacio superior */
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .signup-link p {
@@ -66,66 +37,91 @@
 }
 
 .signup-link a {
-  color: #264653;           /* Color del enlace */
-  text-decoration: none;    /* Sin subrayado */
+  color: #264653;
+  text-decoration: none;
   font-weight: bold;
 }
 
 .signup-link a:hover {
-  text-decoration: underline;  /* Subraya el enlace cuando se pasa el mouse */
+  text-decoration: underline;
 }
-.fullscreen-video {
+
+/* ----- CARRUSEL DE VIDEOS ----- */
+.video-carousel {
   position: relative;
-  width: 100vw;
-  height: 60vh; /* Ajusta esta altura según lo que necesites */
+  width: 100%;
+  height: 90vh;
   overflow: hidden;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
 }
 
-.fullscreen-video video {
-  width: 100%;
-  height: 100%; /* Hace que el video ocupe toda la altura del contenedor */
-  object-fit: cover; /* Asegura que el video cubra todo sin distorsionarse */
+.video {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
-.fullscreen-video video.active {
+.video.active {
   opacity: 1;
 }
 
-.overlay {
+/* Texto superpuesto */
+.overlay-text {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 24px;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  font-weight: bold;
+  color: white;
+  z-index: 10;
+  width: 80%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad */
+  padding: 20px;
+  border-radius: 10px;
 }
 
+.overlay-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #51b632bb;
+}
 
+.overlay-text p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
 
-
-/* Responsividad para pantallas más pequeñas */
+/* Responsividad */
 @media screen and (max-width: 768px) {
   .home {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 2%;
   }
 
-  /* Ajustes para pantallas pequeñas */
   .home h1, .home p {
-    font-size: 1.5rem; /* Ajuste del tamaño en pantallas pequeñas */
+    font-size: 1.2rem;
+  }
+
+  .video-carousel {
+    height: 40vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home h1 {
+    font-size: 1rem;
+  }
+
+  .home p {
+    font-size: 0.9rem;
+  }
+
+  .video-carousel {
+    height: 30vh;
   }
 }

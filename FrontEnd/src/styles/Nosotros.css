@@ -1,20 +1,46 @@
-.card {
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-    color: #9eac42;
-  }
-  
-  .card img {
-    max-height: 200px; /* Limita la altura de la imagen */
-    object-fit: cover; /* Evita que la imagen se deforme */
-  }
-  
+/* Estilo general para secciones */
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #636b2f;
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  /* Animación de latido (heartbeat) */
+.section-description {
+  text-align: center;
+  color: #636b2f;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+/* Estilo de la tarjeta */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Asegurar que los textos en las tarjetas estén alineados */
+.card-title, .card-text {
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  color: #BDB76B;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de la imagen dentro de la tarjeta */
+.card img {
+  max-height: 200px; /* Limita la altura de la imagen */
+  object-fit: cover; /* Evita que la imagen se deforme */
+  border-radius: 10px 10px 0 0; /* Redondea solo la parte superior */
+  }
+
+/* Animación de latido (heartbeat) */
 @keyframes heartbeat {
   0% {
     transform: scale(1);
@@ -37,38 +63,84 @@
 .text-heartbeat {
   font-size: 2rem;
   font-weight: bold;
-  color: #636b2f; /* Color base */
+  color: #264653; /* Color base */
   text-transform: uppercase;
   animation: heartbeat 1.5s infinite; /* Aplica la animación de latido */
   transition: color 0.3s ease-in-out;
+  letter-spacing: 2px; /* Agrega espacio entre las letras */
 }
 
 /* Efecto hover para cambiar de color */
 .text-heartbeat:hover {
-  color: #9eac42; /* Color más claro */
+  color: #A89F0D; /* Color más claro */
 }
 
 /* Animación de entrada (fade-in) */
 @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  /* Estilo del texto */
-  .text-animated {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #636b2f; /* Color base */
-    text-transform: uppercase;
-    animation: fadeIn 1s ease-in-out; /* Aplica la animación */
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
 
-  
+/* Estilo de la sección sobre el equipo */
+#equipo {
+  background-color: #f7f7f7;
+  padding: 50px 0;
+}
+
+/* Estilo de los elementos de equipo */
+#equipo .card {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#equipo .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de las tarjetas en la sección de impacto */
+#impacto .card {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#impacto .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Sección "Nuestro Equipo" */
+#equipo .container {
+  background-color: #f7f7f7; /* Fondo gris claro para la sección */
+}
+
+#equipo h1 {
+  font-size: 2.5rem;
+  color: #636b2f;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Estilo específico para los nombres del equipo */
+#equipo .card-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #636b2f;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Estilo de las descripciones del equipo */
+#equipo .card-text {
+  text-align: center;
+  color: #636b2f;
+  font-size: 1.1rem;
+}

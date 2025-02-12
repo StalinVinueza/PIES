@@ -18,7 +18,6 @@ const FooterEco = () => {
           {/* Segunda columna: Navegación */}
           <div className="col-md-3 text-center">
             <ul className="list-unstyled">
-              <li><a href="/productos">Productos</a></li>
               <li><a href="/contacto">Contactos</a></li>
               <li><a href="/nosotros">Nosotros</a></li>
               <li><a href="/registro">Registrate</a></li>
