@@ -1,4 +1,6 @@
 const ClienteModel = require('../model/clienteM');
+const bcrypt = require('bcrypt');
+const poolPostgres = require('../dbconfig/dbconection.js');
 
 // Obtener todos los clientes
 const getAllClientes = async (req, res) => {
@@ -24,48 +26,53 @@ const getClienteById = async (req, res) => {
 
 // Crear un nuevo cliente
 const createCliente = async (req, res) => {
-  const {
-    ES_CLI_NOMBRE,
-    ES_CLI_APELLIDO,
-    ES_CLI_PERFIL_ID,
-    ES_CLI_CORREO,
-    ES_CLI_GENERO,
-    ES_CLI_FECHA_NACIMIENTO,
-    ES_CLI_DIRECCION,
-    ES_CLI_PAIS,
-    ES_CLI_PROVINCIA,
-    ES_CLI_CIUDAD,
-    ES_CLI_CODIGO_POSTAL,
-    ES_CLI_TELEFONO_1,
-    ES_CLI_TELEFONO_2
-  } = req.body; // Extraer todos los datos del cuerpo de la solicitud
-
   try {
-    // Llamar a la función de creación del cliente, pasando los datos recibidos
-    const newCliente = await ClienteModel.createCliente({
-      ES_CLI_NOMBRE,
-      ES_CLI_APELLIDO,
-      ES_CLI_PERFIL_ID,
-      ES_CLI_CORREO,
-      ES_CLI_GENERO,
-      ES_CLI_FECHA_NACIMIENTO,
-      ES_CLI_DIRECCION,
-      ES_CLI_PAIS,
-      ES_CLI_PROVINCIA,
-      ES_CLI_CIUDAD,
-      ES_CLI_CODIGO_POSTAL,
-      ES_CLI_TELEFONO_1,
-      ES_CLI_TELEFONO_2
-    });
+      const {
+          ES_CLI_NOMBRE,
+          ES_CLI_APELLIDO,
+          ES_CLI_CORREO,
+          ES_CLI_GENERO,
+          ES_CLI_FECHA_NACIMIENTO,
+          ES_CLI_DIRECCION,
+          ES_CLI_PAIS,
+          ES_CLI_PROVINCIA,
+          ES_CLI_CIUDAD,
+          ES_CLI_CODIGO_POSTAL,
+          ES_CLI_TELEFONO_1,
+          ES_CLI_TELEFONO_2,
+          ES_CLI_ESTADO,
+          ES_CLI_MONGO
+      } = req.body;
 
-    // Responder con el ID del nuevo cliente creado
-    res.status(201).json({ ES_CLI_ID: newCliente });
-  } catch (err) {
-    // En caso de error, responder con un mensaje de error
-    res.status(500).json({ message: err.message });
+      // Generar un valor cifrado para la columna ES_CLI_MONGO
+      const valorMongo = ES_CLI_MONGO ? await bcrypt.hash(ES_CLI_MONGO, 10) : null;
+
+
+      const query = `
+          INSERT INTO ES_CLIENTE (
+              ES_CLI_NOMBRE, ES_CLI_APELLIDO, ES_CLI_CORREO, ES_CLI_GENERO,
+              ES_CLI_FECHA_NACIMIENTO, ES_CLI_DIRECCION, ES_CLI_PAIS, ES_CLI_PROVINCIA,
+              ES_CLI_CIUDAD, ES_CLI_CODIGO_POSTAL, ES_CLI_TELEFONO_1, ES_CLI_TELEFONO_2,
+              ES_CLI_ESTADO, ES_CLI_MONGO
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+          RETURNING *;
+      `;
+
+      const values = [
+          ES_CLI_NOMBRE, ES_CLI_APELLIDO, ES_CLI_CORREO, ES_CLI_GENERO,
+          ES_CLI_FECHA_NACIMIENTO, ES_CLI_DIRECCION, ES_CLI_PAIS, ES_CLI_PROVINCIA,
+          ES_CLI_CIUDAD, ES_CLI_CODIGO_POSTAL, ES_CLI_TELEFONO_1, ES_CLI_TELEFONO_2,
+          ES_CLI_ESTADO, valorMongo
+      ];
+
+      const result = await poolPostgres.query(query, values);
+
+      res.status(201).json({ message: "Cliente creado con éxito", cliente: result.rows[0] });
+  } catch (error) {
+      console.error("Error al crear el cliente:", error);
+      res.status(500).json({ message: "Error al crear el cliente", error: error.message });
   }
 };
-
 // Actualizar un cliente existente
 const updateCliente = async (req, res) => {
   const { ES_CLI_ID } = req.body; // Aseguramos que el ID venga en el cuerpo de la solicitud

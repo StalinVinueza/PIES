@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './NavMenu.css';
+import '../styles/NavMenu.css';
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
 
 function NavMenu() {
@@ -69,12 +69,19 @@ function NavMenu() {
               </>
             )}
 
+            {isAuthenticated && userProfile === 4 && (
+              <>
+                <li className="nav-item"><Link className="nav-link" to="/emprendimientos" onClick={handleNavClick}>Emprendimientos</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/productos" onClick={handleNavClick}>Productos</Link></li>
+              </>
+            )}
+
             <li className="nav-item"><Link className="nav-link" to="/contacto" onClick={handleNavClick}>Contacto</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/nosotros" onClick={handleNavClick}>Nosotros</Link></li>
 
             {isAuthenticated ? (
               <li className="nav-item">
-                <button className="nav-link btn" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0 }}>
+                <button className="nav-link" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0 }}>
                   <FaSignOutAlt size={20} title="Cerrar sesión" />
                 </button>
               </li>

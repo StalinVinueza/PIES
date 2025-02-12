@@ -1,0 +1,64 @@
+/* Color del encabezado de la tabla */
+.list-group-header {
+    background-color: #264653; /* Verde oliva suave */
+    color: white;
+    max-height: 50px;
+    border-radius: 8px;
+    text-align: start;
+  }
+  
+  .list-group-body {
+    background-color: #f8f9fa;  /* Un gris claro para contraste */
+    border-bottom: 1px solid #ddd;
+    max-height: 50px;
+    font-size: 12px;
+    text-align: start; /* Centra el texto horizontalmente */
+      
+  }
+ 
+
+  /* Estilo para el botón personalizado */
+.btn-custom {
+  display: inline-block;
+  background-color:transparent;  /* Verde oliva suave */
+  padding: 1px;
+  font-size: 10px;            /* Tamaño de la fuente */
+  border-radius: 5px;         /* Bordes redondeados */
+  display: inline-flex;       /* Flexbox para alineación del icono */
+  align-items: center;        /* Alineación vertical del contenido */
+  justify-content: center;    /* Alineación horizontal del contenido */
+  transition: all 0.3s ease;  /* Transición suave para efectos */
+  cursor: pointer;           /* Cursor en forma de mano al pasar */
+}
+
+/* Efecto hover para el botón */
+.btn-custom:hover {
+  background-color: #565b29;  /* Color más oscuro al pasar el cursor */
+  border-color: #565b29;      /* Color del borde cuando se pasa el cursor */
+  transform: translateY(-2px); /* Elevación sutil del botón */
+}
+
+/* Estilo al hacer clic o al enfocarse */
+.btn-custom:focus, .btn-custom:active {
+  outline: none;                      /* Eliminar borde por defecto */
+  box-shadow: 0 0 0 2px rgba(99, 107, 47, 0.5); /* Sombra sutil */
+}
+
+/* Ajuste para el ícono dentro del botón */
+.btn-custom .icon {
+  color: white;
+  margin-right: 1px;   /* Espaciado entre el ícono y el texto */
+  font-size: 15px;
+  display: inline-block;   
+    /* Tamaño del ícono */
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .btn-custom {
+    padding: 6px 12px;  /* Ajuste de tamaño de botón en pantallas pequeñas */
+    font-size: 14px;    /* Reducir tamaño de fuente en pantallas pequeñas */
+  }
+}
+
+  
