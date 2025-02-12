@@ -3,7 +3,7 @@ import { Eye, Trash, Pencil } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "../styles/EmprendimientosList.css";
 
-function Emprendimientos({ onShowModal }) {
+function EmprendimientosApi({ onShowModal }) {
   const [emprendimientos, setEmprendimientos] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -118,4 +118,4 @@ function Emprendimientos({ onShowModal }) {
   );
 }
 
-export default Emprendimientos;
+export default EmprendimientosApi;

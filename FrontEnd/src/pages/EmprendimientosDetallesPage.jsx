@@ -22,6 +22,9 @@ function EmprendimientoDetailPage() {
     es_pro_imagen: null
   });
 
+  // Variable para controlar si el botón de "Nuevo Producto" debe mostrarse
+  const showAddButton = false; // Cambia esto a `true` si quieres mostrar el botón
+
   // Cargar los detalles del emprendimiento y los productos asociados
   useEffect(() => {
     const fetchData = async () => {
@@ -144,9 +147,12 @@ function EmprendimientoDetailPage() {
       {/* Sección para mostrar los productos */}
       <div className="productos-section">
         <h2>Productos</h2>
-        <button className="btn btn-success mb-3" onClick={handleShowModal}>
-          Nuevo Producto
-        </button>
+        {/* Mostrar el botón solo si showAddButton es true */}
+        {showAddButton && (
+          <button className="btn btn-success mb-3" onClick={handleShowModal}>
+            Nuevo Producto
+          </button>
+        )}
         {productos.length === 0 ? (
           <p>No hay productos disponibles.</p>
         ) : (
