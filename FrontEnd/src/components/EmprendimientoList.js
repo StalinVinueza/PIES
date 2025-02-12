@@ -79,7 +79,9 @@ function Emprendimientos({ onShowModal, isCliente }) {
                   </Link>
 
                   {/* Mostrar botones de editar y eliminar solo si no es un cliente */}
-                  {!isCliente && (
+                  {!isCliente &&
+  usuario &&
+  usuario.id === emprendimiento.es_cli_id && (
                     <>
                       <button
                         className="btn btn-sm btn-edit"

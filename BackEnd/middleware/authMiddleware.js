@@ -28,3 +28,18 @@ exports.verificarRol = (rolesPermitidos) => (req, res, next) => {
 
   next();
 };
+// middleware/authMiddleware.js
+
+const verificarPermisos = (req, res, next) => {
+  const usuario = req.usuario; // Asume que el usuario está disponible en el request (por ejemplo, después de autenticación)
+  const { empId } = req.params; // Obtén el ID del emprendimiento desde la URL
+
+  // Verifica si el usuario tiene permisos para modificar este emprendimiento
+  if (usuario.perfilId === 1 || (usuario.perfilId === 4 && usuario.id === empId)) {
+    next(); // Permite continuar con la solicitud
+  } else {
+    res.status(403).json({ error: "No tienes permisos para realizar esta acción" });
+  }
+};
+
+module.exports = verificarPermisos;
