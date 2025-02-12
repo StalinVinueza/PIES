@@ -81,7 +81,7 @@ function NavMenu() {
 
             {isAuthenticated ? (
               <li className="nav-item">
-                <button className="nav-link btn" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0 }}>
+                <button className="nav-link" onClick={handleLogout} style={{ background: 'none', border: 'none', padding: 0 }}>
                   <FaSignOutAlt size={20} title="Cerrar sesión" />
                 </button>
               </li>
