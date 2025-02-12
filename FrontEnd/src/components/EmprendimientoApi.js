@@ -1,119 +1,121 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import EmprendimientoList from "./EmprendimientoList";
-import EmprendimientoModal from "./EmprendimientoModal";
-import EmprendimientoForm from "./EmprendimientoForm";
-import "../styles/ButtonModal.css";
+import { Eye, Trash, Pencil } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import "../styles/EmprendimientosList.css";
 
-function EmprendimientosApi() {
+function Emprendimientos({ onShowModal }) {
   const [emprendimientos, setEmprendimientos] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [editData, setEditData] = useState({
-    es_emp_id: "",
-    es_emp_nombre: "",
-    es_emp_descripcion: "",
-    es_emp_logo: null
-  });
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  // Cargar emprendimientos al montar el componente
   useEffect(() => {
-    const fetchEmprendimientos = async () => {
-      try {
-        const response = await axios.get("http://localhost:3001/api/emprendimientos");
-        setEmprendimientos(response.data);
-      } catch (error) {
-        console.error("Error al obtener los emprendimientos:", error);
+    fetch("http://localhost:3001/api/emprendimientos")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error en la carga de emprendimientos");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setEmprendimientos(Array.isArray(data) ? data : []);
+      })
+      .catch((error) => {
+        console.error("Error al cargar emprendimientos:", error);
         setEmprendimientos([]);
-      }
-    };
-
-    fetchEmprendimientos();
+      });
   }, []);
 
-  // Mostrar modal para nuevo o editar emprendimiento
-  const handleShowModal = (emprendimiento = {}) => {
-    setEditData({
-      es_emp_id: emprendimiento.es_emp_id || "",
-      es_emp_nombre: emprendimiento.es_emp_nombre || "",
-      es_emp_descripcion: emprendimiento.es_emp_descripcion || "",
-      es_emp_logo: emprendimiento.es_emp_logo || null
-    });
-
-    setShowModal(true);
-  };
-
-  // Cerrar modal
-  const handleCloseModal = () => setShowModal(false);
-
-  // Manejar cambios en el formulario
-  const handleChange = (e) => {
-    if (e.target.name === "es_emp_logo") {
-      if (e.target.files && e.target.files[0]) {
-        setEditData((prev) => ({
-          ...prev,
-          es_emp_logo: e.target.files[0]
-        }));
-      }
-    } else {
-      setEditData((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value
-      }));
+  const handleDelete = (id) => {
+    if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
+      fetch(`http://localhost:3001/api/emprendimientos/${id}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al eliminar el emprendimiento");
+          }
+          setEmprendimientos((prev) =>
+            prev.filter((emp) => emp.es_emp_id !== id)
+          );
+        })
+        .catch((error) => console.error("Error al eliminar:", error));
     }
   };
 
-  // Guardar o actualizar emprendimiento
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("es_emp_nombre", editData.es_emp_nombre);
-    formData.append("es_emp_descripcion", editData.es_emp_descripcion);
-    if (editData.es_emp_logo instanceof File) {
-      formData.append("es_emp_logo", editData.es_emp_logo);
+  const canEditOrDelete = (emprendimiento) => {
+    if (!usuario) {
+      return false; // No hay usuario, no hay permisos
     }
 
-    try {
-      let response;
-      if (editData.es_emp_id) {
-        response = await axios.put(
-          `http://localhost:3001/api/emprendimientos/${editData.es_emp_id}`,
-          formData
-        );
-      } else {
-        response = await axios.post("http://localhost:3001/api/emprendimientos", formData);
-      }
-
-      console.log("Respuesta del servidor:", response.data);
-      setShowModal(false);
-      window.location.reload();
-    } catch (error) {
-      console.error("Error al guardar:", error);
+    if (usuario.perfilId === 1) {
+      return true; // Admin: tiene todos los permisos
     }
+
+    if (usuario.perfilId === 4 && usuario.id === emprendimiento.es_emp_cliente_id) {
+      return true; // Emprendimiento: solo el dueño tiene permisos
+    }
+
+    return false; // Otros perfiles: no tienen permisos
   };
 
   return (
-    <div className="container">
-      <h1 className="text-center my-4">Lista de Emprendimientos</h1>
-      <button className="btn-emprendimiento" onClick={() => handleShowModal()}>
-        Nuevo Emprendimiento
-      </button>
-
-      <EmprendimientoList emprendimientos={emprendimientos} onShowModal={handleShowModal} />
-
-      {showModal && (
-        <EmprendimientoModal
-          show={showModal}
-          handleClose={handleCloseModal}
-          editData={editData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        >
-          <EmprendimientoForm editData={editData} handleChange={handleChange} handleSubmit={handleSubmit} />
-        </EmprendimientoModal>
+    <div className="container py-">
+      {emprendimientos.length === 0 ? (
+        <p className="text-center">No hay emprendimientos disponibles.</p>
+      ) : (
+        <div className="row">
+          {emprendimientos.map((emprendimiento) => (
+            <div
+              key={emprendimiento.es_emp_id}
+              className="col-md-4 col-lg-3 mb-4"
+            >
+              <div className="card shadow-sm h-100">
+                <img
+                  src={
+                    emprendimiento.es_emp_logo.startsWith("/uploads/")
+                      ? `http://localhost:3001${emprendimiento.es_emp_logo}`
+                      : `http://localhost:3001/uploads/${emprendimiento.es_emp_logo}`
+                  }
+                  alt={emprendimiento.es_emp_nombre}
+                  className="card-img-top"
+                  style={{ height: "180px", objectFit: "cover" }}
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
+                </div>
+                <div className="card-footer">
+                  <Link
+                    to={`/emprendimientos/${emprendimiento.es_emp_id}`}
+                    className="btn btn-sm btn-view"
+                  >
+                    <Eye size={18} />
+                  </Link>
+                  {canEditOrDelete(emprendimiento) && (
+                    <>
+                      <button
+                        className="btn btn-sm btn-edit"
+                        onClick={() => onShowModal(emprendimiento)}
+                      >
+                        <Pencil size={18} />
+                      </button>
+                      <button
+                        className="btn btn-sm btn-delete"
+                        onClick={() => handleDelete(emprendimiento.es_emp_id)}
+                      >
+                        <Trash size={18} />
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
 }
 
-export default EmprendimientosApi;
+export default Emprendimientos;

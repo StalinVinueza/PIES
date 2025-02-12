@@ -1,10 +1,9 @@
-// EmprendimientoList.js
 import React, { useEffect, useState } from "react";
 import { Eye, Trash, Pencil } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "../styles/EmprendimientosList.css";
 
-function Emprendimientos({ onShowModal }) {
+function Emprendimientos({ onShowModal, isCliente }) {
   const [emprendimientos, setEmprendimientos] = useState([]);
 
   useEffect(() => {
@@ -79,19 +78,24 @@ function Emprendimientos({ onShowModal }) {
                     <Eye size={18} />
                   </Link>
 
-                  <button
-                    className="btn btn-sm btn-edit"
-                    onClick={() => onShowModal(emprendimiento)}
-                  >
-                    <Pencil size={18} />
-                  </button>
+                  {/* Mostrar botones de editar y eliminar solo si no es un cliente */}
+                  {!isCliente && (
+                    <>
+                      <button
+                        className="btn btn-sm btn-edit"
+                        onClick={() => onShowModal(emprendimiento)}
+                      >
+                        <Pencil size={18} />
+                      </button>
 
-                  <button
-                    className="btn btn-sm btn-delete"
-                    onClick={() => handleDelete(emprendimiento.es_emp_id)}
-                  >
-                    <Trash size={18} />
-                  </button>
+                      <button
+                        className="btn btn-sm btn-delete"
+                        onClick={() => handleDelete(emprendimiento.es_emp_id)}
+                      >
+                        <Trash size={18} />
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
