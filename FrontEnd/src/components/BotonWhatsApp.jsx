@@ -6,7 +6,7 @@ import '../components/Contactos.css'; // Asegúrate de que este archivo exista
 function BotonWhatsApp() {
   return (
     <a
-      href="https://wa.me/593999999999" // Reemplaza con tu número en formato internacional
+      href="https://wa.me/593994926633" // Reemplaza con tu número en formato internacional
       className="btn btn-success whatsapp-btn d-flex align-items-center justify-content-center gap-2"
       target="_blank"
       rel="noopener noreferrer"
