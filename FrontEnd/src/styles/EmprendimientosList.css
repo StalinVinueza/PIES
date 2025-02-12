@@ -1,0 +1,94 @@
+/* Estilos generales */
+h1 {
+  color: #3b3a38; /* Amarillo dorado para alto contraste */
+  font-size: 2.5rem; /* Tamaño grande para destacar */
+  text-transform: uppercase; /* Mayúsculas para énfasis */
+  text-align: center; /* Centrado en la pantalla */
+  letter-spacing: 2px; /* Espaciado entre letras */
+  margin-bottom: 20px; /* Espaciado inferior */
+}
+
+
+.container {
+  padding-top: 20px;
+}
+
+/* Tarjetas de emprendimientos */
+.card {
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  overflow:hidden;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* Imagen cuadrada */
+.card-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.card-img-top {
+  width: 100%; /* Ajusta el ancho al 100% para que ocupe todo el contenedor */
+  height: 200px; /* Aumenta la altura de la imagen */
+  object-fit: cover; /* Mantiene el aspecto correcto sin distorsionar */
+  border-radius: 0px;
+}
+
+/* Contenedor del título */
+.card-title-container {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  font-size: 3 rem;
+  font-weight: bold;
+  color: rgb(59, 59, 63);
+}
+
+/* Área de botones con fondo gris */
+.card-footer {
+  background-color: #264653; /* Cambiado a gris */
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px; /* Espacio entre botones */
+  align-items: center;
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btn {
+  color: white !important;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+/* Colores de botones */
+.btn-view {
+  background-color: #2A9D8F;
+}
+
+.btn-edit {
+  background-color: #E9C46A;
+}
+
+.btn-delete {
+  background-color: #E76F51;
+}

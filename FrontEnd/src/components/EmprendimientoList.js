@@ -1,5 +1,8 @@
+// EmprendimientoList.js
 import React, { useEffect, useState } from "react";
-import { PencilSquare, TrashFill } from "react-bootstrap-icons";
+import { Eye, Trash, Pencil } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import "../styles/EmprendimientosList.css";
 
 function Emprendimientos({ onShowModal }) {
   const [emprendimientos, setEmprendimientos] = useState([]);
@@ -22,7 +25,6 @@ function Emprendimientos({ onShowModal }) {
       });
   }, []);
 
-  // Función para eliminar un emprendimiento
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
       fetch(`http://localhost:3001/api/emprendimientos/${id}`, {
@@ -41,7 +43,7 @@ function Emprendimientos({ onShowModal }) {
   };
 
   return (
-    <div className="container py-4">
+    <div className="container py-">
       {emprendimientos.length === 0 ? (
         <p className="text-center">No hay emprendimientos disponibles.</p>
       ) : (
@@ -65,39 +67,31 @@ function Emprendimientos({ onShowModal }) {
                     e.target.style.display = "none";
                   }}
                 />
-
-                <div className="card-body d-flex flex-column">
+                <div className="card-body">
                   <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
-                  <p className="card-text flex-grow-1">
-                    {emprendimiento.es_emp_descripcion}
-                  </p>
-                  <div className="d-flex justify-content-between">
-                    {/* Botón de editar con color personalizado */}
-                    <button
-                      className="btn btn-sm"
-                      style={{
-                        backgroundColor: "#636b2f",
-                        borderColor: "#636b2f",
-                        color: "white",
-                      }}
-                      onClick={() => onShowModal(emprendimiento)}
-                    >
-                      <PencilSquare size={18} />
-                    </button>
+                </div>
+                {/* Footer con fondo de color para los botones */}
+                <div className="card-footer">
+                  <Link
+                    to={`/emprendimientos/${emprendimiento.es_emp_id}`}
+                    className="btn btn-sm btn-view"
+                  >
+                    <Eye size={18} />
+                  </Link>
 
-                    {/* Botón de eliminar con color personalizado */}
-                    <button
-                      className="btn btn-sm"
-                      style={{
-                        backgroundColor: "#636b2f",
-                        borderColor: "#636b2f",
-                        color: "white",
-                      }}
-                      onClick={() => handleDelete(emprendimiento.es_emp_id)}
-                    >
-                      <TrashFill size={18} />
-                    </button>
-                  </div>
+                  <button
+                    className="btn btn-sm btn-edit"
+                    onClick={() => onShowModal(emprendimiento)}
+                  >
+                    <Pencil size={18} />
+                  </button>
+
+                  <button
+                    className="btn btn-sm btn-delete"
+                    onClick={() => handleDelete(emprendimiento.es_emp_id)}
+                  >
+                    <Trash size={18} />
+                  </button>
                 </div>
               </div>
             </div>

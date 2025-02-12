@@ -1,3 +1,4 @@
+// App.js
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavMenu from './components/NavMenu';
@@ -14,6 +15,7 @@ import Login from "./components/Login";
 import ProtectedRoute from './components/ProtectedRoute';
 import PoliticasPrivacidad from './pages/PoliticasPrivacidad';
 import PoliticasReembolsos from './pages/PoliticasReembolsos';
+import EmprendimientoDetailPage from './pages/EmprendimientosDetallesPage'; // Importa la nueva página
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,24 +25,25 @@ function App() {
   return (
     <div className="App">
       {/* Navbar */}
-      <NavMenu /> 
+      <NavMenu />
 
       {/* Contenido principal */}
       <main>
         <Routes>
-          <Route path="/" element={<Home />} /> 
-          <Route path="/clientes" element={<ProtectedRoute><Clientes /></ProtectedRoute>} /> 
+          <Route path="/" element={<Home />} />
+          <Route path="/clientes" element={<ProtectedRoute><Clientes /></ProtectedRoute>} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/emprendimientos" element={<ProtectedRoute><Emprendimientos /></ProtectedRoute>} />
+          <Route path="/emprendimientos/:id" element={<ProtectedRoute><EmprendimientoDetailPage /></ProtectedRoute>} /> {/* Nueva ruta */}
           <Route path="/carrito" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-          <Route path="/contacto" element={<Contacto />} /> 
-          <Route path="/nosotros" element={<Nosotros />} /> 
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/nosotros" element={<Nosotros />} />
           <Route path='/registro' element={<Registro />} />
           <Route path='/login' element={<Login />} />
-          
+
           {/* Rutas para las políticas */}
-          <Route path="/politicas-privacidad" element={<PoliticasPrivacidad />} /> {/* Corrected path */}
-          <Route path="/politicas-reembolsos" element={<PoliticasReembolsos />} /> {/* Corrected path */}
+          <Route path="/politicas-privacidad" element={<PoliticasPrivacidad />} />
+          <Route path="/politicas-reembolsos" element={<PoliticasReembolsos />} />
         </Routes>
       </main>
 

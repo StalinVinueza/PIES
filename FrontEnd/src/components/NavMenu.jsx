@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './NavMenu.css';
+import '../styles/NavMenu.css';
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
 
 function NavMenu() {
@@ -66,6 +66,13 @@ function NavMenu() {
               <>
                 <li className="nav-item"><Link className="nav-link" to="/emprendimientos" onClick={handleNavClick}>Emprendimientos</Link></li>
                 <li className="nav-item"><Link className="nav-link" to="/carrito" onClick={handleNavClick}>Carrito</Link></li>
+              </>
+            )}
+
+            {isAuthenticated && userProfile === 4 && (
+              <>
+                <li className="nav-item"><Link className="nav-link" to="/emprendimientos" onClick={handleNavClick}>Emprendimientos</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="/productos" onClick={handleNavClick}>Productos</Link></li>
               </>
             )}
 

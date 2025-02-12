@@ -1,0 +1,51 @@
+/* ButtonModal.css */
+.custom-btn {
+    padding: 12px 25px; /* Tamaño del botón */
+    font-size: 1.2rem; /* Tamaño del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 0 5px; /* Espaciado entre botones */
+  }
+  
+  .modal-footer-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+
+  .custom-btn {
+    padding: 12px 25px !important;
+    font-size: 1.2rem !important;
+    border-radius: 5px !important;
+  }
+
+ 
+
+/* Estilo del botón (igual que antes) */
+.btn-emprendimiento {
+  background-color: #264653;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-left: 15px; 
+}
+
+.btn-emprendimiento:hover {
+  background-color: #2A9D8F;
+  transform: scale(1.05);
+}
+
+.btn-emprendimiento:focus {
+  outline: none;
+}
+
+.btn-emprendimiento:active {
+  background-color: #1F6F55;
+}

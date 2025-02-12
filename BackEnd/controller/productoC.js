@@ -24,14 +24,29 @@ const getProductoById = async (req, res) => {
   }
 };
 
+// Obtener productos por ES_EMP_ID (ID del emprendimiento)
+const getProductosByEmprendimientoId = async (req, res) => {
+  const { es_emp_id } = req.params;
+  try {
+    const productos = await ProductoModel.getProductosByEmprendimientoId(es_emp_id);
+    if (productos.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron productos para este emprendimiento.' });
+    }
+    res.status(200).json(productos);
+  } catch (err) {
+    res.status(500).json({ message: 'Error al obtener los productos: ' + err.message });
+  }
+};
+
 // Crear un nuevo producto con imagen
 const createProducto = async (req, res) => {
   try {
     const { es_emp_id, es_pro_nombre, es_pro_precio, es_pro_stock, es_pro_descripcion } = req.body;
     const es_pro_imagen = req.file ? `/uploads/${req.file.filename}` : null;
 
-    if (!es_emp_id || !es_pro_nombre || !es_pro_precio || !es_pro_stock || !es_pro_descripcion || !es_pro_imagen) {
-      return res.status(400).json({ message: "Todos los campos son obligatorios, incluyendo la imagen" });
+    // Validación básica
+    if (!es_emp_id || !es_pro_nombre || !es_pro_precio || !es_pro_stock || !es_pro_descripcion) {
+      return res.status(400).json({ message: "Todos los campos son obligatorios." });
     }
 
     const newProducto = await ProductoModel.createProducto({
@@ -45,7 +60,8 @@ const createProducto = async (req, res) => {
 
     res.status(201).json(newProducto);
   } catch (err) {
-    res.status(500).json({ message: "Error al crear el producto: " + err.message });
+    console.error("Error al crear el producto:", err);
+    res.status(500).json({ message: "Error interno del servidor al crear el producto." });
   }
 };
 
@@ -97,6 +113,7 @@ const deleteProducto = async (req, res) => {
 module.exports = {
   getAllProductos,
   getProductoById,
+  getProductosByEmprendimientoId, // Exportar el nuevo método
   createProducto,
   updateProducto,
   deleteProducto

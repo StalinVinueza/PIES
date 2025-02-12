@@ -17,7 +17,7 @@ class EmprendimientoModel {
   }
 
   // Obtener un emprendimiento por ID
-  static async getEmprendimientobyId(id) {
+  static async getEmprendimientoById(id) {
     try {
       const result = await poolPostgres.query(`
         SELECT 

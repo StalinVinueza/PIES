@@ -70,7 +70,7 @@ function ProductosApi() {
   // Guardar o actualizar producto
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     formData.append("es_emp_id", editData.es_emp_id);
     formData.append("es_pro_nombre", editData.es_pro_nombre);
@@ -80,21 +80,34 @@ function ProductosApi() {
     if (editData.es_pro_imagen instanceof File) {
       formData.append("es_pro_imagen", editData.es_pro_imagen);
     }
-
+  
     try {
       let response;
       if (editData.es_pro_id) {
         response = await axios.put(
           `http://localhost:3001/api/productos/${editData.es_pro_id}`,
-          formData
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // Importante para enviar archivos
+            },
+          }
         );
       } else {
-        response = await axios.post("http://localhost:3001/api/productos", formData);
+        response = await axios.post(
+          "http://localhost:3001/api/productos",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // Importante para enviar archivos
+            },
+          }
+        );
       }
-
+  
       console.log("Respuesta del servidor:", response.data);
       setShowModal(false);
-      window.location.reload();
+      window.location.reload(); // Recargar la página para ver los cambios
     } catch (error) {
       console.error("Error al guardar:", error);
     }

@@ -46,7 +46,8 @@ class ProductoModel {
       );
       return result.rows[0];
     } catch (err) {
-      throw new Error('Error al crear el producto: ' + err.message);
+      console.error("Error en la consulta SQL:", err);
+      throw new Error('Error al crear el producto en la base de datos.');
     }
   }
 
@@ -92,6 +93,24 @@ class ProductoModel {
       throw new Error("Error al eliminar el producto: " + err.message);
     }
   }
+
+  static async getProductosByEmprendimientoId(es_emp_id) {
+    try {
+      const result = await poolPostgres.query(`
+        SELECT 
+          ES_PRO_ID, ES_EMP_ID, ES_PRO_NOMBRE, ES_PRO_PRECIO, 
+          ES_PRO_STOCK, ES_PRO_DESCRIPCION, ES_PRO_IMAGEN, 
+          ES_PRO_FECHA_CREACION, ES_PRO_FECHA_MODIFICACION, ES_PRO_ESTADO
+        FROM ES_PRODUCTO
+        WHERE ES_EMP_ID = $1
+      `, [es_emp_id]);
+  
+      return result.rows;
+    } catch (err) {
+      throw new Error('Error al obtener los productos por ES_EMP_ID: ' + err.message);
+    }
+  }
 }
 
+  
 module.exports = ProductoModel;
