@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import ClienteForm from './ClienteForm'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../styles/ButtonModal.css";
 
-function ClienteModal({ show, handleClose, editData, handleChange, handleUpdate }) {
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEdit = () => setIsEditing(!isEditing);
-
+function ClienteModal({ show, handleClose, editData }) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{editData.es_cli_id ? 'Información Cliente' : 'Nuevo Cliente'}</Modal.Title>
+        <Modal.Title>Información Cliente</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {!isEditing ? (
-          // Mostrar solo la información
+        {editData && editData.es_cli_id ? (
           <div>
             <p><strong>Nombre:</strong> {editData.es_cli_nombre}</p>
             <p><strong>Apellido:</strong> {editData.es_cli_apellido}</p>
@@ -26,24 +22,17 @@ function ClienteModal({ show, handleClose, editData, handleChange, handleUpdate 
             <p><strong>Provincia:</strong> {editData.es_cli_provincia}</p>
             <p><strong>Ciudad:</strong> {editData.es_cli_ciudad}</p>
             <p><strong>Codigo Postal:</strong> {editData.es_cli_codigo_postal}</p>
-            <p><strong>Teléfono:</strong> {editData.es_cli_telefono_1}</p>
-            <p><strong>Teléfono:</strong> {editData.es_cli_telefono_2}</p>
+            <p><strong>Teléfono 1:</strong> {editData.es_cli_telefono_1}</p>
+            <p><strong>Teléfono 2:</strong> {editData.es_cli_telefono_2}</p>
+            <p><strong>Fecha de Registro:</strong> {editData.es_cli_fecha_creacion}</p>
+            <p><strong>Fecha de Actualización:</strong> {editData.es_cli_fecha_modificacion}</p>
             <p><strong>Estado:</strong> {editData.es_cli_estado}</p>
-
           </div>
         ) : (
-          // Mostrar el formulario de edición
-          <ClienteForm editData={editData} handleChange={handleChange} />
+          <p>No hay datos disponibles para mostrar.</p>
         )}
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
-        {!isEditing ? (
-          <Button variant="primary" onClick={toggleEdit}>Editar</Button>
-        ) : (
-          <Button variant="success" onClick={handleUpdate}>Guardar</Button>
-        )}
-      </Modal.Footer>
+      
     </Modal>
   );
 }

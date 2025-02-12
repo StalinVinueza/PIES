@@ -36,10 +36,7 @@ function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
           onChange={(e) => handleChange(e)}
         />
       </Form.Group>
-
-      <Button variant="primary" type="submit">
-        Guardar
-      </Button>
+     
     </Form>
   );
 }

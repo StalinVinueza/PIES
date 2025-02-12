@@ -2,7 +2,6 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import EmprendimientoForm from "./EmprendimientoForm";
 
-
 function EmprendimientoModal({ show, handleClose, editData, handleChange, handleSubmit }) {
   return (
     <Modal show={show} onHide={handleClose}>
@@ -12,11 +11,15 @@ function EmprendimientoModal({ show, handleClose, editData, handleChange, handle
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <EmprendimientoForm editData={editData} handleChange={handleChange} handleSubmit={handleSubmit} />
+        <EmprendimientoForm
+          editData={editData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Cerrar
+          Cancelar
         </Button>
         <Button variant="primary" onClick={handleSubmit}>
           Guardar

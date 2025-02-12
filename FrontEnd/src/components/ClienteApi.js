@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import ClienteList from './ClienteList';
 import ClienteModal from './ClienteModal';
+import ClienteDeleteModal from './EliminacionModal'; // Importar el nuevo modal
+
 
 function ApiClientes() {
   const [clientes, setClientes] = useState([]);
   const [selectedCliente, setSelectedCliente] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); 
   const [editData, setEditData] = useState({
     es_cli_nombre: '',
     es_cli_apellido: '',
     es_cli_correo: '',
+    es_cli_mongo: '', // Agregar campo de contraseña
     es_cli_direccion: '',
-    es_cli_telefono_1: ''
+    es_cli_telefono_1: '',
+    es_cli_genero: '',
+    es_cli_fecha_nacimiento: '',
+    es_cli_pais: '',
+    es_cli_provincia: '',
+    es_cli_ciudad: '',
+    es_cli_codigo_postal: '',
+    es_cli_telefono_2: '',
+    es_cli_estado: ''
   });
+  const [clienteToDelete, setClienteToDelete] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:3001/api/clientes')
@@ -31,8 +44,17 @@ function ApiClientes() {
         es_cli_nombre: '',
         es_cli_apellido: '',
         es_cli_correo: '',
+        es_cli_mongo: '',
         es_cli_direccion: '',
-        es_cli_telefono_1: ''
+        es_cli_telefono_1: '',
+        es_cli_genero: '',
+        es_cli_fecha_nacimiento: '',
+        es_cli_pais: '',
+        es_cli_provincia: '',
+        es_cli_ciudad: '',
+        es_cli_codigo_postal: '',
+        es_cli_telefono_2: '',
+        es_cli_estado: ''
       });
     }
     setShowModal(true);
@@ -45,7 +67,7 @@ function ApiClientes() {
   };
 
   const handleCreate = () => {
-    if (!editData.es_cli_nombre || !editData.es_cli_apellido || !editData.es_cli_correo) {
+    if (!editData.es_cli_nombre || !editData.es_cli_apellido || !editData.es_cli_correo || !editData.es_cli_mongo) {
       alert('Todos los campos obligatorios deben ser completados');
       return;
     }
@@ -87,19 +109,25 @@ function ApiClientes() {
       .catch(error => console.error('Error al actualizar el cliente:', error));
   };
 
+  const handleShowDeleteModal = (id) => {
+    setClienteToDelete(id);
+    setShowDeleteModal(true); // Mostrar el modal de confirmación de eliminación
+  };
+
   const handleDelete = (id) => {
-    if (window.confirm("¿Estás seguro de eliminar este cliente?")) {
-      fetch(`http://localhost:3001/api/clientes/${id}`, { method: 'DELETE' })
-        .then(() => setClientes(clientes.filter(cliente => cliente.es_cli_id !== id)))
-        .catch(error => console.error(error));
-    }
+    fetch(`http://localhost:3001/api/clientes/${id}`, { method: 'DELETE' })
+      .then(() => setClientes(clientes.filter(cliente => cliente.es_cli_id !== id)))
+      .catch(error => console.error(error));
+    setShowDeleteModal(false);
+    setClienteToDelete(null); // Limpiar el cliente seleccionado
   };
 
   return (
     <div className="container">
       <h1 className="text-center my-4">Lista de Clientes</h1>
-      <button className="btn btn-success mb-3" onClick={() => handleShowModal()}>Nuevo Cliente</button>
-      <ClienteList clientes={clientes} onShowModal={handleShowModal} onDelete={handleDelete} />
+      
+      <ClienteList clientes={clientes} onShowModal={handleShowModal} onDelete={handleShowDeleteModal} />
+      
       {showModal && (
         <ClienteModal
           show={showModal}
@@ -109,6 +137,14 @@ function ApiClientes() {
           handleSave={selectedCliente ? handleUpdate : handleCreate}
         />
       )}
+
+      {/* Usar el nuevo modal de eliminación */}
+      <ClienteDeleteModal
+        show={showDeleteModal}
+        onHide={() => setShowDeleteModal(false)}
+        onDelete={handleDelete}
+        clienteToDelete={clienteToDelete}
+      />
     </div>
   );
 }
