@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../components/Contactos.css';
+
 
 function FormularioContacto() {
   const [formData, setFormData] = useState({
@@ -71,14 +73,11 @@ function FormularioContacto() {
       });
 
       if (response.ok) {
-        alert('Mensaje enviado correctamente');
         setFormData({ nombre: '', email: '', celular: '', mensaje: '' });
       } else {
-        alert('Hubo un error al enviar el mensaje');
       }
     } catch (error) {
       console.error('Error al enviar mensaje:', error);
-      alert('Error en el servidor');
     }
   };
 
@@ -142,9 +141,7 @@ function FormularioContacto() {
         {/* Botón Enviar */}
         <button
           type="submit"
-          className="btn w-100"
-          style={{ backgroundColor: '#636b2f', borderColor: '#636b2f', color: 'white' }}
-        >
+          className="btn w-100">
           Enviar
         </button>
       </form>

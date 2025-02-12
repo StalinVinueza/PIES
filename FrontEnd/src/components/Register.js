@@ -118,6 +118,7 @@ function RegistroUsuario() {
         <option value="">Seleccione su Género</option>
         <option value="masculino">Masculino</option>
         <option value="femenino">Femenino</option>
+        <option value="femenino">Otro</option>
         
       </select>
 

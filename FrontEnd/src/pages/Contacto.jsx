@@ -5,12 +5,11 @@ import BotonWhatsApp from '../components/BotonWhatsApp';
 import FormularioContacto from '../components/FormularioContacto'; 
 import '../components/Contactos.css'; // Asegúrate de que este archivo exista en styles, no en components
 
-
 function Contacto() {
   return (
-    <div className="container mt-5">
-      <h1 className="text-center">Contactos</h1>
-      <p className="text-center">Deseas más información, encuéntranos en nuestros canales oficiales</p>
+    <div className="container contacto-container">
+      <h1 className="text-center contacto-title">Contactos</h1>
+      <p className="text-center contacto-description">Deseas más información, encuéntranos en nuestros canales oficiales</p>
 
       {/* Sección de dos columnas para Ubicación y Formulario */}
       <div className="row d-flex align-items-start">
@@ -26,9 +25,9 @@ function Contacto() {
       </div>
 
       {/* Sección del Botón de WhatsApp */}
-      <div className="row mt-4">
+      <div className="row contacto-whatsapp">
         <div className="col text-center">
-          <p className="fs-3">Escríbenos, ¡Te contactaremos de inmediato! ✉️🚀</p>
+          <p className="fs-3">¿Tienes preguntas? Escríbenos por WhatsApp</p>
           <BotonWhatsApp />
         </div>
       </div>
