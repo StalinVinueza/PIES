@@ -11,4 +11,7 @@ function ClientePage() {
   );
 }
 
+
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+console.log(usuario); // Imprime el objeto usuario en la consola
 export default ClientePage;
