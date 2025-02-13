@@ -1,7 +1,8 @@
 /* Estilos para el contenedor de la página Nosotros */
 .nosotros-container {
   max-width: 1000px; /* Reduce el tamaño máximo */
-  margin: 0 auto; /* Centra el contenedor */
+  padding-top: 1px; /* Ajusta según la necesidad */
+
 }
 
 /* Títulos de las secciones */

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../components/Contactos.css';
 
-
 function FormularioContacto() {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -18,7 +17,34 @@ function FormularioContacto() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    let newErrors = { ...errors };
+
+    // Validaciones en tiempo real
+    if (name === 'nombre') {
+      // Solo letras y espacios
+      if (!/^[a-zA-Z\s]*$/.test(value)) {
+        newErrors.nombre = 'Caracter no válido. Solo se permiten letras y espacios.';
+        setErrors(newErrors);
+        return;  // Bloquear la entrada
+      } else {
+        newErrors.nombre = '';
+      }
+    }
+
+    if (name === 'celular') {
+      // Solo números, máximo 10 caracteres
+      if (!/^\d*$/.test(value) || value.length > 10) {
+        newErrors.celular = 'Caracter no válido. Solo se permiten números, hasta 10 dígitos.';
+        setErrors(newErrors);
+        return;  // Bloquear la entrada
+      } else {
+        newErrors.celular = '';
+      }
+    }
+
+    setErrors(newErrors);
+    setFormData({ ...formData, [name]: value });
   };
 
   const validateForm = () => {
@@ -38,11 +64,10 @@ function FormularioContacto() {
       errors.email = 'Por favor ingrese un correo electrónico válido';
     }
 
-    // Validar Número de celular (Solo números, 10 dígitos)
-    const celularRegex = /^[0-9]{10}$/;
-    if (!celularRegex.test(formData.celular)) {
+    // Validar Número de celular (10 dígitos exactos)
+    if (formData.celular.length !== 10) {
       valid = false;
-      errors.celular = 'El número de celular debe tener 10 dígitos';
+      errors.celular = 'El número de celular debe tener exactamente 10 dígitos';
     }
 
     // Validar Mensaje (No vacío)
@@ -60,21 +85,18 @@ function FormularioContacto() {
 
     // Validar formulario
     if (!validateForm()) {
-      return; // No enviar si hay errores
+      return;
     }
 
     try {
       const response = await fetch('http://localhost:3001/api/contacto', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         setFormData({ nombre: '', email: '', celular: '', mensaje: '' });
-      } else {
       }
     } catch (error) {
       console.error('Error al enviar mensaje:', error);
@@ -85,7 +107,8 @@ function FormularioContacto() {
     <div className="container mt-4">
       <h2 className="text-center">Envíanos un mensaje</h2>
       <form onSubmit={handleSubmit} className="p-4 shadow-sm bg-light rounded">
-        {/* Campo Nombre */}
+        
+        {/* Nombre */}
         <div className="mb-3">
           <label className="form-label">Nombre</label>
           <input
@@ -98,7 +121,7 @@ function FormularioContacto() {
           {errors.nombre && <div className="text-danger">{errors.nombre}</div>}
         </div>
 
-        {/* Campo Correo Electrónico */}
+        {/* Correo Electrónico */}
         <div className="mb-3">
           <label className="form-label">Correo Electrónico</label>
           <input
@@ -111,7 +134,7 @@ function FormularioContacto() {
           {errors.email && <div className="text-danger">{errors.email}</div>}
         </div>
 
-        {/* Campo Número Celular */}
+        {/* Celular */}
         <div className="mb-3">
           <label className="form-label">Número de Celular</label>
           <input
@@ -125,7 +148,7 @@ function FormularioContacto() {
           {errors.celular && <div className="text-danger">{errors.celular}</div>}
         </div>
 
-        {/* Campo Mensaje */}
+        {/* Mensaje */}
         <div className="mb-3">
           <label className="form-label">Mensaje</label>
           <textarea
@@ -139,9 +162,7 @@ function FormularioContacto() {
         </div>
 
         {/* Botón Enviar */}
-        <button
-          type="submit"
-          className="btn w-100">
+        <button type="submit" className="btn w-100">
           Enviar
         </button>
       </form>

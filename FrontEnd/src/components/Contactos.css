@@ -8,11 +8,12 @@
 .contacto-container h2,
 .contacto-container h3 {
   color: #264653; /* Color principal del navbar */
+  padding-top: 1px; /* Ajusta según la necesidad */
+
 }
 
 .contacto-title {
   font-size: 24px !important;
-  margin-top: 20px;
   color: #264653;
   font-weight: bold; /* Opcional: para mejor legibilidad */
 }

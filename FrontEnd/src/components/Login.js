@@ -6,21 +6,24 @@ const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
+  const [correoError, setCorreoError] = useState("");
+  const [contrasenaError, setContrasenaError] = useState("");
 
   const formRef = useRef(null); // Referencia al formulario para hacer scroll hacia arriba
 
   const validateForm = () => {
+    let formError = "";
     if (!correo || !contrasena) {
-      return "Todos los campos son requeridos.";
+      formError = "Todos los campos son requeridos.";
     }
 
     // Validación de formato de correo
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(correo)) {
-      return "Por favor ingresa un correo válido.";
+      formError = "Por favor ingresa un correo válido.";
     }
 
-    return ""; // Si todo está bien, retornamos una cadena vacía
+    return formError;
   };
 
   const handleLogin = async (e) => {
@@ -62,6 +65,24 @@ const Login = () => {
     }
   };
 
+  const handleCorreoChange = (e) => {
+    const value = e.target.value;
+    setCorreo(value);
+    setCorreoError("");
+
+    // Validación en tiempo real
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (value && !emailRegex.test(value)) {
+      setCorreoError("Correo no válido.");
+    }
+  };
+
+  const handleContrasenaChange = (e) => {
+    const value = e.target.value;
+    setContrasena(value);
+    setContrasenaError("");
+  };
+
   return (
     <div className="login-container" ref={formRef}>
       <h2>Iniciar Sesión</h2>
@@ -71,17 +92,19 @@ const Login = () => {
         <input
           type="email"
           value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
+          onChange={handleCorreoChange}
           required
         />
+        {correoError && <div className="error">{correoError}</div>} {/* Error correo */}
 
         <label>Contraseña:</label>
         <input
           type="password"
           value={contrasena}
-          onChange={(e) => setContrasena(e.target.value)}
+          onChange={handleContrasenaChange}
           required
         />
+        {contrasenaError && <div className="error">{contrasenaError}</div>} {/* Error contraseña */}
 
         <button type="submit" className="btn btn-success w-100">Iniciar Sesión</button>
       </form>
