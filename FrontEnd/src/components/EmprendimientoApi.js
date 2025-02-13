@@ -3,7 +3,7 @@ import { Eye, Trash, Pencil } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "../styles/EmprendimientosList.css";
 
-function EmprendimientosApi({ onShowModal }) {
+function Emprendimientos({ onShowModal }) {
   const [emprendimientos, setEmprendimientos] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -53,7 +53,6 @@ function EmprendimientosApi({ onShowModal }) {
     if (usuario.perfilId === 4 && usuario.id === emprendimiento.es_emp_cliente_id) {
       return true; // Emprendimiento: solo el dueño tiene permisos
     }
-
     return false; // Otros perfiles: no tienen permisos
   };
 
@@ -118,4 +117,4 @@ function EmprendimientosApi({ onShowModal }) {
   );
 }
 
-export default EmprendimientosApi;
+export default Emprendimientos;

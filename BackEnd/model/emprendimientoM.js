@@ -52,13 +52,13 @@ class EmprendimientoModel {
     try {
       // Obtener el logo anterior si no se sube uno nuevo
       const existing = await poolPostgres.query(`SELECT ES_EMP_LOGO FROM ES_EMPRENDIMIENTO WHERE ES_EMP_ID = $1`, [id]);
-  
+
       if (existing.rows.length === 0) {
         throw new Error('Emprendimiento no encontrado');
       }
-  
+
       const es_emp_logo = logo || existing.rows[0].es_emp_logo;
-  
+
       const result = await poolPostgres.query(
         `UPDATE ES_EMPRENDIMIENTO SET
          ES_EMP_NOMBRE = $1,
