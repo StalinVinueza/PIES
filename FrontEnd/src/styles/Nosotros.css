@@ -55,14 +55,23 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo para los párrafos */
+/* Estilo para los títulos h1 */
+.nosotros-container h1 {
+  font-size: 24px !important;
+  margin-top: 20px;
+  color: #264653;
+  font-weight: bold; /* Opcional: para mejor legibilidad */
+}
+
+/* Estilo para los párrafos p */
 .nosotros-container p {
+  color: #264653; /* Color especificado */
   font-size: 1rem; /* Tamaño más pequeño */
   line-height: 1.6; /* Menor altura de línea */
-  color: #333;
   margin-bottom: 1rem; /* Espacio inferior */
   text-align: justify; /* Justificar el texto */
 }
+
 
 /* Estilo de las listas */
 .nosotros-container ul {
@@ -105,8 +114,10 @@
 
 /* Título y texto de la tarjeta */
 .card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
+  font-size: 24px !important;
+  margin-top: 20px;
+  color: #264653;
+  font-weight: bold; /* Opcional: para mejor legibilidad */
 }
 
 .card-text {

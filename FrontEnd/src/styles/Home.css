@@ -1,9 +1,4 @@
-/* Aseguramos que el body y html no tengan márgenes ni rellenos adicionales */
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+
 
 /* Elimina el espacio debajo de la barra de navegación */
 .navbar {
@@ -67,14 +62,13 @@ body, html {
 .video-carousel {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 70vh;
   overflow: hidden;
   background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 0;
-  padding: 0;
+  margin-bottom: 20px;
 }
 
 .video {

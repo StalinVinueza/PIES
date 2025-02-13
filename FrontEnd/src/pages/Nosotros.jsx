@@ -6,7 +6,7 @@ import Card from '../components/CardNosotros'; // Asegúrate de que la ruta sea 
 function Nosotros() {
   return (
     <div className="nosotros-container container mt-5">
-      <h1 className="text-muted text-center">
+      <h1 className="text-center">
         Comprometidos con el planeta y la sostenibilidad.
       </h1>
 
