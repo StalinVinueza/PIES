@@ -1,6 +1,7 @@
 /* Estilos para el contenedor de la página Nosotros */
 .nosotros-container {
   max-width: 1000px; /* Reduce el tamaño máximo */
+  margin: 0 auto; /* Centra el contenedor */
 }
 
 /* Títulos de las secciones */
@@ -60,6 +61,7 @@
   line-height: 1.6; /* Menor altura de línea */
   color: #333;
   margin-bottom: 1rem; /* Espacio inferior */
+  text-align: justify; /* Justificar el texto */
 }
 
 /* Estilo de las listas */
@@ -70,13 +72,13 @@
 .nosotros-container ul li {
   font-size: 1rem; /* Tamaño más pequeño */
   margin-bottom: 0.3rem; /* Menos espacio entre los elementos */
+  text-align: justify; /* Justificar el texto */
 }
 
 /* Estilo para las filas de imágenes y contenido */
 .nosotros-container .row {
   margin-bottom: 2rem; /* Menos espacio entre filas */
 }
-
 
 /* Estilos para las tarjetas */
 .card {

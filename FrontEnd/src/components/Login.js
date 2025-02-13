@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";  // Importar Link para redirección
 import "../styles/Login.css";
 
@@ -7,9 +7,34 @@ const Login = () => {
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
 
+  const formRef = useRef(null); // Referencia al formulario para hacer scroll hacia arriba
+
+  const validateForm = () => {
+    if (!correo || !contrasena) {
+      return "Todos los campos son requeridos.";
+    }
+
+    // Validación de formato de correo
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(correo)) {
+      return "Por favor ingresa un correo válido.";
+    }
+
+    return ""; // Si todo está bien, retornamos una cadena vacía
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(""); // Resetear errores anteriores
+
+    const formError = validateForm();
+    if (formError) {
+      setError(formError); // Mostrar el error si la validación falla
+      return; // No continuar con el login
+    }
+
+    // Hacer scroll hacia arriba
+    formRef.current.scrollIntoView({ behavior: 'smooth' });
 
     try {
       const response = await fetch("http://localhost:3001/api/auth/login", {
@@ -31,16 +56,14 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
 
-      // alert("Login exitoso!");
       window.location.href = "/"; // Redirigir al usuario a la página principal
     } catch (error) {
       setError(error.message);
     }
   };
-  
 
   return (
-    <div className="login-container">
+    <div className="login-container" ref={formRef}>
       <h2>Iniciar Sesión</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleLogin}>

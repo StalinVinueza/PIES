@@ -106,6 +106,13 @@ button[type="button"]:hover {
   transition: border 0.3s ease;
 }
 
+/* Estilo para los íconos del ojo de la contraseña */
+.input-group-append .btn-light svg {
+  color: #264653; /* Cambia este valor por el color que prefieras */
+  font-size: 1.2rem; /* Puedes ajustar el tamaño del ícono */
+}
+
+
 
 /* Estilo en pantallas pequeñas */
 @media screen and (max-width: 768px) {

@@ -1,16 +1,33 @@
-/* Ajustes generales */
-.home {
-  padding: 5%;
+/* Aseguramos que el body y html no tengan márgenes ni rellenos adicionales */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
+/* Elimina el espacio debajo de la barra de navegación */
+.navbar {
+  margin-bottom: 0;
+}
+
+/* Título principal */
 .main-title {
   padding-top: 4%;
   color: #a6da21;
   font-weight: bold;
 }
 
+/* Estilos para los párrafos del home */
 .home p {
   font-size: 1.5rem;
+}
+
+/* Justificación de texto en descripciones de productos */
+.col-md-6 p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  margin-bottom: 1.5rem;
 }
 
 /* Imágenes de productos */
@@ -56,6 +73,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 0;
+  padding: 0;
 }
 
 .video {
@@ -81,7 +100,7 @@
   color: white;
   z-index: 10;
   width: 80%;
-  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad */
+  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
 }
@@ -110,6 +129,12 @@
   .video-carousel {
     height: 40vh;
   }
+
+  /* Ajuste de justificación para móviles */
+  .col-md-6 p {
+    text-align: left;
+    hyphens: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -123,5 +148,13 @@
 
   .video-carousel {
     height: 30vh;
+  }
+
+  .overlay-text h1 {
+    font-size: 2rem;
+  }
+
+  .overlay-text p {
+    font-size: 1rem;
   }
 }
