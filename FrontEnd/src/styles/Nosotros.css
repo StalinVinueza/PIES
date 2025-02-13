@@ -1,6 +1,8 @@
 /* Estilos para el contenedor de la página Nosotros */
 .nosotros-container {
   max-width: 1000px; /* Reduce el tamaño máximo */
+  padding-top: 1px; /* Ajusta según la necesidad */
+
 }
 
 /* Títulos de las secciones */
@@ -54,13 +56,23 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo para los párrafos */
+/* Estilo para los títulos h1 */
+.nosotros-container h1 {
+  font-size: 24px !important;
+  margin-top: 20px;
+  color: #264653;
+  font-weight: bold; /* Opcional: para mejor legibilidad */
+}
+
+/* Estilo para los párrafos p */
 .nosotros-container p {
+  color: #264653; /* Color especificado */
   font-size: 1rem; /* Tamaño más pequeño */
   line-height: 1.6; /* Menor altura de línea */
-  color: #333;
   margin-bottom: 1rem; /* Espacio inferior */
+  text-align: justify; /* Justificar el texto */
 }
+
 
 /* Estilo de las listas */
 .nosotros-container ul {
@@ -70,13 +82,13 @@
 .nosotros-container ul li {
   font-size: 1rem; /* Tamaño más pequeño */
   margin-bottom: 0.3rem; /* Menos espacio entre los elementos */
+  text-align: justify; /* Justificar el texto */
 }
 
 /* Estilo para las filas de imágenes y contenido */
 .nosotros-container .row {
   margin-bottom: 2rem; /* Menos espacio entre filas */
 }
-
 
 /* Estilos para las tarjetas */
 .card {
@@ -103,8 +115,10 @@
 
 /* Título y texto de la tarjeta */
 .card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
+  font-size: 24px !important;
+  margin-top: 20px;
+  color: #264653;
+  font-weight: bold; /* Opcional: para mejor legibilidad */
 }
 
 .card-text {

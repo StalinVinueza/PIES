@@ -5,13 +5,7 @@
   display: flex;
   align-items: center;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
 }
-
-/* NavMenu.css */
 
 /* Línea inferior decorativa */
 .navbar::after {
@@ -27,9 +21,9 @@
 /* Contenedor del logo */
 .navbar-brand img {
   height: auto; /* Mantiene proporción */
-  max-height: 80px; /* Aumenta el tamaño sin afectar la barra */
+  max-height: 70px; /* Aumenta el tamaño sin afectar la barra */
   max-width: 130px;
-  padding-bottom: 20px;
+
   transition: transform 0.3s ease-in-out; /* Suaviza el efecto */
 }
 
@@ -41,7 +35,8 @@
 
 /* Alinear los elementos del navbar */
 .navbar-nav {
-padding-bottom: 15px;
+  padding-bottom: 0; /* Elimina este padding */
+  margin: 0; /* Asegura que no tenga márgenes */
 }
 
 .navbar-nav .nav-item {
