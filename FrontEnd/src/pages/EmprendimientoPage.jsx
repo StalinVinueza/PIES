@@ -3,7 +3,7 @@ import EmprendimientosApi from '../components/EmprendimientoApi';
 import EmprendimientoModal from '../components/EmprendimientoModal'; // Importa el modal
 
 const EmprendimientoPage = () => {
-  const [emprendimientos, setEmprendimientos] = useState([]);
+  const [setEmprendimientos] = useState([]);
   const [editData, setEditData] = useState({ es_emp_nombre: "", es_emp_descripcion: "", es_emp_logo: null });
   const [showModal, setShowModal] = useState(false);
 

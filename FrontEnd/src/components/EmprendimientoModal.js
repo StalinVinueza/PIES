@@ -26,4 +26,5 @@ function EmprendimientoModal({ show, handleClose, editData, handleChange, handle
   );
 }
 
+
 export default EmprendimientoModal;

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { PencilSquare, TrashFill, Eye } from "react-bootstrap-icons";
-import Modal from "react-bootstrap/Modal";
+import { Eye, Trash, Pencil } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import "../styles/EmprendimientosList.css";
+import EmprendimientoModal from "./EmprendimientoModal";
 
-function Emprendimientos({ onShowModal }) {
+function Emprendimientos() {
   const [emprendimientos, setEmprendimientos] = useState([]);
-  const [selectedEmprendimiento, setSelectedEmprendimiento] = useState(null);
-  const [showViewModal, setShowViewModal] = useState(false);
+  const [editData, setEditData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   useEffect(() => {
     fetch("http://localhost:3001/api/emprendimientos")
@@ -16,7 +19,6 @@ function Emprendimientos({ onShowModal }) {
         return response.json();
       })
       .then((data) => {
-        console.log("Datos recibidos:", data);
         setEmprendimientos(Array.isArray(data) ? data : []);
       })
       .catch((error) => {
@@ -25,7 +27,6 @@ function Emprendimientos({ onShowModal }) {
       });
   }, []);
 
-  // Función para eliminar un emprendimiento
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
       fetch(`http://localhost:3001/api/emprendimientos/${id}`, {
@@ -43,12 +44,21 @@ function Emprendimientos({ onShowModal }) {
     }
   };
 
-  // Función para visualizar los detalles de un emprendimiento
-  const handleView = (emprendimiento) => {
-    setSelectedEmprendimiento(emprendimiento);
-    setShowViewModal(true);
+  const canEditOrDelete = (emprendimiento) => {
+    if (!usuario) return false;
+
+    if (usuario.perfilId === 1) return true;
+    if (usuario.perfilId === 4 && usuario.id === emprendimiento.es_emp_cliente_id) {
+      return true;
+    }
+    return false;
   };
-  const handleCloseViewModal = () => setShowViewModal(false);
+
+  const handleShowModal = (emprendimiento) => {
+    setEditData(emprendimiento); // Guarda el emprendimiento seleccionado
+    setShowModal(true); // Muestra el modal
+  };
+
   return (
     <div className="container py-">
       {emprendimientos.length === 0 ? (
@@ -74,80 +84,47 @@ function Emprendimientos({ onShowModal }) {
                     e.target.style.display = "none";
                   }}
                 />
-                <div className="card-body d-flex flex-column">
+                <div className="card-body">
                   <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
-                  <div className="d-flex justify-content-between">
-                    <button
-                      className="btn btn-sm"
-                      style={{
-                        backgroundColor: "#636b2f",
-                        borderColor: "#636b2f",
-                        color: "white",
-                      }}
-                      onClick={() => handleView(emprendimiento)}
-                    >
-                      <Eye size={18} />
-                    </button>
-                    <button
-                      className="btn btn-sm"
-                      style={{
-                        backgroundColor: "#636b2f",
-                        borderColor: "#636b2f",
-                        color: "white",
-                      }}
-                      onClick={() => onShowModal(emprendimiento)}
-                    >
-                      <PencilSquare size={18} />
-                    </button>
-
-                    <button
-                      className="btn btn-sm"
-                      style={{
-                        backgroundColor: "#636b2f",
-                        borderColor: "#636b2f",
-                        color: "white",
-                      }}
-                      onClick={() => handleDelete(emprendimiento.es_emp_id)}
-                    >
-                      <TrashFill size={18} />
-                    </button>
-                  </div>
+                </div>
+                <div className="card-footer">
+                  <Link
+                    to={`/emprendimientos/${emprendimiento.es_emp_id}`}
+                    className="btn btn-sm btn-view"
+                  >
+                    <Eye size={18} />
+                  </Link>
+                  {canEditOrDelete(emprendimiento) && (
+                    <>
+                      <button
+                        className="btn btn-sm btn-edit"
+                        onClick={() => handleShowModal(emprendimiento)}
+                      >
+                        <Pencil size={18} />
+                      </button>
+                      <button
+                        className="btn btn-sm btn-delete"
+                        onClick={() => handleDelete(emprendimiento.es_emp_id)}
+                      >
+                        <Trash size={18} />
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
       )}
-      {/* Modal para ver los detalles del emprendimiento (solo lectura) */}
-      <Modal show={showViewModal} onHide={handleCloseViewModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Detalles del Emprendimiento</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedEmprendimiento && (
-            <>
-              <p><strong>Nombre:</strong> {selectedEmprendimiento.es_emp_nombre}</p>
-              
-              <p><strong>Descripción:</strong> {selectedEmprendimiento.es_emp_descripcion}</p>
-              <p><strong>Logo:</strong></p>
-              <img
-                src={`http://localhost:3001${selectedEmprendimiento.es_emp_logo}`}
-                alt={selectedEmprendimiento.es_emp_nombre}
-                className="img-fluid"
-              />
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-primary" onClick={() => onShowModal(selectedEmprendimiento)}>
-            Editar
-          </button>
-          <button className="btn btn-danger" onClick={() => handleDelete(selectedEmprendimiento.es_emp_id)}>
-            Eliminar
-          </button>
-         
-        </Modal.Footer>
-      </Modal>
+
+      {/* Modal para editar o crear un emprendimiento */}
+      <EmprendimientoModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        editData={editData || {}} // Si no hay datos, pasa un objeto vacío
+        handleChange={() => {}}
+        handleSubmit={() => {}}
+      />
     </div>
   );
 }
