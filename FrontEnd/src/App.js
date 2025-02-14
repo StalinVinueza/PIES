@@ -15,7 +15,8 @@ import Login from "./components/Login";
 import ProtectedRoute from './components/ProtectedRoute';
 import PoliticasPrivacidad from './pages/PoliticasPrivacidad';
 import PoliticasReembolsos from './pages/PoliticasReembolsos';
-import EmprendimientoDetailPage from './pages/EmprendimientosDetallesPage'; // Importa la nueva página
+import EmprendimientoDetailPage from './pages/EmprendimientosDetallesPage'; 
+import ProductosDetallePage from './pages/ProductosDetallePage';// Importa la nueva página
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/clientes" element={<ProtectedRoute><Clientes /></ProtectedRoute>} />
           <Route path="/productos" element={<Productos />} />
+          <Route path="/productos/:id" element={<ProtectedRoute><ProductosDetallePage /></ProtectedRoute>} /> {/* Nueva ruta */}
           <Route path="/emprendimientos" element={<ProtectedRoute><Emprendimientos /></ProtectedRoute>} />
           <Route path="/emprendimientos/:id" element={<ProtectedRoute><EmprendimientoDetailPage /></ProtectedRoute>} /> {/* Nueva ruta */}
           <Route path="/carrito" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
