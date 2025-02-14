@@ -1,5 +1,5 @@
 import React from "react";
-import { Form  } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 
 function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
@@ -15,7 +15,6 @@ function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
           required
         />
       </Form.Group>
-
 
       <Form.Group className="mb-3">
         <Form.Label>Descripción</Form.Label>
