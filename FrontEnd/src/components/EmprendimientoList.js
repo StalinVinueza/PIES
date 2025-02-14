@@ -129,4 +129,6 @@ function Emprendimientos() {
   );
 }
 
+
 export default Emprendimientos;
+
