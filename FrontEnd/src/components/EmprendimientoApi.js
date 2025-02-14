@@ -58,12 +58,16 @@ function Emprendimientos({ onShowModal }) {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 style={{ color: "#264653", textAlign: "center", fontSize: "2rem", fontWeight: "bold" }}>Emprendimientos</h2>
   
-        <button className="btn"
-  style={{ backgroundColor: "#264653", color: "white" }}
-  onClick={() => onShowModal(null)}>
-          <PlusCircle size={20} className="me-2" />
-          Agregar Emprendimiento
-        </button>
+        {/* Agregar condición para no mostrar el botón si el usuario tiene ID 3 */}
+        {usuario && usuario.perfilId === 1 && (
+  <button className="btn"
+    style={{ backgroundColor: "#264653", color: "white" }}
+    onClick={() => onShowModal(null)}>
+    <PlusCircle size={20} className="me-2" />
+    Agregar Emprendimiento
+  </button>
+)}
+        
       </div>
 
       {emprendimientos.length === 0 ? (
