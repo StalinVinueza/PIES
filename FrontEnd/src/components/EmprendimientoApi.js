@@ -104,6 +104,7 @@ function EmprendimientosApi({ onShowModal }) {
                         className="btn btn-sm btn-delete"
                         onClick={() => handleDelete(emprendimiento.es_emp_id)}
                       >
+                        
                         <Trash size={18} />
                       </button>
                     </>

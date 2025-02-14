@@ -106,4 +106,5 @@ function Emprendimientos({ onShowModal, isCliente }) {
   );
 }
 
+
 export default Emprendimientos;
