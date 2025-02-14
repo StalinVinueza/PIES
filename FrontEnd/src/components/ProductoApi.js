@@ -92,11 +92,7 @@ function ProductoApi() {
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
-      
-      <h2 style={{ color: "#264653", textAlign: "center", fontSize: "2rem", fontWeight: "bold" }}>
-  Lista de Productos
-</h2>
-
+      <h2>Lista de Productos</h2>
       <button className="btn"
   style={{ backgroundColor: "#264653", color: "white" }} onClick={() => setShowModal(true)}>
     <PlusCircle size={20} className="me-2" />
@@ -114,7 +110,7 @@ function ProductoApi() {
       />
 
       {showModal && (
-        <div className="row">
+        <div className="modal show d-block">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
