@@ -22,7 +22,6 @@ class CompraModel {
         );
         return cliente.rows.length > 0;
     }
-
     static async createCart(es_cli_id) {
         try {
             // Verificar si el cliente existe
@@ -30,7 +29,6 @@ class CompraModel {
             if (!clienteExiste) {
                 throw new Error("El cliente no existe");
             }
-
             // Crear el carrito
             const result = await poolPostgres.query(
                 "INSERT INTO ES_COMPRA (ES_CLI_ID) VALUES ($1) RETURNING ES_COMPRA_ID",
@@ -62,21 +60,17 @@ class CompraModel {
             if (!clienteExiste) {
                 throw new Error("El cliente no existe");
             }
-
             let carrito = await this.getActiveCart(es_cli_id);
-
             // Si no hay carrito activo, creamos uno nuevo
             if (!carrito) {
                 const nuevoCarritoId = await this.createCart(es_cli_id);
                 carrito = { es_compra_id: nuevoCarritoId };
             }
-
             // Obtener la factura del carrito
             let factura = await poolPostgres.query(
                 "SELECT ES_FAC_ID FROM ES_FACTURA WHERE ES_COMPRA_ID = $1",
                 [carrito.es_compra_id]
             );
-
             let es_fac_id;
             if (factura.rows.length === 0) {
                 // Crear la factura si no existe
@@ -88,7 +82,6 @@ class CompraModel {
             } else {
                 es_fac_id = factura.rows[0].es_fac_id;
             }
-
             // Obtener el precio del producto
             const precio = await this.getProductPrice(es_pro_id);
             if (!precio) throw new Error("Producto no encontrado");
