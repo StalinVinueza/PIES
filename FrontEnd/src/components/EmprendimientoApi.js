@@ -16,6 +16,8 @@ function Emprendimientos({ onShowModal }) {
         return response.json();
       })
       .then((data) => {
+        // Imprimir los datos recibidos
+        console.log("Datos de emprendimientos recibidos:", data);
         setEmprendimientos(Array.isArray(data) ? data : []);
       })
       .catch((error) => {
@@ -26,6 +28,7 @@ function Emprendimientos({ onShowModal }) {
 
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
+      console.log(`Eliminando emprendimiento con ID: ${id}`); // Imprimir el ID a eliminar
       fetch(`http://localhost:3001/api/emprendimientos/${id}`, {
         method: "DELETE",
       })
@@ -33,6 +36,7 @@ function Emprendimientos({ onShowModal }) {
           if (!response.ok) {
             throw new Error("Error al eliminar el emprendimiento");
           }
+          console.log(`Emprendimiento con ID ${id} eliminado correctamente`); // Imprimir mensaje de éxito
           setEmprendimientos((prev) =>
             prev.filter((emp) => emp.es_emp_id !== id)
           );
