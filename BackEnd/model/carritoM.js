@@ -5,7 +5,7 @@ class CompraModel {
     static async getActiveCart(es_cli_id) {
         try {
             const result = await poolPostgres.query(
-                "SELECT ES_COMPRA_ID, ES_COM_ESTADO FROM ES_COMPRA WHERE ES_CLI_ID = $1 AND ES_COM_ESTADO = 'pendiente'",
+                "SELECT ES_COMPRA_ID FROM ES_COMPRA WHERE ES_CLI_ID = $1 AND ES_COM_ESTADO = 'pendiente'",
                 [es_cli_id]
             );
             return result.rows.length > 0 ? result.rows[0] : null;
@@ -17,12 +17,6 @@ class CompraModel {
     // 🛒 Crear un nuevo carrito de compras
     static async createCart(es_cli_id) {
         try {
-            // Verificar si el cliente ya tiene un carrito pendiente
-            const activeCart = await this.getActiveCart(es_cli_id);
-            if (activeCart) {
-                throw new Error("El cliente ya tiene un carrito activo");
-            }
-
             const result = await poolPostgres.query(
                 "INSERT INTO ES_COMPRA (ES_CLI_ID, ES_COM_ESTADO) VALUES ($1, 'pendiente') RETURNING ES_COMPRA_ID",
                 [es_cli_id]
@@ -46,15 +40,9 @@ class CompraModel {
         }
     }
 
-    // Agregar un producto al carrito
+    //Agregar un producto al carrito
     static async addToCart(es_compra_id, es_pro_id, cantidad) {
         try {
-            // Verificar que el carrito no esté finalizado
-            const carrito = await this.getActiveCart(es_compra_id);
-            if (!carrito || carrito.es_com_estado !== 'pendiente') {
-                throw new Error("No se puede agregar productos a un carrito finalizado");
-            }
-
             const precio = await this.getProductPrice(es_pro_id);
             if (!precio) throw new Error("Producto no encontrado");
 
@@ -69,7 +57,7 @@ class CompraModel {
         }
     }
 
-    // Obtener los productos en el carrito
+    //Obtener los productos en el carrito
     static async getCartDetails(es_cli_id) {
         try {
             const result = await poolPostgres.query(`
@@ -85,12 +73,9 @@ class CompraModel {
         }
     }
 
-    // Finalizar la compra
+    //Finalizar la compra
     static async finalizePurchase(es_cli_id, es_met_pago_id) {
-        const client = await poolPostgres.connect();
         try {
-            await client.query('BEGIN');
-
             const carrito = await this.getActiveCart(es_cli_id);
             if (!carrito) throw new Error("No hay productos en el carrito");
 
@@ -115,13 +100,9 @@ class CompraModel {
                 [compraId]
             );
 
-            await client.query('COMMIT');
             return factura.rows[0].es_fac_id;
         } catch (err) {
-            await client.query('ROLLBACK');
             throw new Error("Error al finalizar la compra: " + err.message);
-        } finally {
-            client.release();
         }
     }
 }
