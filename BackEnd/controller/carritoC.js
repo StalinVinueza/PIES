@@ -4,10 +4,7 @@ const addToCart = async (req, res) => {
     const { es_cli_id, es_pro_id, cantidad } = req.body;
 
     try {
-        let carrito = await CompraModel.getActiveCart(es_cli_id);
-        let compraId = carrito ? carrito.es_compra_id : await CompraModel.createCart(es_cli_id);
-
-        await CompraModel.addToCart(compraId, es_pro_id, cantidad);
+        await CompraModel.addToCart(es_cli_id, es_pro_id, cantidad);
         res.status(200).json({ message: "Producto agregado al carrito" });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -50,4 +47,3 @@ module.exports = {
     finalizePurchase,
     removeFromCart
 };
-
