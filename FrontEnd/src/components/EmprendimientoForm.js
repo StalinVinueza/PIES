@@ -16,6 +16,7 @@ function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
         />
       </Form.Group>
 
+
       <Form.Group className="mb-3">
         <Form.Label>Descripción</Form.Label>
         <Form.Control
