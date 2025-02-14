@@ -74,7 +74,7 @@ function Emprendimientos({ onShowModal }) {
             <div key={emprendimiento.es_emp_id} className="col-md-4 col-lg-3 mb-4">
               <div className="card shadow-sm h-100">
                 <img
-                  src={
+                  src={ 
                     emprendimiento.es_emp_logo.startsWith("/uploads/")
                       ? `http://localhost:3001${emprendimiento.es_emp_logo}`
                       : `http://localhost:3001/uploads/${emprendimiento.es_emp_logo}`
@@ -96,6 +96,7 @@ function Emprendimientos({ onShowModal }) {
                       <button className="btn btn-sm btn-edit me-2" onClick={() => onShowModal(emprendimiento)}>
                         <Pencil size={18} />
                       </button>
+
                       <button className="btn btn-sm btn-delete" onClick={() => handleDelete(emprendimiento.es_emp_id)}>
                         <Trash size={18} />
                       </button>
