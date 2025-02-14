@@ -14,4 +14,5 @@ router.post("/compra/finalizar", compraController.finalizePurchase);
 // Ruta para eliminar un producto del carrito
 router.delete("/compra/:detalleId", compraController.removeFromCart);
 
+
 module.exports = router;

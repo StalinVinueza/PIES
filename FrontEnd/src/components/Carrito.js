@@ -1,3 +1,4 @@
+// Cart.js (Frontend)
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -61,34 +62,42 @@ function Cart() {
       <h2 className="my-3">🛒 Productos Disponibles</h2>
       <div className="row">
         {productos.map((producto) => (
-          <div key={producto.es_pro_id} className="col-md-4 mb-3">
+          <div key={producto.id} className="col-md-3 mb-3">
             <div className="card">
-              <img src={`http://localhost:3001/uploads/${producto.es_pro_imagen}`} className="card-img-top" alt={producto.es_pro_nombre} />
-              <div className="card-body">
-                <h5 className="card-title">{producto.es_pro_nombre}</h5>
-                <p className="card-text">${producto.es_pro_precio}</p>
-                <button className="btn btn-primary" onClick={() => addToCart(producto.es_pro_id)}>Agregar al Carrito</button>
+              <div className="d-flex">
+                <div className="w-50">
+                  <img src={`http://localhost:3001/uploads/${producto.imagen}`} className="card-img-top" alt={producto.nombre} />
+                </div>
+                <div className="w-50 p-2">
+                  <h5 className="card-title">{producto.nombre}</h5>
+                  <p className="card-text">${producto.precio}</p>
+                  <button className="btn btn-primary" onClick={() => addToCart(producto.id)}>Agregar al Carrito</button>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <h2 className="my-3">🛍️ Carrito de Compras</h2>
-      {carrito.length === 0 ? <p>No hay productos en el carrito</p> : (
-        <ul className="list-group">
-          {carrito.map((item) => (
-            <li key={item.es_fac_det_id} className="list-group-item d-flex justify-content-between align-items-center">
-              {item.es_pro_nombre} - {item.es_fac_det_cantidad} unidades - ${item.es_fac_det_subtotal}
-              <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(item.es_fac_det_id)}>❌</button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="d-flex justify-content-end">
+        <div className="w-25">
+          <h2 className="my-3">🛍️ Carrito de Compras</h2>
+          {carrito.length === 0 ? <p>No hay productos en el carrito</p> : (
+            <ul className="list-group">
+              {carrito.map((item) => (
+                <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
+                  {item.nombre} - {item.cantidad} unidades - ${item.subtotal}
+                  <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(item.id)}>❌</button>
+                </li>
+              ))}
+            </ul>
+          )}
 
-      {carrito.length > 0 && (
-        <button className="btn btn-success mt-3" onClick={finalizePurchase}>Finalizar Compra</button>
-      )}
+          {carrito.length > 0 && (
+            <button className="btn btn-success mt-3" onClick={finalizePurchase}>Finalizar Compra</button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

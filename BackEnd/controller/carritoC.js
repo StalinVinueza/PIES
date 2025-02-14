@@ -44,8 +44,8 @@ const removeFromCart = async (req, res) => {
     const { detalleId } = req.params;
 
     try {
-        // Eliminar el producto del carrito
-        await poolPostgres.query("DELETE FROM ES_FACTURA_DETALLE WHERE ES_FAC_DET_ID = $1", [detalleId]);
+        // Eliminar el producto del carrito usando el modelo
+        await CompraModel.removeFromCart(detalleId);
         res.status(200).json({ message: "Producto eliminado del carrito" });
     } catch (err) {
         res.status(500).json({ message: err.message });
