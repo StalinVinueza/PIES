@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductoForm from "./ProductoForm";
 import ProductoList from "./ProductoList";
+import { PlusCircle } from "react-bootstrap-icons";
 
 function ProductoApi() {
   const [productos, setProductos] = useState([]);
@@ -90,10 +91,18 @@ function ProductoApi() {
 
   return (
     <div className="container mt-4">
-      <h2>Lista de Productos</h2>
-      <button className="btn btn-success mb-3" onClick={() => setShowModal(true)}>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+      
+      <h2 style={{ color: "#264653", textAlign: "center", fontSize: "2rem", fontWeight: "bold" }}>
+  Lista de Productos
+</h2>
+
+      <button className="btn"
+  style={{ backgroundColor: "#264653", color: "white" }} onClick={() => setShowModal(true)}>
+    <PlusCircle size={20} className="me-2" />
         Agregar Producto
       </button>
+      </div>
 
       <ProductoList 
         productos={productos} 
@@ -105,7 +114,7 @@ function ProductoApi() {
       />
 
       {showModal && (
-        <div className="modal show d-block">
+        <div className="row">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
