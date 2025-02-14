@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import EmprendimientosApi from '../components/EmprendimientoApi';
-import EmprendimientoModal from '../components/EmprendimientoModal'; // Importa el modal
+import EmprendimientoModal from '../components/EmprendimientoModal';
 
 const EmprendimientoPage = () => {
-  const [setEmprendimientos] = useState([]);
+  const [emprendimientos, setEmprendimientos] = useState([]);
   const [editData, setEditData] = useState({ es_emp_nombre: "", es_emp_descripcion: "", es_emp_logo: null });
   const [showModal, setShowModal] = useState(false);
 
@@ -21,8 +21,24 @@ const EmprendimientoPage = () => {
     }
   };
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = (emprendimiento) => {
+    if (emprendimiento) {
+      setEditData({
+        es_emp_id: emprendimiento.es_emp_id,
+        es_emp_nombre: emprendimiento.es_emp_nombre,
+        es_emp_descripcion: emprendimiento.es_emp_descripcion,
+        es_emp_logo: emprendimiento.es_emp_logo,
+      });
+    } else {
+      setEditData({ es_emp_nombre: "", es_emp_descripcion: "", es_emp_logo: null });
+    }
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setEditData({ es_emp_nombre: "", es_emp_descripcion: "", es_emp_logo: null });
+  };
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -42,8 +58,13 @@ const EmprendimientoPage = () => {
     }
 
     try {
-      await fetch("http://localhost:3001/api/emprendimientos", {
-        method: "POST",
+      const url = editData.es_emp_id
+        ? `http://localhost:3001/api/emprendimientos/${editData.es_emp_id}`
+        : "http://localhost:3001/api/emprendimientos";
+      const method = editData.es_emp_id ? "PUT" : "POST";
+
+      await fetch(url, {
+        method: method,
         body: formData,
       });
 
@@ -51,7 +72,7 @@ const EmprendimientoPage = () => {
       setEditData({ es_emp_nombre: "", es_emp_descripcion: "", es_emp_logo: null });
       fetchEmprendimientos(); // Recarga la lista de emprendimientos
     } catch (error) {
-      console.error("Error al agregar el emprendimiento:", error);
+      console.error("Error al agregar/editar el emprendimiento:", error);
     }
   };
 
@@ -66,8 +87,6 @@ const EmprendimientoPage = () => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
-
-      
     </div>
   );
 };

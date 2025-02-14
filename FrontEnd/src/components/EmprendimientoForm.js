@@ -16,7 +16,6 @@ function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
         />
       </Form.Group>
 
-
       <Form.Group className="mb-3">
         <Form.Label>Descripción</Form.Label>
         <Form.Control
@@ -37,7 +36,10 @@ function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
           onChange={(e) => handleChange(e)}
         />
       </Form.Group>
-     
+
+      <Button variant="primary" type="submit">
+        Guardar
+      </Button>
     </Form>
   );
 }
