@@ -7,6 +7,7 @@ function ProductoApi() {
   const [productos, setProductos] = useState([]);
   const [emprendimientos, setEmprendimientos] = useState([]);
   const [editData, setEditData] = useState({
+    es_pro_id: "",
     es_pro_nombre: "",
     es_pro_precio: "",
     es_pro_stock: "",
@@ -68,9 +69,17 @@ function ProductoApi() {
         formData.append("es_pro_imagen", editData.es_pro_imagen);
       }
 
-      await axios.post("http://localhost:3001/api/productos", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      if (editData.es_pro_id) {
+        // Actualización de producto existente
+        await axios.put(`http://localhost:3001/api/productos/${editData.es_pro_id}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      } else {
+        // Creación de nuevo producto
+        await axios.post("http://localhost:3001/api/productos", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
 
       setShowModal(false);
       fetchProductos();
@@ -100,7 +109,7 @@ function ProductoApi() {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Agregar Producto</h5>
+                <h5 className="modal-title">{editData.es_pro_id ? "Editar Producto" : "Nuevo Producto"}</h5>
                 <button className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
               <div className="modal-body">
