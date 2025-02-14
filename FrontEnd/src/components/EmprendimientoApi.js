@@ -96,7 +96,14 @@ function Emprendimientos({ onShowModal }) {
                       <button className="btn btn-sm btn-edit me-2" onClick={() => onShowModal(emprendimiento)}>
                         <Pencil size={18} />
                       </button>
+
+                      <button
+                        className="btn btn-sm btn-delete"
+                        onClick={() => handleDelete(emprendimiento.es_emp_id)}
+                      >
+                        
                       <button className="btn btn-sm btn-delete" onClick={() => handleDelete(emprendimiento.es_emp_id)}>
+
                         <Trash size={18} />
                       </button>
                     </div>
