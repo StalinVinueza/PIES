@@ -17,7 +17,7 @@ function ProductoDetailPage() {
     es_pro_precio: "",
     es_pro_stock: "",
     es_pro_descripcion: "",
-    es_pro_imagen: null
+    es_pro_imagen: null,
   });
 
   // Cargar los detalles del producto
@@ -25,7 +25,9 @@ function ProductoDetailPage() {
     const fetchData = async () => {
       try {
         // Obtener los detalles del producto
-        const response = await axios.get(`http://localhost:3001/api/productos/${id}`);
+        const response = await axios.get(
+          `http://localhost:3001/api/productos/${id}`
+        );
         setProducto(response.data);
         setEditData(response.data); // Poblamos el formulario con los datos del producto
       } catch (error) {
@@ -51,13 +53,13 @@ function ProductoDetailPage() {
       if (e.target.files && e.target.files[0]) {
         setEditData((prev) => ({
           ...prev,
-          es_pro_imagen: e.target.files[0]
+          es_pro_imagen: e.target.files[0],
         }));
       }
     } else {
       setEditData((prev) => ({
         ...prev,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
       }));
     }
   };
@@ -83,7 +85,10 @@ function ProductoDetailPage() {
           formData
         );
       } else {
-        response = await axios.post("http://localhost:3001/api/productos", formData);
+        response = await axios.post(
+          "http://localhost:3001/api/productos",
+          formData
+        );
       }
 
       console.log("Respuesta del servidor:", response.data);
@@ -106,38 +111,35 @@ function ProductoDetailPage() {
 
   return (
     <div className="detalle-producto">
-  {/* Título principal centrado en la parte superior */}
-  <h1 className="detalle-titulo">{producto.es_pro_nombre}</h1>
+      {/* Título principal centrado en la parte superior */}
+      <h1 className="detalle-titulo">{producto.es_pro_nombre}</h1>
 
-  <div className="detalle-contenedor">
-    <div className="detalle-texto">
-     
-      
-      <label className="detalle-label">Descripción:</label>
-      <p>{producto.es_pro_descripcion}</p>
-      
-      <label className="detalle-label">Precio:</label>
-      <p>${producto.es_pro_precio}</p>
-      
-      <label className="detalle-label">Stock:</label>
-      <p>{producto.es_pro_stock}</p>
+      <div className="detalle-contenedor">
+        <div className="detalle-texto">
+          <label className="detalle-label">Descripción:</label>
+          <p>{producto.es_pro_descripcion}</p>
+
+          <label className="detalle-label">Precio:</label>
+          <p>${producto.es_pro_precio}</p>
+
+          <label className="detalle-label">Stock:</label>
+          <p>{producto.es_pro_stock}</p>
+        </div>
+
+        <div className="detalle-imagen">
+          <img
+            src={`http://localhost:3001${producto.es_pro_imagen}`}
+            alt={producto.es_pro_nombre}
+            className="img-producto"
+          />
+        </div>
+      </div>
+
+      {/* Botón para abrir el modal de edición */}
+      <button className="btn btn-primary" onClick={handleShowModal}>
+        Editar Producto
+      </button>
     </div>
-
-    <div className="detalle-imagen">
-      <img
-        src={`http://localhost:3001${producto.es_pro_imagen}`}
-        alt={producto.es_pro_nombre}
-        className="img-producto"
-      />
-    </div>
-  </div>
-
-  {/* Botón para abrir el modal de edición */}
-  <button className="btn btn-primary" onClick={handleShowModal}>
-    Editar Producto
-  </button>
-</div>
-
   );
 }
 
