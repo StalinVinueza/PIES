@@ -10,7 +10,7 @@
   .list-group-body {
     background-color: #f8f9fa;  /* Un gris claro para contraste */
     border-bottom: 1px solid #ddd;
-    max-height: 50px;
+    max-height: 80px;
     font-size: 12px;
     text-align: start; /* Centra el texto horizontalmente */
       
