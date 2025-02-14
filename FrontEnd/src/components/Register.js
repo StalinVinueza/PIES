@@ -57,7 +57,7 @@ function RegistroUsuario() {
     <div className="container register-container">
       <h2 >Registro de Usuario</h2>
       <form onSubmit={handleSubmit}>
-        
+
       <div className="row">
     <div className="col-md-12 col-lg-12">
       
@@ -66,10 +66,8 @@ function RegistroUsuario() {
       
       <label className="form-label text-start w-100">Apellido</label>
       <input type="text" name="ES_CLI_APELLIDO" placeholder="Ingrese su Apellido" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">Correo</label>
       <input type="email" name="ES_CLI_CORREO" placeholder="Ingrese un Correo" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-50">Contraseña</label>
       <div className="input-group">
         <input 
@@ -90,7 +88,6 @@ function RegistroUsuario() {
           </button>
         </div>
       </div>
-
       <div className="input-group">
         <input 
           type={showConfirmPassword ? 'text' : 'password'} 
@@ -110,42 +107,30 @@ function RegistroUsuario() {
           </button>
         </div>
       </div>
-
       {error && <div className="alert alert-danger">{error}</div>}
-
       <label className="form-label text-start w-100">Género</label>
       <select name="ES_CLI_GENERO" className="form-control" onChange={handleChange} required>
         <option value="">Seleccione su Género</option>
         <option value="masculino">Masculino</option>
         <option value="femenino">Femenino</option>
-        <option value="femenino">Otro</option>
         
       </select>
-
       <label className="form-label text-start w-100">Fecha de Nacimiento</label>
       <input type="date" name="ES_CLI_FECHA_NACIMIENTO" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">Dirección</label>
       <input type="text" name="ES_CLI_DIRECCION" placeholder="Ingrese su Dirección" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">País</label>
       <input type="text" name="ES_CLI_PAIS" placeholder="Ingrese su País" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">Provincia</label>
       <input type="text" name="ES_CLI_PROVINCIA" placeholder="Ingrese su Provincia" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">Ciudad</label>
       <input type="text" name="ES_CLI_CIUDAD" placeholder="Ingrese su Ciudad" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">Código Postal</label>
       <input type="text" name="ES_CLI_CODIGO_POSTAL" placeholder="Ingrese su Código Postal" className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">Teléfono</label>
       <input type="text" name="ES_CLI_TELEFONO_1" placeholder="Ingrese un Número Teléfonico " className="form-control" onChange={handleChange} required />
-
       <label className="form-label text-start w-100">Teléfono 2 (Opcional)</label>
       <input type="text" name="ES_CLI_TELEFONO_2" placeholder="Ingrese un Número Teléfonico(Opcional)" className="form-control" onChange={handleChange} />
-
     </div>
   </div>
         {/* Botón de envío con color verde */}

@@ -1,12 +1,12 @@
 /* Contenedor principal de la página de registro */
 .register-container {
-  padding: 40px;
+  padding: 50px;
   background-color: #f3f8f7; /* Fondo suave */
   color: #264653; /* Color de texto */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0px 4px 15px #BDB76B; /* Sombra suave */
   max-width: 650px; /* Máxima anchura del formulario */
-  margin: 80px auto; /* Centrado horizontal y margen superior */
+  margin: 100px auto 30px; /* Centrado horizontal y margen superior */
   text-align: center;
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
@@ -105,6 +105,41 @@ button[type="button"]:hover {
   font-size: 0.9rem; /* Reducir tamaño de fuente */
   transition: border 0.3s ease;
 }
+
+/* Estilo para los íconos del ojo de la contraseña */
+.input-group-append .btn-light svg {
+  color: #264653; /* Cambia este valor por el color que prefieras */
+  font-size: 1.2rem; /* Puedes ajustar el tamaño del ícono */
+}
+
+.text-center.mt-3 a {
+  text-decoration: none; /* Elimina el subrayado */
+  color: #BDB76B; /* Establece el color del enlace */
+  font-weight: bold; 
+
+}
+
+/* Estilo para el enlace con la clase btn-link */
+.btn-link {
+  color: #28a745; /* Cambiar el color a verde */
+  text-decoration: none; /* Eliminar subrayado */
+  font-size: 16px; /* Tamaño de fuente */
+  font-weight: normal; /* Peso de fuente normal */
+}
+
+.btn-link:hover {
+  color: #218838; /* Color verde más oscuro cuando el enlace está en hover */
+  text-decoration: underline; /* Subraya el texto al pasar el cursor */
+}
+.password-toggle-btn.showing {
+  color: #28a745; /* Color verde cuando el ojo está abierto */
+}
+
+.password-toggle-btn.hiding {
+  color: #dc3545; /* Color rojo cuando el ojo está cerrado */
+}
+
+
 
 
 /* Estilo en pantallas pequeñas */

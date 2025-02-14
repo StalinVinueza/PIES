@@ -8,9 +8,8 @@
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0px 4px 10px #BDB76B; /* Sombra suave */
     max-width: 800px; /* Máxima anchura del contenido */
-    margin: 40px auto; /* Centrado horizontal y margen superior/inferior */
-    padding-left: 20px; /* Espacio a la izquierda */
-    padding-right: 20px; /* Espacio a la derecha */
+    margin: 6rem auto 20px; /* Aumenta el margen superior en rem */
+
   }
   
   .privacy-page h1 {

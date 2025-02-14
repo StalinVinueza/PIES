@@ -1,41 +1,43 @@
+/* Contactos.css */
 
-.formulario-container {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px #636b2f;
+/* Color general para todo el contenido de contacto */
+.contacto-container,
+.contacto-title,
+.contacto-whatsapp,
+.contacto-container p,
+.contacto-container h2,
+.contacto-container h3 {
+  color: #264653; /* Color principal del navbar */
+  padding-top: 1px; /* Ajusta según la necesidad */
+
 }
 
+.contacto-title {
+  font-size: 24px !important;
+  color: #264653;
+  font-weight: bold; /* Opcional: para mejor legibilidad */
+}
+
+/* Formulario */
 .formulario-container .form-label {
-  font-weight: bold;
-  color: #636b2f;
+  color: #2A9D8F !important; /* Color turquesa para las etiquetas */
 }
 
-.formulario-container .form-control {
-  border: 1px solid #636b2f;
-  border-radius: 5px;
+.formulario-container .btn {
+  background-color: #2A9D8F;
+  color: white !important; /* Texto blanco en botones */
 }
 
-.formulario-container .btn-primary {
-  background-color: #636b2f;
-  border: none;
-  transition: all 0.3s ease-in-out;
+.formulario-container .btn:hover {
+  background-color: #21867A;
 }
 
-.formulario-container .btn-primary:hover {
-  background-color: #9eac42;
-}
-
+/* Campos del formulario */
 .form-control {
-  border-color: #264653; /* Cambia este color si deseas otro tono de verde */
+  color: #264653 !important; /* Color del texto ingresado */
 }
 
-/* Estilo para los campos con error */
-.form-control.is-invalid {
-  border-color: #e74c3c; /* Rojo para indicar error */
-}
-
-
+/* Botón de WhatsApp */
 .whatsapp-btn {
   background-color: #2A9D8F; /* Color de fondo personalizado */
   text-decoration: none;
@@ -44,6 +46,7 @@
   border-radius: 5px;
   padding: 10px 40px;
   font-size: 18px;
+  margin-bottom: 10px;
   text-align: center; /* Asegura que el texto esté centrado */
   display: inline-flex; /* Usamos flexbox para centrar el contenido */
   align-items: center;
@@ -51,28 +54,18 @@
 }
 
 .whatsapp-btn:hover {
-  background-color: #2A9D8F; /* Color de fondo cuando se pasa el ratón por encima */
+  background-color: #21867A;
+  color: white;
 }
 
-
-/* Contactos.css */
-
-/* Agregar márgenes arriba y abajo para la sección de contacto */
-.contacto-container {
-  margin-top: 100px;   /* Espacio en la parte superior */
-  margin-bottom: 20px; /* Espacio en la parte inferior */
-  color: #264653;
+/* Mapa y descripción */
+.map-responsive p,
+.map-responsive h2,
+.map-responsive h3 {
+  color: #264653 !important; /* Mismo color que el navbar */
 }
 
-/* Agregar márgenes al título */
-.contacto-title {
-  margin-top: 20px;
-  color: #264653;
-}
-
-
-/* Agregar márgenes a la sección del botón de WhatsApp */
-.contacto-whatsapp {
-  margin-top: 10px;
-  color: #264653;
+/* Mensajes de error */
+.text-danger {
+  color: #e74c3c !important; /* Rojo más vibrante */
 }

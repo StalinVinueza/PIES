@@ -76,7 +76,7 @@ function NavMenu() {
               </>
             )}
 
-            <li className="nav-item"><Link className="nav-link" to="/contacto" onClick={handleNavClick}>Contacto</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/contacto" onClick={handleNavClick}>Contactos</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/nosotros" onClick={handleNavClick}>Nosotros</Link></li>
 
             {isAuthenticated ? (

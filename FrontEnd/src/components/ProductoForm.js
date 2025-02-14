@@ -1,68 +1,88 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
 
-function ProductoForm({ editData, handleChange, handleSubmit }) {
+function ProductoForm({ editData, handleChange, handleSubmit, emprendimientos }) {
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Label>Nombre del Producto</Form.Label>
-        <Form.Control
+    <form onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <label className="form-label">Nombre del Producto</label>
+        <input
           type="text"
+          className="form-control"
           name="es_pro_nombre"
-          value={editData.es_pro_nombre || ""}
+          value={editData.es_pro_nombre}
           onChange={handleChange}
           required
         />
-      </Form.Group>
+      </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Precio</Form.Label>
-        <Form.Control
+      <div className="mb-3">
+        <label className="form-label">Precio</label>
+        <input
           type="number"
+          className="form-control"
           name="es_pro_precio"
-          value={editData.es_pro_precio || ""}
+          value={editData.es_pro_precio}
           onChange={handleChange}
-          step="0.01"
           required
         />
-      </Form.Group>
+      </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Stock</Form.Label>
-        <Form.Control
+      <div className="mb-3">
+        <label className="form-label">Stock</label>
+        <input
           type="number"
+          className="form-control"
           name="es_pro_stock"
-          value={editData.es_pro_stock || ""}
+          value={editData.es_pro_stock}
           onChange={handleChange}
           required
         />
-      </Form.Group>
+      </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Descripción</Form.Label>
-        <Form.Control
-          as="textarea"
+      <div className="mb-3">
+        <label className="form-label">Descripción</label>
+        <textarea
+          className="form-control"
           name="es_pro_descripcion"
-          value={editData.es_pro_descripcion || ""}
+          value={editData.es_pro_descripcion}
           onChange={handleChange}
           required
-        />
-      </Form.Group>
+        ></textarea>
+      </div>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Imagen del Producto</Form.Label>
-        <Form.Control
+      {/* Selector de Emprendimiento */}
+      <div className="mb-3">
+        <label className="form-label">Emprendimiento</label>
+        <select
+          className="form-control"
+          name="es_emp_id"
+          value={editData.es_emp_id}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Seleccione un Emprendimiento</option>
+          {emprendimientos.map((emp) => (
+            <option key={emp.es_emp_id} value={emp.es_emp_id}>
+              {emp.es_emp_nombre}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mb-3">
+        <label className="form-label">Imagen</label>
+        <input
           type="file"
+          className="form-control"
           name="es_pro_imagen"
-          accept="image/*"
           onChange={handleChange}
         />
-      </Form.Group>
+      </div>
 
-      <Button variant="primary" type="submit">
+      <button type="submit" className="btn btn-primary">
         Guardar
-      </Button>
-    </Form>
+      </button>
+    </form>
   );
 }
 
