@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Eye, Trash, Pencil } from "react-bootstrap-icons";
+import { Eye, Trash, Pencil, PlusCircle } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "../styles/EmprendimientosList.css";
 
-function EmprendimientosApi({ onShowModal }) {
+function Emprendimientos({ onShowModal }) {
   const [emprendimientos, setEmprendimientos] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -16,6 +16,8 @@ function EmprendimientosApi({ onShowModal }) {
         return response.json();
       })
       .then((data) => {
+        // Imprimir los datos recibidos
+        console.log("Datos de emprendimientos recibidos:", data);
         setEmprendimientos(Array.isArray(data) ? data : []);
       })
       .catch((error) => {
@@ -26,6 +28,7 @@ function EmprendimientosApi({ onShowModal }) {
 
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este emprendimiento?")) {
+      console.log(`Eliminando emprendimiento con ID: ${id}`); // Imprimir el ID a eliminar
       fetch(`http://localhost:3001/api/emprendimientos/${id}`, {
         method: "DELETE",
       })
@@ -33,6 +36,7 @@ function EmprendimientosApi({ onShowModal }) {
           if (!response.ok) {
             throw new Error("Error al eliminar el emprendimiento");
           }
+          console.log(`Emprendimiento con ID ${id} eliminado correctamente`); // Imprimir mensaje de éxito
           setEmprendimientos((prev) =>
             prev.filter((emp) => emp.es_emp_id !== id)
           );
@@ -42,32 +46,32 @@ function EmprendimientosApi({ onShowModal }) {
   };
 
   const canEditOrDelete = (emprendimiento) => {
-    if (!usuario) {
-      return false; // No hay usuario, no hay permisos
-    }
-
-    if (usuario.perfilId === 1) {
-      return true; // Admin: tiene todos los permisos
-    }
-
-    if (usuario.perfilId === 4 && usuario.id === emprendimiento.es_emp_cliente_id) {
-      return true; // Emprendimiento: solo el dueño tiene permisos
-    }
-
-    return false; // Otros perfiles: no tienen permisos
+    if (!usuario) return false;
+    if (usuario.perfilId === 1) return true;
+    if (usuario.perfilId === 4 && usuario.id === emprendimiento.es_emp_cliente_id)
+      return true;
+    return false;
   };
 
   return (
-    <div className="container py-">
+    <div className="container py-3">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 style={{ color: "#264653", textAlign: "center", fontSize: "2rem", fontWeight: "bold" }}>Emprendimientos</h2>
+  
+        <button className="btn"
+  style={{ backgroundColor: "#264653", color: "white" }}
+  onClick={() => onShowModal(null)}>
+          <PlusCircle size={20} className="me-2" />
+          Agregar Emprendimiento
+        </button>
+      </div>
+
       {emprendimientos.length === 0 ? (
         <p className="text-center">No hay emprendimientos disponibles.</p>
       ) : (
         <div className="row">
           {emprendimientos.map((emprendimiento) => (
-            <div
-              key={emprendimiento.es_emp_id}
-              className="col-md-4 col-lg-3 mb-4"
-            >
+            <div key={emprendimiento.es_emp_id} className="col-md-4 col-lg-3 mb-4">
               <div className="card shadow-sm h-100">
                 <img
                   src={
@@ -78,35 +82,24 @@ function EmprendimientosApi({ onShowModal }) {
                   alt={emprendimiento.es_emp_nombre}
                   className="card-img-top"
                   style={{ height: "180px", objectFit: "cover" }}
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
+                  onError={(e) => (e.target.style.display = "none")}
                 />
                 <div className="card-body">
                   <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
                 </div>
-                <div className="card-footer">
-                  <Link
-                    to={`/emprendimientos/${emprendimiento.es_emp_id}`}
-                    className="btn btn-sm btn-view"
-                  >
+                <div className="card-footer d-flex justify-content-between">
+                  <Link to={`/emprendimientos/${emprendimiento.es_emp_id}`} className="btn btn-sm btn-view">
                     <Eye size={18} />
                   </Link>
                   {canEditOrDelete(emprendimiento) && (
-                    <>
-                      <button
-                        className="btn btn-sm btn-edit"
-                        onClick={() => onShowModal(emprendimiento)}
-                      >
+                    <div>
+                      <button className="btn btn-sm btn-edit me-2" onClick={() => onShowModal(emprendimiento)}>
                         <Pencil size={18} />
                       </button>
-                      <button
-                        className="btn btn-sm btn-delete"
-                        onClick={() => handleDelete(emprendimiento.es_emp_id)}
-                      >
+                      <button className="btn btn-sm btn-delete" onClick={() => handleDelete(emprendimiento.es_emp_id)}>
                         <Trash size={18} />
                       </button>
-                    </>
+                    </div>
                   )}
                 </div>
               </div>
@@ -118,4 +111,4 @@ function EmprendimientosApi({ onShowModal }) {
   );
 }
 
-export default EmprendimientosApi;
+export default Emprendimientos;

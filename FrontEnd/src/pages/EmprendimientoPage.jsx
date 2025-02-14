@@ -1,48 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import EmprendimientosApi from '../components/EmprendimientoApi';
 import EmprendimientoModal from '../components/EmprendimientoModal'; // Importa el modal
 
-function EmprendimientoPage() {
+const EmprendimientoPage = () => {
+  const [setEmprendimientos] = useState([]);
+  const [editData, setEditData] = useState({ es_emp_nombre: "", es_emp_descripcion: "", es_emp_logo: null });
   const [showModal, setShowModal] = useState(false);
-  const [editData, setEditData] = useState({});
 
-  // Función para mostrar el modal y pasar los datos del emprendimiento a editar
-  const handleShowModal = (emprendimiento) => {
-    setEditData(emprendimiento); // Guarda los datos del emprendimiento a editar
-    setShowModal(true); // Muestra el modal
+  useEffect(() => {
+    fetchEmprendimientos();
+  }, []);
+
+  const fetchEmprendimientos = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/api/emprendimientos");
+      const data = await res.json();
+      setEmprendimientos(data);
+    } catch (error) {
+      console.error("Error al obtener los emprendimientos:", error);
+    }
   };
 
-  // Función para cerrar el modal
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setEditData({}); // Limpia los datos de edición
-  };
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
-  // Función para manejar el envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Datos enviados:", editData);
-    // Aquí puedes agregar la lógica para guardar los cambios en la API
-    handleCloseModal(); // Cierra el modal después de guardar
-  };
-
-  // Función para manejar cambios en los campos del formulario
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditData((prev) => ({
-      ...prev,
-      [name]: value,
+    const { name, value, type, files } = e.target;
+    setEditData((prevData) => ({
+      ...prevData,
+      [name]: type === "file" ? files[0] : value,
     }));
   };
 
-  return (
-    <div className="cliente-page">
-      <div className="cliente-page-content">
-        {/* Pasa la función handleShowModal como prop onShowModal */}
-        <EmprendimientosApi onShowModal={handleShowModal} />
-      </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("es_emp_nombre", editData.es_emp_nombre);
+    formData.append("es_emp_descripcion", editData.es_emp_descripcion);
+    if (editData.es_emp_logo instanceof File) {
+      formData.append("es_emp_logo", editData.es_emp_logo);
+    }
 
-      {/* Modal para editar o crear un emprendimiento */}
+    try {
+      await fetch("http://localhost:3001/api/emprendimientos", {
+        method: "POST",
+        body: formData,
+      });
+
+      setShowModal(false);
+      setEditData({ es_emp_nombre: "", es_emp_descripcion: "", es_emp_logo: null });
+      fetchEmprendimientos(); // Recarga la lista de emprendimientos
+    } catch (error) {
+      console.error("Error al agregar el emprendimiento:", error);
+    }
+  };
+
+  return (
+    <div className="cliente-page-content">
+      <EmprendimientosApi onShowModal={handleShowModal} />
+
       <EmprendimientoModal
         show={showModal}
         handleClose={handleCloseModal}
@@ -50,8 +66,10 @@ function EmprendimientoPage() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
+
+      
     </div>
   );
-}
+};
 
 export default EmprendimientoPage;

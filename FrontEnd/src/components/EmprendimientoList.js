@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Eye, Trash, Pencil } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "../styles/EmprendimientosList.css";
+import EmprendimientoModal from "./EmprendimientoModal";
 
-function Emprendimientos({ onShowModal, isCliente }) {
+function Emprendimientos() {
   const [emprendimientos, setEmprendimientos] = useState([]);
+  const [editData, setEditData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   useEffect(() => {
     fetch("http://localhost:3001/api/emprendimientos")
@@ -15,7 +19,6 @@ function Emprendimientos({ onShowModal, isCliente }) {
         return response.json();
       })
       .then((data) => {
-        console.log("Datos recibidos:", data);
         setEmprendimientos(Array.isArray(data) ? data : []);
       })
       .catch((error) => {
@@ -39,6 +42,21 @@ function Emprendimientos({ onShowModal, isCliente }) {
         })
         .catch((error) => console.error("Error al eliminar:", error));
     }
+  };
+
+  const canEditOrDelete = (emprendimiento) => {
+    if (!usuario) return false;
+
+    if (usuario.perfilId === 1) return true;
+    if (usuario.perfilId === 4 && usuario.id === emprendimiento.es_emp_cliente_id) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleShowModal = (emprendimiento) => {
+    setEditData(emprendimiento); // Guarda el emprendimiento seleccionado
+    setShowModal(true); // Muestra el modal
   };
 
   return (
@@ -69,7 +87,6 @@ function Emprendimientos({ onShowModal, isCliente }) {
                 <div className="card-body">
                   <h5 className="card-title">{emprendimiento.es_emp_nombre}</h5>
                 </div>
-                {/* Footer con fondo de color para los botones */}
                 <div className="card-footer">
                   <Link
                     to={`/emprendimientos/${emprendimiento.es_emp_id}`}
@@ -77,17 +94,14 @@ function Emprendimientos({ onShowModal, isCliente }) {
                   >
                     <Eye size={18} />
                   </Link>
-
-                  {/* Mostrar botones de editar y eliminar solo si no es un cliente */}
-                  {!isCliente && (
+                  {canEditOrDelete(emprendimiento) && (
                     <>
                       <button
                         className="btn btn-sm btn-edit"
-                        onClick={() => onShowModal(emprendimiento)}
+                        onClick={() => handleShowModal(emprendimiento)}
                       >
                         <Pencil size={18} />
                       </button>
-
                       <button
                         className="btn btn-sm btn-delete"
                         onClick={() => handleDelete(emprendimiento.es_emp_id)}
@@ -102,6 +116,15 @@ function Emprendimientos({ onShowModal, isCliente }) {
           ))}
         </div>
       )}
+
+      {/* Modal para editar o crear un emprendimiento */}
+      <EmprendimientoModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        editData={editData || {}} // Si no hay datos, pasa un objeto vacío
+        handleChange={() => {}}
+        handleSubmit={() => {}}
+      />
     </div>
   );
 }
