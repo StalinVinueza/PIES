@@ -37,9 +37,7 @@ function EmprendimientoForm({ editData, handleChange, handleSubmit }) {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Guardar
-      </Button>
+      
     </Form>
   );
 }

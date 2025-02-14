@@ -15,9 +15,7 @@ function EmprendimientoModal({ show, handleClose, editData, handleChange, handle
         <EmprendimientoForm editData={editData} handleChange={handleChange} handleSubmit={handleSubmit} />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Cerrar
-        </Button>
+        
         <Button variant="primary" onClick={handleSubmit}>
           Guardar
         </Button>
