@@ -5,25 +5,23 @@ import ProductoList from "./ProductoList";
 
 function ProductoApi() {
   const [productos, setProductos] = useState([]);
-  const [emprendimientos, setEmprendimientos] = useState([]); // Lista de emprendimientos
+  const [emprendimientos, setEmprendimientos] = useState([]);
   const [editData, setEditData] = useState({
     es_pro_nombre: "",
     es_pro_precio: "",
     es_pro_stock: "",
     es_pro_descripcion: "",
-    es_emp_id: "", // ID del emprendimiento
+    es_emp_id: "",
     es_pro_imagen: null,
   });
 
   const [showModal, setShowModal] = useState(false);
 
-  // Cargar productos y emprendimientos al montar el componente
   useEffect(() => {
     fetchProductos();
     fetchEmprendimientos();
   }, []);
 
-  // Cargar lista de productos
   const fetchProductos = async () => {
     try {
       const response = await axios.get("http://localhost:3001/api/productos");
@@ -33,7 +31,6 @@ function ProductoApi() {
     }
   };
 
-  // Cargar lista de emprendimientos
   const fetchEmprendimientos = async () => {
     try {
       const response = await axios.get("http://localhost:3001/api/emprendimientos");
@@ -43,7 +40,6 @@ function ProductoApi() {
     }
   };
 
-  // Manejar cambios en el formulario
   const handleChange = (event) => {
     const { name, value, type, files } = event.target;
     if (type === "file") {
@@ -53,11 +49,9 @@ function ProductoApi() {
     }
   };
 
-  // Manejar envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // Validar que se seleccione un emprendimiento
+
     if (!editData.es_emp_id) {
       alert("Por favor, seleccione un emprendimiento.");
       return;
@@ -79,7 +73,7 @@ function ProductoApi() {
       });
 
       setShowModal(false);
-      fetchProductos(); // Recargar lista de productos
+      fetchProductos();
     } catch (error) {
       console.error("Error al guardar:", error);
     }
@@ -92,33 +86,14 @@ function ProductoApi() {
         Agregar Producto
       </button>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Descripción</th>
-            <th>Emprendimiento</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {productos.map((producto) => (
-            <tr key={producto.id}>
-              <td>{producto.es_pro_nombre}</td>
-              <td>{producto.es_pro_precio}</td>
-              <td>{producto.es_pro_stock}</td>
-              <td>{producto.es_pro_descripcion}</td>
-              <td>{producto.emprendimiento_nombre}</td>
-              <td>
-                <button className="btn btn-primary">Editar</button>
-                <button className="btn btn-danger ms-2">Eliminar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ProductoList 
+        productos={productos} 
+        emprendimientos={emprendimientos} 
+        onShowModal={(producto) => {
+          setEditData(producto);
+          setShowModal(true);
+        }}
+      />
 
       {showModal && (
         <div className="modal show d-block">
